@@ -1,4 +1,4 @@
 # leetcode-rust
 Leetcode solution written in Rust by AI
 
-Current resolved 1613 problems
+![LeetCode Stats](https://leetcard.jacoblin.cool/nyroro266_ai?theme=dark&font=Noto%20Sans)
