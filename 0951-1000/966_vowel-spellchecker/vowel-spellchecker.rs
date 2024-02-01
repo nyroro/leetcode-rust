@@ -21,9 +21,9 @@ impl Solution {
                 answer.push(query.clone());
             } else {
                 let lower_query = query.to_lowercase();
-                if let Some(&original) = exact_match.get(&lower_query) {
+                if let Some(original) = exact_match.get(&lower_query).cloned() {
                     answer.push(original);
-                } else if let Some(&original) = vowel_match.get(&Self::devowel(&lower_query)) {
+                } else if let Some(original) = vowel_match.get(&Self::devowel(&lower_query)).cloned() {
                     answer.push(original);
                 } else {
                     answer.push("".to_string());

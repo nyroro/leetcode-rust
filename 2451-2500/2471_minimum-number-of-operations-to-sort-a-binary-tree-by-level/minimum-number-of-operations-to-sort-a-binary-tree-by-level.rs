@@ -15,7 +15,7 @@ impl Solution {
             
             for _ in 0..n {
                 if let Some(node) = queue.pop_front() {
-                    let node = node.borrow();
+                    let node = node.as_ref().unwrap().borrow();
                     row.push(node.val);
                     
                     if let Some(left) = &node.left {

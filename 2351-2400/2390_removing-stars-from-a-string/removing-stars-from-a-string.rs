@@ -6,10 +6,11 @@ impl Solution {
         
         for (i, c) in s.chars().enumerate() {
             if c == '*' {
-                stack.push(i);
-            } else if !stack.is_empty() {
-                result.remove(stack.pop().unwrap());
+                if i > 0 && !stack.is_empty() {
+                    result.pop();
+                }
             } else {
+                stack.push(i);
                 result.push(c);
             }
         }

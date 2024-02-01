@@ -1,6 +1,6 @@
 
 impl Solution {
-    pub fn array_nesting(nums: Vec<i32>) -> i32 {
+    pub fn array_nesting(mut nums: Vec<i32>) -> i32 {
         let mut max_length = 0;
         let n = nums.len();
 

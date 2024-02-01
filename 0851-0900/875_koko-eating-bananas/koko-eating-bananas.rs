@@ -7,7 +7,7 @@ impl Solution {
         while left < right {
             let mid = left + (right - left) / 2;
             
-            if can_eat_all(&piles, h, mid) {
+            if Solution::can_eat_all(&piles, h, mid) {
                 right = mid;
             } else {
                 left = mid + 1;

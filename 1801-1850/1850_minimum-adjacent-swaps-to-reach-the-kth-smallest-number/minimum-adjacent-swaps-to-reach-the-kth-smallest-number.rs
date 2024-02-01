@@ -2,7 +2,7 @@
 impl Solution {
     pub fn get_min_swaps(num: String, k: i32) -> i32 {
         let mut num = num.chars().collect::<Vec<char>>();
-        let original = num.clone();
+        let mut original = num.clone();
         
         // 辅助函数，用于计算下一个排列
 

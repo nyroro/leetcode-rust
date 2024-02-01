@@ -35,12 +35,3 @@ impl ATM {
         }
     }
 }
-
-fn main() {
-    let mut atm = ATM::new();
-    atm.deposit(vec![0, 0, 1, 2, 1]);
-    println!("{:?}", atm.withdraw(600));
-    atm.deposit(vec![0, 1, 0, 1, 1]);
-    println!("{:?}", atm.withdraw(600));
-    println!("{:?}", atm.withdraw(550));
-}

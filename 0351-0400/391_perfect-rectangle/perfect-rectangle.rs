@@ -6,6 +6,8 @@ impl Solution {
         let mut points = HashSet::new();
         let mut area = 0;
 
+        let mut corner = HashSet::new();
+
         for rect in &rectangles {
             let (x1, y1, x2, y2) = (rect[0], rect[1], rect[2], rect[3]);
             area += (x2 - x1) * (y2 - y1);
@@ -19,27 +21,48 @@ impl Solution {
                 if points.contains(p) {
                     points.remove(p);
                 } else {
-                    points.insert(p);
+                    points.insert(*p);
                 }
+            }
+
+            if corner.contains(&p1) {
+                corner.remove(&p1);
+            } else {
+                corner.insert(p1);
+            }
+            if corner.contains(&p2) {
+                corner.remove(&p2);
+            } else {
+                corner.insert(p2);
+            }
+            if corner.contains(&p3) {
+                corner.remove(&p3);
+            } else {
+                corner.insert(p3);
+            }
+            if corner.contains(&p4) {
+                corner.remove(&p4);
+            } else {
+                corner.insert(p4);
             }
         }
 
-        if points.len() != 4 {
+        if points.len() != 4 || corner.len() != 4 {
             return false;
         }
 
-        let mut corner = HashSet::new();
-        corner.insert((rectangles[0][0], rectangles[0][1]));
-        corner.insert((rectangles[0][0], rectangles[0][3]));
-        corner.insert((rectangles[0][2], rectangles[0][1]));
-        corner.insert((rectangles[0][2], rectangles[0][3]));
+        let mut min_x = i32::MAX;
+        let mut min_y = i32::MAX;
+        let mut max_x = i32::MIN;
+        let mut max_y = i32::MIN;
 
-        for p in &points {
-            if !corner.contains(p) {
-                return false;
-            }
+        for p in &corner {
+            min_x = min_x.min(p.0);
+            min_y = min_y.min(p.1);
+            max_x = max_x.max(p.0);
+            max_y = max_y.max(p.1);
         }
 
-        area == (corner.iter().max_by_key(|&&(x, y)| x * y).unwrap().0 - corner.iter().min_by_key(|&&(x, y)| x * y).unwrap().0) * (corner.iter().max_by_key(|&&(x, y)| x * y).unwrap().1 - corner.iter().min_by_key(|&&(x, y)| x * y).unwrap().1)
+        area == (max_x - min_x) * (max_y - min_y)
     }
 }

@@ -12,11 +12,11 @@ impl Solution {
         entity_map.insert("&gt;", ">");
         entity_map.insert("&lt;", "<");
         entity_map.insert("&frasl;", "/");
-        
+
         let mut result = String::new();
         let mut i = 0;
         let n = text.len();
-        
+
         while i < n {
             if &text[i..=i] == "&" {
                 let mut found = false;
@@ -37,16 +37,8 @@ impl Solution {
                 i += 1;
             }
         }
-        
+
         result
 
     }
-}
-
-fn main() {
-    let text1 = "&amp;amp; is an HTML entity but &amp;ambassador; is not.".to_string();
-    let text2 = "and I quote: &amp;quot;...&amp;quot;".to_string();
-    
-    println!("{}", Solution::entity_parser(text1)); // Output: "&amp; is an HTML entity but &amp;ambassador; is not."
-    println!("{}", Solution::entity_parser(text2)); // Output: "and I quote: \"...\""
 }

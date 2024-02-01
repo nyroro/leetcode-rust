@@ -15,10 +15,10 @@ impl Solution {
                 return;
             }
             
-            for (i, &mentor) in mentors.iter().enumerate() {
+            for (i, mentor) in mentors.iter().enumerate() {
                 if !assigned[i] {
                     assigned[i] = true;
-                    let compatibility = calculate_compatibility(&students[student_idx], &mentor);
+                    let compatibility = calculate_compatibility(&students[student_idx], mentor);
                     backtrack(students, mentors, assigned, student_idx + 1, sum + compatibility, max_sum);
                     assigned[i] = false;
                 }

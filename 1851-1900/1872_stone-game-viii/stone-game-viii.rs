@@ -10,7 +10,7 @@ impl Solution {
         }
         
         let mut dp = vec![0; n];
-        dp[n - 2] = prefix_sum[n - 1];
+        dp[n - 1] = prefix_sum[n - 1];
         
         for i in (1..n - 1).rev() {
             dp[i] = std::cmp::max(dp[i + 1], prefix_sum[i] - dp[i + 1]);

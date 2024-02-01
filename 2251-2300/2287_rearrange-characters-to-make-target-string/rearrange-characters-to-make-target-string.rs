@@ -14,7 +14,8 @@ impl Solution {
             if *count == 0 {
                 return 0;
             }
-            max_copies = max_copies.min(*count as i32);
+            let copies = *count as i32 / target.matches(c).count() as i32;
+            max_copies = max_copies.min(copies);
         }
         
         max_copies

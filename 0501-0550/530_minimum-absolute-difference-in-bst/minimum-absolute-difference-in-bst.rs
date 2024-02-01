@@ -19,7 +19,7 @@ impl Solution {
             Self::inorder_traversal(&n.left, prev_val, min_abs_diff);
             
             if let Some(prev) = prev_val {
-                *min_abs_diff = (*min_abs_diff).min(n.val - prev);
+                *min_abs_diff = (*min_abs_diff).min(n.val - *prev);
             }
             *prev_val = Some(n.val);
             

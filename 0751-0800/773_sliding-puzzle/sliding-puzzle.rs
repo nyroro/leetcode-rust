@@ -1,5 +1,5 @@
 
-use std::collections::{HashSet, VecDeque};
+use std::collections::{HashSet, VecDeque, HashMap};
 
 impl Solution {
     pub fn sliding_puzzle(board: Vec<Vec<i32>>) -> i32 {

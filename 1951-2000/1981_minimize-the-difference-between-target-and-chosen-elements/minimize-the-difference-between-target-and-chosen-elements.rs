@@ -17,7 +17,7 @@ impl Solution {
             for j in 0..n {
                 for k in 0..=70 * 70 {
                     if dp[i - 1][k] {
-                        let sum = k + mat[i][j];
+                        let sum = k as i32 + mat[i][j];
                         if sum <= 70 * 70 {
                             dp[i][sum as usize] = true;
                         }

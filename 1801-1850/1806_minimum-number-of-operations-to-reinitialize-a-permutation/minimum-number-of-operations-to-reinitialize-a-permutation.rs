@@ -2,7 +2,7 @@
 impl Solution {
     pub fn reinitialize_permutation(n: i32) -> i32 {
         let mut perm: Vec<i32> = (0..n).collect();
-        let mut arr: Vec<i32> = vec![0; n];
+        let mut arr: Vec<i32> = vec![0; n as usize];
         let mut operations = 0;
 
         loop {

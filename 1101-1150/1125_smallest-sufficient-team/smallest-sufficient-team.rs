@@ -35,7 +35,7 @@ impl Solution {
         dp.insert(0, vec![]);
 
         for (i, &skills) in people_skills.iter().enumerate() {
-            for (&prev_skills, prev_team) in dp.clone() {
+            for (prev_skills, prev_team) in dp.clone() {
                 let new_skills = prev_skills | skills;
                 if !dp.contains_key(&new_skills) || prev_team.len() + 1 < dp[&new_skills].len() {
                     let mut new_team = prev_team.clone();

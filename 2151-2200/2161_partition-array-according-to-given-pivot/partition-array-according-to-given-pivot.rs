@@ -4,7 +4,7 @@ impl Solution {
         let mut less_than_pivot = Vec::new();
         let mut greater_than_pivot = Vec::new();
         
-        for num in nums {
+        for &num in &nums {
             if num < pivot {
                 less_than_pivot.push(num);
             } else if num > pivot {

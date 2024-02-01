@@ -1,31 +1,26 @@
 
 impl Solution {
     pub fn minimum_time_required(jobs: Vec<i32>, k: i32) -> i32 {
-        let n = jobs.len();
-        let k = k as usize;
-        let mut dp = vec![vec![0; n]; 1 << n];
-        let mut sum = vec![0; 1 << n];
+        let mut workers = vec![0; k as usize];
+        let mut result = i32::MAX;
+        Self::backtrack(0, &jobs, &mut workers, &mut result);
+        result
 
-        for i in 1..(1 << n) {
-            for j in 0..n {
-                if (i & (1 << j)) != 0 {
-                    sum[i] = sum[i ^ (1 << j)] + jobs[j];
-                    break;
-                }
+    }
+    
+    fn backtrack(idx: usize, jobs: &Vec<i32>, workers: &mut Vec<i32>, result: &mut i32) {
+        if idx == jobs.len() {
+            *result = (*result).min(*workers.iter().max().unwrap());
+            return;
+        }
+        
+        for i in 0..workers.len() {
+            workers[i] += jobs[idx];
+            Self::backtrack(idx + 1, jobs, workers, result);
+            workers[i] -= jobs[idx];
+            if workers[i] == 0 {
+                break;
             }
         }
-
-        for i in 0..(1 << n) {
-            for j in 0..n {
-                if (i & (1 << j)) == 0 {
-                    dp[i | (1 << j)][0] = sum[i | (1 << j)];
-                    for l in 1..k {
-                        dp[i | (1 << j)][l] = std::cmp::min(dp[i | (1 << j)][l], std::cmp::max(dp[i][l - 1], sum[i | (1 << j)]));
-                    }
-                }
-            }
-        }
-
-        dp[(1 << n) - 1][k - 1]
     }
 }

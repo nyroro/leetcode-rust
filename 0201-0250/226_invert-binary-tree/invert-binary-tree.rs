@@ -8,9 +8,12 @@ impl Solution {
             let mut node = node.borrow_mut();
             let left = Self::invert_tree(node.left.take());
             let right = Self::invert_tree(node.right.take());
-            node.left = right;
-            node.right = left;
-            Some(node.clone())
+            let new_node = TreeNode {
+                val: node.val,
+                left: right,
+                right: left,
+            };
+            Some(Rc::new(RefCell::new(new_node)))
         } else {
             None
 

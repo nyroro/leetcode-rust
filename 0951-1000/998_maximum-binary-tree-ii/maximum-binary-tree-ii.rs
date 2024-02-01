@@ -7,7 +7,7 @@ impl Solution {
         match root {
             Some(node) => {
                 if val > node.borrow().val {
-                    let new_node = Some(Rc::new(RefCell::new(TreeNode::new(val)));
+                    let new_node = Some(Rc::new(RefCell::new(TreeNode::new(val))));
                     new_node.as_ref().unwrap().borrow_mut().left = Some(node);
                     new_node
 

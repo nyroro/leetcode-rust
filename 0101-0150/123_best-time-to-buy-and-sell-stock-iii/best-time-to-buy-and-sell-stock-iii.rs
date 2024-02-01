@@ -6,16 +6,19 @@ impl Solution {
             return 0;
         }
         
-        let mut buy = vec![0; n];
-        let mut sell = vec![0; n];
-        
-        buy[0] = -prices[0];
+        let mut buy1 = -prices[0];
+        let mut sell1 = 0;
+        let mut buy2 = -prices[0];
+        let mut sell2 = 0;
         
         for i in 1..n {
-            buy[i] = buy[i-1].max(-prices[i]);
-            sell[i] = sell[i-1].max(buy[i-1] + prices[i]);
+            buy1 = buy1.max(-prices[i]);
+            sell1 = sell1.max(buy1 + prices[i]);
+            buy2 = buy2.max(sell1 - prices[i]);
+            sell2 = sell2.max(buy2 + prices[i]);
         }
         
-        sell[n-1]
+        sell2
+
     }
 }

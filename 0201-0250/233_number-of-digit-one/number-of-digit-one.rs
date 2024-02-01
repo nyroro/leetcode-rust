@@ -11,10 +11,12 @@ impl Solution {
             let digit = s[i..=i].parse::<i32>().unwrap_or(0);
             
             if digit > 1 {
-                count += high * weight + weight;
+                count += (high + 1) * weight;
             } else if digit == 1 {
                 let low = s[i + 1..].parse::<i32>().unwrap_or(0);
                 count += high * weight + low + 1;
+            } else {
+                count += high * weight;
             }
         }
         

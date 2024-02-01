@@ -7,8 +7,10 @@ impl Solution {
     pub fn k_similarity(s1: String, s2: String) -> i32 {
         let mut queue = VecDeque::new();
         let mut visited = HashSet::new();
-        queue.push_back((s1, 0));
-        visited.insert(s1.clone());
+        queue.push_back((s1.clone(), 0));  // Cloning s1
+
+        visited.insert(s1.clone());  // Cloning s1
+
 
         while let Some((current, swaps)) = queue.pop_front() {
             if current == s2 {
@@ -28,8 +30,10 @@ impl Solution {
                     next.swap(i, j);
                     let next_str = String::from_utf8(next).unwrap();
                     if !visited.contains(&next_str) {
-                        queue.push_back((next_str, swaps + 1));
-                        visited.insert(next_str);
+                        queue.push_back((next_str.clone(), swaps + 1));  // Cloning next_str
+
+                        visited.insert(next_str);  // Inserting next_str
+
                     }
                 }
             }
@@ -38,16 +42,4 @@ impl Solution {
         0
 
     }
-}
-
-fn main() {
-    let s1 = String::from("ab");
-    let s2 = String::from("ba");
-    println!("{}", Solution::k_similarity(s1, s2));  // Output: 1
-
-
-    let s1 = String::from("abc");
-    let s2 = String::from("bca");
-    println!("{}", Solution::k_similarity(s1, s2));  // Output: 2
-
 }

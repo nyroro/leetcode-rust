@@ -1,7 +1,7 @@
 
 impl Solution {
     pub fn count_homogenous(s: String) -> i32 {
-        let modulo: i32 = 1_000_000_007;
+        let modulo: i64 = 1_000_000_007;
         let mut count: i64 = 0;
         let mut current_count: i64 = 1;
         

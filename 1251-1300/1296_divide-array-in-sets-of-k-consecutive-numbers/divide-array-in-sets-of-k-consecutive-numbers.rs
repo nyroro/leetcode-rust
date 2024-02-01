@@ -20,12 +20,12 @@ impl Solution {
             if count > 0 {
                 // 检查是否存在连续的子数组
 
-                for i in key..key+k {
+                for i in (key..key+k).rev() {
                     if let Some(value) = count_map.get_mut(&i) {
-                        if *value == 0 {
+                        if *value < count {
                             return false;
                         }
-                        *value -= 1;
+                        *value -= count;
                     } else {
                         return false;
                     }

@@ -21,7 +21,7 @@ impl Solution {
         // 判断每个字母的频率差异是否小于等于3
 
         for i in 0..26 {
-            if (freq1[i] - freq2[i]).abs() > 3 {
+            if (freq1[i] as i32 - freq2[i] as i32).abs() > 3 {
                 return false;
             }
         }

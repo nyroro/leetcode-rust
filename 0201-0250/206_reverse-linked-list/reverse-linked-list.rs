@@ -1,24 +1,23 @@
 
 // Definition for singly-linked list.
-#[derive(PartialEq, Eq, Clone, Debug)]
-pub struct ListNode {
-    pub val: i32,
-    pub next: Option<Box<ListNode>>,
-}
+// #[derive(PartialEq, Eq, Clone, Debug)]
+// pub struct ListNode {
+//   pub val: i32,
+//   pub next: Option<Box<ListNode>>
+// }
+// 
+// impl ListNode {
+//   #[inline]
+//   fn new(val: i32) -> Self {
+//     ListNode {
+//       next: None,
+//       val
 
-impl ListNode {
-    #[inline]
-    fn new(val: i32) -> Self {
-        ListNode {
-            next: None,
-            val,
-        }
-    }
-}
+//     }
+//   }
+// }
 
 impl Solution {
-    // 迭代方法
-
     pub fn reverse_list(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
         let mut prev = None;
         let mut current = head;
@@ -33,8 +32,6 @@ impl Solution {
         prev
 
     }
-
-    // 递归方法
 
     pub fn reverse_list_recursive(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
         fn reverse(node: Option<Box<ListNode>>, prev: Option<Box<ListNode>>) -> Option<Box<ListNode>> {

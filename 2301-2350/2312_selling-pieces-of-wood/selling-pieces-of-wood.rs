@@ -1,7 +1,9 @@
 
 impl Solution {
     pub fn selling_wood(m: i32, n: i32, prices: Vec<Vec<i32>>) -> i64 {
-        let mut dp = vec![vec![0; (n + 1) as usize]; (m + 1) as usize];
+        let m = m as usize;
+        let n = n as usize;
+        let mut dp = vec![vec![0; n + 1]; m + 1];
         
         for price in &prices {
             let h = price[0] as usize;
@@ -21,7 +23,7 @@ impl Solution {
             }
         }
         
-        dp[m as usize][n as usize] as i64
+        dp[m][n] as i64
 
     }
 }

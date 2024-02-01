@@ -8,7 +8,7 @@ impl Solution {
         let mut eaten = 0;
 
         for (i, (&a, &d)) in apples.iter().zip(days.iter()).enumerate() {
-            heap.push((Reverse(i + d), a));
+            heap.push((Reverse(i as i32 + d), a));
             while let Some(&(top, apples)) = heap.peek() {
                 if top.0 <= i as i32 || apples == 0 {
                     heap.pop();

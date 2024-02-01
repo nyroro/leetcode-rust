@@ -8,7 +8,7 @@ impl Solution {
         for i in (0..n).rev() {
             shift_sum = (shift_sum + shifts[i]) % 26;
             let shift = (chars[i] as u8 - b'a') as i32;
-            chars[i] = ((shift + shift_sum) % 26 + b'a') as char;
+            chars[i] = ((shift + shift_sum) % 26 + b'a' as i32) as u8 as char;
         }
 
         chars.into_iter().collect()

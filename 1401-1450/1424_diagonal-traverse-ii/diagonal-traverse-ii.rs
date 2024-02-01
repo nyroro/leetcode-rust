@@ -8,7 +8,7 @@ impl Solution {
         for i in 0..nums.len() {
             for j in 0..nums[i].len() {
                 if let Some(diagonal) = map.get_mut(&(i as i32 + j as i32)) {
-                    diagonal.push(nums[i][j]);
+                    diagonal.insert(0, nums[i][j]);
                 } else {
                     map.insert(i as i32 + j as i32, vec![nums[i][j]]);
                 }
@@ -17,11 +17,11 @@ impl Solution {
         
         let mut result: Vec<i32> = Vec::new();
         
-        for (key, mut value) in map {
-            if key % 2 == 0 {
-                value.reverse();
-            }
-            result.append(&mut value);
+        let mut keys: Vec<i32> = map.keys().cloned().collect();
+        keys.sort();
+        
+        for key in keys {
+            result.extend(map[&key].iter());
         }
         
         result

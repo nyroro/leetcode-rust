@@ -3,39 +3,36 @@
 
 impl Solution {
     pub fn minimum_fuel_cost(roads: Vec<Vec<i32>>, seats: i32) -> i64 {
-        let mut ans = 0;
         let n = roads.len() + 1;
-        let mut graph: Vec<Vec<i32>> = vec![vec![]; n];
+        let mut graph: Vec<Vec<usize>> = vec![vec![]; n];
         
-        // 构建图
+        // 构建图的邻接表表示
 
         for road in &roads {
             let u = road[0] as usize;
             let v = road[1] as usize;
-            graph[u].push(v as i32);
-            graph[v].push(u as i32);
+            graph[u].push(v);
+            graph[v].push(u);
         }
         
-        // DFS函数
+        // 深度优先搜索函数
 
-        fn dfs(graph: &Vec<Vec<i32>>, u: usize, prev: i32, seats: i32, ans: &mut i64) -> i32 {
-            let mut people = 1;
+        fn dfs(u: usize, parent: usize, graph: &Vec<Vec<usize>>, seats: i32) -> (i64, i32) {
+            let mut total_fuel = 0;
+            let mut total_people = 1;
             for &v in &graph[u] {
-                if v == prev {
+                if v == parent {
                     continue;
                 }
-                people += dfs(graph, v as usize, u as i32, seats, ans);
+                let (fuel, people) = dfs(v, u, graph, seats);
+                total_fuel += fuel + ((people + seats - 1) as i64 / seats as i64);
+                total_people += people;
             }
-            if u > 0 {
-                // 计算所需汽车数量 = 向上取整(people / seats)
-                *ans += (people + seats - 1) / seats;
-            }
-            people
-
+            (total_fuel, total_people)
         }
         
-        dfs(&graph, 0, -1, seats, &mut ans);
-        ans
+        let (fuel, _) = dfs(0, n, &graph, seats);
+        fuel
 
     }
 }

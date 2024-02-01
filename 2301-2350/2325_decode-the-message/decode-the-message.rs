@@ -7,9 +7,11 @@ impl Solution {
         
         // 构建替换表
 
+        let mut index = 0;
         for c in key.chars() {
             if c != ' ' && substitution_table[(c as u8 - b'a') as usize] == ' ' {
-                substitution_table[(c as u8 - b'a') as usize] = (substitution_table.len() as u8 + b'a') as char;
+                substitution_table[(c as u8 - b'a') as usize] = (index as u8 + b'a') as char;
+                index += 1;
             }
         }
         

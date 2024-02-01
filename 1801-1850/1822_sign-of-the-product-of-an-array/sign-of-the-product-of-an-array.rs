@@ -13,20 +13,14 @@ impl Solution {
 
         // Iterate through the elements of the array
 
-        for num in nums {
+        for num in &nums {
             // Multiply each element to the product
 
-            product *= num;
+            product *= num.signum();
         }
 
-        // Check the sign of the product and return the corresponding value
+        // Return the sign of the product
 
-        if product > 0 {
-            return 1;
-        } else if product < 0 {
-            return -1;
-        } else {
-            return 0;
-        }
+        product.signum()
     }
 }

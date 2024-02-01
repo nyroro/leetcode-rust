@@ -16,8 +16,8 @@ impl Solution {
                 let mut left = j + 1;
                 let mut right = nums.len() - 1;
                 while left < right {
-                    let sum = nums[i] + nums[j] + nums[left] + nums[right];
-                    if sum == target {
+                    let sum = nums[i] as i64 + nums[j] as i64 + nums[left] as i64 + nums[right] as i64;
+                    if sum == target as i64 {
                         result.push(vec![nums[i], nums[j], nums[left], nums[right]]);
                         while left < right && nums[left] == nums[left + 1] {
                             left += 1;
@@ -27,7 +27,7 @@ impl Solution {
                         }
                         left += 1;
                         right -= 1;
-                    } else if sum < target {
+                    } else if sum < target as i64 {
                         left += 1;
                     } else {
                         right -= 1;

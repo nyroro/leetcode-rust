@@ -9,14 +9,14 @@ impl Solution {
         
         // 定义递归函数来计算节点的子节点数量
 
-        fn count(node: Option<Rc<RefCell<TreeNode>>>, val: i32) -> i32 {
+        fn count(node: Option<Rc<RefCell<TreeNode>>>, val: i32, left: &mut i32, right: &mut i32) -> i32 {
             if let Some(n) = node {
                 let n = n.borrow();
-                let l = count(n.left.clone(), val);
-                let r = count(n.right.clone(), val);
+                let l = count(n.left.clone(), val, left, right);
+                let r = count(n.right.clone(), val, left, right);
                 if n.val == val {
-                    left = l;
-                    right = r;
+                    *left = l;
+                    *right = r;
                 }
                 return l + r + 1;
             }
@@ -25,7 +25,7 @@ impl Solution {
         
         // 调用递归函数计算节点的子节点数量
 
-        let _ = count(root, x);
+        let _ = count(root, x, &mut left, &mut right);
         
         // 根据题目要求的规则判断是否存在一种选择能够确保获胜
 

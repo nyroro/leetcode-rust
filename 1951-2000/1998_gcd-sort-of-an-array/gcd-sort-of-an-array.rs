@@ -24,7 +24,7 @@ impl Solution {
         // 遍历 nums 中的每个数
 
         for &num in &nums {
-            let mut x = num;
+            let mut x = num as usize;
             let mut factors = Vec::new();
 
             // 计算 num 的所有因子
@@ -37,14 +37,14 @@ impl Solution {
             // 将 num 和其因子进行合并
 
             for &factor in &factors {
-                dsu.union(num, factor);
+                dsu.union(num as usize, factor);
             }
         }
 
         // 检查 nums 和 sorted_nums 中的每个对应位置的数是否在同一个集合中
 
         for i in 0..n {
-            if dsu.find(nums[i]) != dsu.find(sorted_nums[i]) {
+            if dsu.find(nums[i] as usize) != dsu.find(sorted_nums[i] as usize) {
                 return false;
             }
         }

@@ -25,7 +25,7 @@ impl Solution {
                 let t = t1 - t2;
                 heap.push(t);
             } else {
-                let t3 = *heap.peek().unwrap();
+                let t3 = heap.peek().unwrap();
                 let t = t2 - t3 + 1;
                 let t1 = t1 - t;
                 let t2 = t2 - t;
@@ -38,6 +38,6 @@ impl Solution {
             }
         }
         
-        return -heap.pop().unwrap();
+        return heap.pop().unwrap();
     }
 }

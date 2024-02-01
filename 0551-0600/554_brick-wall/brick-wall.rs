@@ -6,7 +6,7 @@ impl Solution {
         let mut gaps = HashMap::new();
         let mut max_gaps = 0;
 
-        for row in wall {
+        for row in &wall {
             let mut sum = 0;
             for i in 0..row.len() - 1 {
                 sum += row[i];

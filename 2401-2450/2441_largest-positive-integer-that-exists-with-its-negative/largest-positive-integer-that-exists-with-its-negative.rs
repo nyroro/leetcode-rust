@@ -8,9 +8,13 @@ impl Solution {
 
         for &num in nums.iter() {
             if set.contains(&-num) {
-                max_k = max_k.max(num);
+                max_k = max_k.max(num.abs());
             }
             set.insert(num);
+        }
+
+        if max_k == -1 {
+            return -1;
         }
 
         max_k

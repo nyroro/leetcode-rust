@@ -17,13 +17,13 @@ impl Solution {
         let mut result = 0;
         for i in 1..32 {
             for j in 1..32 {
-                if i + j >= k {
-                    result += bit_counts[i] * bit_counts[j];
+                if i + j >= k as usize {
+                    result += bit_counts[i] as i64 * bit_counts[j] as i64;
                 }
             }
         }
 
-        result as i64
+        result
 
     }
 }

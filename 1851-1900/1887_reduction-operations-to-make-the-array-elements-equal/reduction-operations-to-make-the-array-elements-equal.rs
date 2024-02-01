@@ -13,7 +13,7 @@ impl Solution {
             if nums[i] < largest {
                 largest = nums[i]; // 更新当前最大值
 
-                operations += 1; // 增加操作次数
+                operations += (nums.len() - i - 1) as i32; // 增加操作次数
 
             }
         }

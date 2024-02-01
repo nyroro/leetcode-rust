@@ -11,8 +11,8 @@ impl Solution {
         for i in 0..n {
             let bucket = (nums[i] as i64 - std::i32::MIN as i64) / (value_diff + 1);
             if bucket_map.contains_key(&bucket) ||
-                bucket_map.contains_key(&(bucket - 1) && (nums[i] as i64 - *bucket_map.get(&(bucket - 1)).unwrap()) <= value_diff) ||
-                bucket_map.contains_key(&(bucket + 1) && (*bucket_map.get(&(bucket + 1)).unwrap() - nums[i] as i64) <= value_diff) {
+                (bucket_map.contains_key(&(bucket - 1)) && (nums[i] as i64 - *bucket_map.get(&(bucket - 1)).unwrap()) <= value_diff) ||
+                (bucket_map.contains_key(&(bucket + 1)) && (*bucket_map.get(&(bucket + 1)).unwrap() - nums[i] as i64) <= value_diff) {
                 return true;
             }
             bucket_map.insert(bucket, nums[i] as i64);

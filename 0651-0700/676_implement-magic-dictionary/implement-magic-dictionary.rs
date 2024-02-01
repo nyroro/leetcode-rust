@@ -36,16 +36,3 @@ impl MagicDictionary {
 
     }
 }
-
-fn main() {
-    let mut obj = MagicDictionary::new();
-    obj.build_dict(vec!["hello".to_string(), "leetcode".to_string()]);
-    println!("{}", obj.search("hello".to_string())); // false
-
-    println!("{}", obj.search("hhllo".to_string())); // true
-
-    println!("{}", obj.search("hell".to_string())); // false
-
-    println!("{}", obj.search("leetcoded".to_string())); // false
-
-}

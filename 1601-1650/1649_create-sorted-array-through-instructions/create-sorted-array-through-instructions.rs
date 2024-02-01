@@ -32,7 +32,7 @@ impl Solution {
     pub fn create_sorted_array(instructions: Vec<i32>) -> i32 {
         let mod_val = 1_000_000_007;
         let max_val = *instructions.iter().max().unwrap() as usize;
-        let mut fenwick_tree = FenwickTree::new(max_val);
+        let mut fenwick_tree = FenwickTree::new(max_val + 1);
         let mut cost = 0;
 
         for (i, &num) in instructions.iter().enumerate() {

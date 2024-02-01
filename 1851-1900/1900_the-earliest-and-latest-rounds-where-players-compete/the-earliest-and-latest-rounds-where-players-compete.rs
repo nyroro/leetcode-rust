@@ -11,10 +11,10 @@ impl Solution {
         let mut ret = vec![1000, -1];
         let mut memo: HashMap<(usize, usize, usize, usize), ()> = HashMap::new();
 
-        fn dfs(a: usize, b: usize, c: usize, x: i32, ret: &mut Vec<i32>, memo: &mut HashMap<(usize, usize, usize, usize), ()>) {
+        fn dfs(a: usize, b: usize, c: usize, x: usize, ret: &mut Vec<i32>, memo: &mut HashMap<(usize, usize, usize, usize), ()>) {
             if a == c {
-                ret[0] = ret[0].min(x);
-                ret[1] = ret[1].max(x);
+                ret[0] = ret[0].min(x as i32);
+                ret[1] = ret[1].max(x as i32);
                 return;
             }
             let n = a + b + c + 2;

@@ -14,11 +14,10 @@ impl Solution {
         
         let simplified_path = stack.join("/");
         
-        if simplified_path.is_empty() {
-            "/".to_string()
-        } else {
-            simplified_path
+        let mut result = String::from("/");
+        result.push_str(&simplified_path);
+        
+        result
 
-        }
     }
 }

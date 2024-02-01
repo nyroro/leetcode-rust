@@ -19,19 +19,7 @@ impl Solution {
 
         }
         
-        count.iter().sum() as i32 // 返回无法吃到三明治的学生数量
+        count.iter().sum::<i32>() // 返回无法吃到三明治的学生数量
 
     }
-}
-
-fn main() {
-    let students = vec![1, 1, 0, 0];
-    let sandwiches = vec![0, 1, 0, 1];
-    println!("{}", Solution::count_students(students, sandwiches)); // 输出: 0
-
-
-    let students2 = vec![1, 1, 1, 0, 0, 1];
-    let sandwiches2 = vec![1, 0, 0, 0, 1, 1];
-    println!("{}", Solution::count_students(students2, sandwiches2)); // 输出: 3
-
 }

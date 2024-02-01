@@ -5,16 +5,16 @@ impl Solution {
         let mut right = n;
         while left <= right {
             let mid = left + (right - left) / 2;
-            let curr = mid * (mid + 1) / 2;
-            if curr == n {
+            let curr = (mid as i64 * (mid as i64 + 1)) / 2;
+            if curr == n as i64 {
                 return mid;
-            } else if curr < n {
+            } else if curr < n as i64 {
                 left = mid + 1;
             } else {
                 right = mid - 1;
             }
         }
-        right
+        right as i32
 
     }
 }

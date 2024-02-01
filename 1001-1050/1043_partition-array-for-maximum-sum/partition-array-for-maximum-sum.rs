@@ -8,7 +8,7 @@ impl Solution {
         for i in 0..n {
             let mut cur_max = 0;
             for j in 1..=k {
-                if i as i32 - j + 1 >= 0 {
+                if i as i32 - j as i32 + 1 >= 0 {
                     cur_max = cur_max.max(arr[i - j + 1]);
                     dp[i + 1] = dp[i + 1].max(dp[i - j + 1] + cur_max * j as i32);
                 }

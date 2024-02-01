@@ -1,12 +1,8 @@
 
-// 创建一个名为Solution的结构体
-
-
-
 impl Solution {
     // 实现count_good_numbers函数
 
-    pub fn count_good_numbers(n: i64) -> i32 {
+    fn count_good_numbers(n: i64) -> i32 {
         // 定义模数
 
         let modulo: i64 = 1000000007;

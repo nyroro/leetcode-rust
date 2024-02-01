@@ -11,6 +11,6 @@ impl Solution {
             }
         }
         
-        Solution::chalk_replacer(chalk, total % chalk.iter().sum())
+        Solution::chalk_replacer(chalk.clone(), (total % chalk.iter().sum::<i32>()) as i32)
     }
 }

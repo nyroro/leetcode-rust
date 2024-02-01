@@ -19,7 +19,7 @@ impl Solution {
                 }
 
                 let length = right - left + 1;
-                max_length = max_length.max(length);
+                max_length = max_length.max(length as i32);
             }
 
             i += 1;

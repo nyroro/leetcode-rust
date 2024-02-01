@@ -1,6 +1,8 @@
 
 use std::collections::{HashMap, HashSet, VecDeque};
 
+
+
 impl Solution {
     pub fn num_buses_to_destination(routes: Vec<Vec<i32>>, source: i32, target: i32) -> i32 {
         if source == target {
@@ -18,13 +20,14 @@ impl Solution {
         let mut visited_stops = HashSet::new();
         let mut queue = VecDeque::new();
         queue.push_back((source, 0));
+        visited_stops.insert(source);
 
         while let Some((stop, buses)) = queue.pop_front() {
             if stop == target {
                 return buses;
             }
 
-            for &route_idx in stop_to_routes[&stop].iter() {
+            for &route_idx in stop_to_routes.get(&stop).unwrap_or(&vec![]).iter() {
                 if visited_routes[route_idx] {
                     continue;
                 }

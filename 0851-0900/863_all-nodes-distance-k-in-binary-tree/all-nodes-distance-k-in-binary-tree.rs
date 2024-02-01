@@ -30,9 +30,11 @@ impl Solution {
                 result.push(node);
                 return;
             }
-            for &neighbor in graph[&node].iter() {
-                if !visited[neighbor as usize] {
-                    dfs(neighbor, distance - 1, graph, visited, result);
+            if let Some(neighbors) = graph.get(&node) {
+                for &neighbor in neighbors.iter() {
+                    if !visited[neighbor as usize] {
+                        dfs(neighbor, distance - 1, graph, visited, result);
+                    }
                 }
             }
         }

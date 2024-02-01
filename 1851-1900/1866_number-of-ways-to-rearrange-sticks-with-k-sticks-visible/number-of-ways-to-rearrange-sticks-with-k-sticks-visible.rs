@@ -8,8 +8,7 @@ impl Solution {
         
         for i in 2..=n as usize {
             for j in 1..=k as usize {
-                dp[i][j] = (dp[i - 1][j - 1] + ((i - 1) as i64 * dp[i - 1][j] as i64) % modulo) as i32;
-                dp[i][j] %= modulo;
+                dp[i][j] = ((dp[i - 1][j - 1] as i64 + ((i - 1) as i64 * dp[i - 1][j] as i64) % modulo) % modulo) as i32;
             }
         }
         

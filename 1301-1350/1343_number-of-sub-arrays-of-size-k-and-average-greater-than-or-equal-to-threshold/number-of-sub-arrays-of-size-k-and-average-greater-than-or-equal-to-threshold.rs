@@ -9,7 +9,7 @@ impl Solution {
         while right < arr.len() {
             sum += arr[right];
 
-            if right - left + 1 == k {
+            if right - left + 1 == k as usize {
                 if sum >= threshold * k {
                     count += 1;
                 }

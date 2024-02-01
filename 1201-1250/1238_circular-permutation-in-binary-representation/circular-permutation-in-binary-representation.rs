@@ -9,13 +9,14 @@ impl Solution {
         // 生成排列
 
         for i in 0..size {
-            result.push(i ^ (i >> 1)); // 使用异或运算生成满足条件的排列
+            result.push((i ^ (i >> 1)) as i32); // 使用异或运算生成满足条件的排列，并将结果转换为i32类型
 
         }
 
         // 找到start的位置并移动到开头
 
-        let start_index = result.iter().position(|&x| x == start).unwrap();
+        let start_index = result.iter().position(|&x| x == start).unwrap() as usize; // 找到start的位置并将结果转换为usize类型
+
         result.rotate_left(start_index);
 
         result // 返回结果

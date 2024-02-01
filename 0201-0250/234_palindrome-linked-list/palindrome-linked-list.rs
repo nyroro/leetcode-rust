@@ -4,17 +4,17 @@ impl Solution {
         let mut slow = head.as_ref();
         let mut fast = head.as_ref();
         
-        // Find the middle of the linked list
+        // 找到链表的中间节点
 
         while fast.is_some() && fast.as_ref().unwrap().next.is_some() {
             slow = slow.unwrap().next.as_ref();
             fast = fast.unwrap().next.as_ref().unwrap().next.as_ref();
         }
         
-        // Reverse the second half of the linked list
+        // 反转链表的后半部分
 
         let mut prev = None;
-        let mut curr = slow;
+        let mut curr = slow.cloned();
         while let Some(mut node) = curr {
             let next = node.next.take();
             node.next = prev.take();
@@ -22,7 +22,7 @@ impl Solution {
             curr = next;
         }
         
-        // Compare the first and second half of the linked list
+        // 比较链表的前半部分和反转后的后半部分是否相等
 
         let mut first = head.as_ref();
         let mut second = prev.as_ref();

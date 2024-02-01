@@ -39,10 +39,3 @@ impl Solution {
 
     }
 }
-
-fn main() {
-    println!("{}", Solution::largest_variance(String::from("aababbb"))); // Output: 3
-
-    println!("{}", Solution::largest_variance(String::from("abcde"))); // Output: 0
-
-}

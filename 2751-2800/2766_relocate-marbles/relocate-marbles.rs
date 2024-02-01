@@ -20,13 +20,12 @@ impl Solution {
             if let Some(&count) = marble_positions.get(&from) {
                 *marble_positions.entry(from).or_insert(0) -= count;
                 *marble_positions.entry(to).or_insert(0) += count;
-                marble_positions.remove(&from);
             }
         }
 
         // 将有弹珠的位置按顺序放入数组中并返回
 
-        let mut result: Vec<i32> = marble_positions.keys().cloned().collect();
+        let mut result: Vec<i32> = marble_positions.keys().cloned().filter(|&x| *marble_positions.get(&x).unwrap() > 0).collect();
         result.sort();
         result
 

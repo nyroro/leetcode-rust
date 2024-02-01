@@ -1,7 +1,7 @@
 
 impl Solution {
     pub fn remove_nodes(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
-        let mut stack = Vec::new();
+        let mut stack: Vec<Box<ListNode>> = Vec::new();
         let mut current = head;
 
         while let Some(mut node) = current {

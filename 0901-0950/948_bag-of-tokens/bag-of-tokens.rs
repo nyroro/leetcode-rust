@@ -1,7 +1,10 @@
 
 impl Solution {
-    pub fn bag_of_tokens_score(tokens: Vec<i32>, power: i32) -> i32 {
-        let mut tokens = tokens;
+    pub fn bag_of_tokens_score(mut tokens: Vec<i32>, mut power: i32) -> i32 {
+        if tokens.is_empty() {
+            return 0;
+        }
+        
         tokens.sort(); // 按照值的大小进行排序
 
         let mut score = 0;

@@ -18,6 +18,10 @@ impl Solution {
                 right -= 1;
             }
             
+            if index == 0 {
+                break;
+            }
+            
             index -= 1;
         }
         

@@ -33,7 +33,10 @@ impl Solution {
                 }
                 *index += 1;
                 if node.left.is_some() && node.left.as_ref().unwrap().borrow().val != voyage[*index] {
-                    std::mem::swap(&mut node.left, &mut node.right);
+                    let left = node.left.take();
+                    let right = node.right.take();
+                    node.left = right;
+                    node.right = left;
                     result.push(node.val);
                 }
                 let left_result = dfs(node.left.take(), index, voyage, result);

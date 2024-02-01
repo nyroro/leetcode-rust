@@ -31,10 +31,3 @@ impl Solution {
 
     }
 }
-
-fn main() {
-    let s = "leetcode".to_string();
-    let t = "coats".to_string();
-    println!("{}", Solution::min_steps(s, t));  // Output: 7
-
-}

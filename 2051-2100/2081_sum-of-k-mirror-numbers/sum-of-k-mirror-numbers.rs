@@ -3,14 +3,13 @@
 
 impl Solution {
     pub fn k_mirror(k: i32, n: i32) -> i64 {
-        let mut ret: Vec<i64> = (1..k).collect();
+        let mut ret: Vec<i64> = (1..k as i64).collect();
 
-        fn gao(x: i32, y: Option<i32>, k: i32, ret: &mut Vec<i64>) {
+        fn gao(x: i64, y: Option<i64>, k: i64, ret: &mut Vec<i64>) {
             let mut num = x;
             if let Some(y_val) = y {
                 num = num * k + y_val;
             }
-            let mut tx = x;
             let mut x_val = x;
             while x_val > 0 {
                 num = num * k + x_val % k;
@@ -29,11 +28,11 @@ impl Solution {
 
         let mut x = 1;
         for i in 1..k {
-            gao(i, None, k, &mut ret);
+            gao(i as i64, None, k as i64, &mut ret);
         }
         while ret.len() < n as usize {
-            for i in k.pow(x) .. k.pow(x + 1) {
-                gao(i / k, Some(i % k), k, &mut ret);
+            for i in k.pow(x as u32) .. k.pow(x as u32 + 1) {
+                gao((i / k).into(), Some((i % k).into()), k as i64, &mut ret);
                 if ret.len() >= n as usize {
                     break;
                 }
@@ -41,8 +40,8 @@ impl Solution {
             if ret.len() >= n as usize {
                 break;
             }
-            for i in k.pow(x) .. k.pow(x + 1) {
-                gao(i, None, k, &mut ret);
+            for i in k.pow(x as u32) .. k.pow(x as u32 + 1) {
+                gao(i as i64, None, k as i64, &mut ret);
                 if ret.len() >= n as usize {
                     break;
                 }

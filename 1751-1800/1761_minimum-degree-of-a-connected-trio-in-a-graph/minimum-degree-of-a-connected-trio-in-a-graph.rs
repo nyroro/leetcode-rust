@@ -1,8 +1,10 @@
 
 impl Solution {
     pub fn min_trio_degree(n: i32, edges: Vec<Vec<i32>>) -> i32 {
-        let mut degree = vec![0; (n + 1) as usize];
-        let mut graph = vec![vec![false; (n + 1) as usize]; (n + 1) as usize];
+        let n = n as usize; // Convert n to usize
+
+        let mut degree = vec![0; n + 1];
+        let mut graph = vec![vec![false; n + 1]; n + 1];
         
         for edge in &edges {
             let u = edge[0] as usize;

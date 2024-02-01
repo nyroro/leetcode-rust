@@ -6,7 +6,7 @@ impl Solution {
 
         for i in 1..=s.len() {
             for j in 0..i {
-                if dictionary.contains(&s[j..i]) {
+                if dictionary.contains(&s[j..i].to_string()) {
                     dp[i] = dp[i].min(dp[j]);
                 } else {
                     dp[i] = dp[i].min(dp[j] + (i - j) as i32);

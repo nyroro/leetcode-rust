@@ -2,7 +2,7 @@
 impl Solution {
     pub fn find_max_value_of_equation(points: Vec<Vec<i32>>, k: i32) -> i32 {
         let mut result = std::i32::MIN;
-        let mut deque = VecDeque::new();
+        let mut deque: std::collections::VecDeque<Vec<i32>> = std::collections::VecDeque::new();
         
         for point in points {
             let x = point[0];

@@ -2,6 +2,8 @@
 impl Solution {
     pub fn kth_smallest_prime_fraction(arr: Vec<i32>, k: i32) -> Vec<i32> {
         let n = arr.len();
+        let k = k as usize; // Convert k to usize
+
         let mut left = 0.0;
         let mut right = 1.0;
         let mut result = vec![0, 0];

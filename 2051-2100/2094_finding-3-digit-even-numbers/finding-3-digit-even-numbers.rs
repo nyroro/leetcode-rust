@@ -1,13 +1,16 @@
 
 impl Solution {
-    pub fn find_even_numbers(digits: Vec<i32>) -> Vec<i32> {
+    pub fn find_even_numbers(mut digits: Vec<i32>) -> Vec<i32> {
         let mut result = Vec::new();
         let mut path = Vec::new();
         let mut visited = vec![false; digits.len()];
         
+        digits.sort(); // Sort the input digits to handle duplicates
+        
         Self::backtrack(&digits, &mut visited, &mut path, &mut result);
         
-        result.sort();
+        result.sort(); // Sort the result array
+
         result
 
     }
@@ -15,7 +18,7 @@ impl Solution {
     fn backtrack(digits: &Vec<i32>, visited: &mut Vec<bool>, path: &mut Vec<i32>, result: &mut Vec<i32>) {
         if path.len() == 3 {
             let num = path.iter().fold(0, |acc, &x| acc * 10 + x);
-            if num % 2 == 0 {
+            if num % 2 == 0 && (num > 0 && path[0] != 0) {
                 result.push(num);
             }
             return;

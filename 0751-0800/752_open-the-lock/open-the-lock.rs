@@ -1,4 +1,6 @@
 
+use std::collections::{HashSet, VecDeque};
+
 impl Solution {
     pub fn open_lock(deadends: Vec<String>, target: String) -> i32 {
         let start = "0000".to_string();
@@ -20,8 +22,8 @@ impl Solution {
             
             for i in 0..4 {
                 let digit = current.chars().nth(i).unwrap().to_digit(10).unwrap();
-                let next1 = current.chars().take(i).chain(std::iter::once(((digit + 1) % 10).to_digit(10).unwrap())).chain(current.chars().skip(i + 1)).collect::<String>();
-                let next2 = current.chars().take(i).chain(std::iter::once(((digit + 9) % 10).to_digit(10).unwrap())).chain(current.chars().skip(i + 1)).collect::<String>();
+                let next1 = current.chars().take(i).chain(std::iter::once(((digit + 1) % 10).to_string().chars().next().unwrap())).chain(current.chars().skip(i + 1)).collect::<String>();
+                let next2 = current.chars().take(i).chain(std::iter::once(((digit + 9) % 10).to_string().chars().next().unwrap())).chain(current.chars().skip(i + 1)).collect::<String>();
                 
                 if !visited.contains(&next1) && !deadends.contains(&next1) {
                     visited.insert(next1.clone());

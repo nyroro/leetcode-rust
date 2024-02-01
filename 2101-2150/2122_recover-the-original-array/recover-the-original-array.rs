@@ -35,7 +35,9 @@ impl Solution {
         for &t in &nums {
             if t > x && (t - x) % 2 == 0 {
                 let k = (t - x) / 2;
-                if gao(&mut nums, &mut ret, k) {
+                let mut nums_clone = nums.clone(); // 创建nums的可变副本
+
+                if gao(&mut nums_clone, &mut ret, k) {
                     return ret;
                 }
             }

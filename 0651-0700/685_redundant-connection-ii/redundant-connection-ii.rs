@@ -1,56 +1,66 @@
 
-impl Solution {
-    pub fn find_redundant_directed_connection(edges: Vec<Vec<i32>>) -> Vec<i32> {
-        let n = edges.len();
-        let mut parent = vec![0; n + 1];
-        let mut first = vec![0; n + 1];
-        let mut second = vec![0; n + 1];
-        let mut candidates = vec![];
+struct UnionFind {
+    parent: Vec<i32>,
+}
 
-        for edge in &edges {
-            let u = edge[0] as usize;
-            let v = edge[1] as usize;
-            if parent[v] != 0 {
-                first = vec![u as i32, v as i32];
-                second = edge.clone();
-            } else {
-                parent[v] = u as i32;
-            }
+impl UnionFind {
+    fn new(n: usize) -> UnionFind {
+        UnionFind { parent: (0..=n as i32).collect() }
+    }
+
+    fn find(&mut self, mut x: i32) -> i32 {
+        while x != self.parent[x as usize] {
+            x = self.parent[x as usize];
         }
+        x
 
-        for i in 1..=n {
-            parent[i] = i as i32;
-        }
+    }
 
-        for edge in &edges {
-            let u = edge[0] as usize;
-            let v = edge[1] as usize;
-            if edge == second {
-                continue;
-            }
-            let pu = Self::find(&parent, u);
-            let pv = Self::find(&parent, v);
-            if pu == pv {
-                candidates = first.clone();
-            } else {
-                parent[pv] = pu;
-            }
-        }
-
-        if candidates.is_empty() {
-            second
+    fn union(&mut self, x: i32, y: i32) -> bool {
+        let root_x = self.find(x);
+        let root_y = self.find(y);
+        if root_x == root_y {
+            false
 
         } else {
-            candidates
+            self.parent[root_x as usize] = root_y;
+            true
 
         }
     }
+}
 
-    fn find(parent: &Vec<i32>, mut x: usize) -> i32 {
-        while x as i32 != parent[x] {
-            x = parent[x] as usize;
+impl Solution {
+    pub fn find_redundant_directed_connection(edges: Vec<Vec<i32>>) -> Vec<i32> {
+        let n = edges.len();
+        let mut uf = UnionFind::new(n);
+        let mut parent = vec![0; n + 1];
+        let mut conflict_edge = vec![];
+        let mut cycle_edge = vec![];
+
+        for edge in &edges {
+            let u = edge[0];
+            let v = edge[1];
+            if parent[v as usize] != 0 {
+                conflict_edge = vec![parent[v as usize], v];
+                conflict_edge.extend_from_slice(edge);
+            } else {
+                parent[v as usize] = u;
+                if !uf.union(u, v) {
+                    cycle_edge = edge.clone();
+                }
+            }
         }
-        x as i32
 
+        if !conflict_edge.is_empty() {
+            if !cycle_edge.is_empty() {
+                return vec![parent[conflict_edge[3] as usize], conflict_edge[3]];
+            } else {
+                return vec![conflict_edge[2], conflict_edge[3]];
+            }
+        } else {
+            cycle_edge
+
+        }
     }
 }

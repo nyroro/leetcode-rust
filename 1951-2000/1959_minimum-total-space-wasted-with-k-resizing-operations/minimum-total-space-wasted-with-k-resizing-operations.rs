@@ -16,13 +16,14 @@ impl Solution {
             for i in 0..n {
                 let mut max_val = 0;
                 let mut sum = 0;
+                dp[i][j] = std::i32::MAX;
                 for l in (0..=i).rev() {
                     max_val = max_val.max(nums[l]);
                     sum += nums[l];
                     dp[i][j] = if l > 0 {
-                        dp[i][j].min(dp[l - 1][j - 1] + max_val * (i as i32 - l as i32 + 1) - sum)
+                        dp[i][j].min(dp[l - 1][j - 1] + max_val * ((i - l + 1) as i32) - sum)
                     } else {
-                        dp[i][j].min(max_val * (i as i32 - l as i32 + 1) - sum)
+                        dp[i][j].min(max_val * ((i - l + 1) as i32) - sum)
                     };
                 }
             }

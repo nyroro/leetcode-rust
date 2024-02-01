@@ -8,6 +8,11 @@ impl Solution {
         // Extract day, month, and year
 
         let day = parts[0].trim_matches(char::is_alphabetic);
+        let day = if day.len() == 1 {
+            format!("0{}", day)
+        } else {
+            day.to_string()
+        };
         let month = match parts[1] {
             "Jan" => "01",
             "Feb" => "02",

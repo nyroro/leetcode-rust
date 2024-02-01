@@ -1,17 +1,12 @@
 
-// Define a struct to represent the state of the algorithm
+// Define a struct to represent the solution
 
-struct MinInteger {
-    num: Vec<u8>,  // Convert the input string to a vector of u8 digits
 
-    k: i32,  // Number of swaps allowed
 
-}
-
-impl MinInteger {
+impl Solution {
     // Implement a function to find the minimum integer
 
-    pub fn min_integer(num: String, k: i32) -> String {
+    pub fn min_integer(num: String, mut k: i32) -> String {
         // Convert the input string to a vector of u8 digits
 
         let num: Vec<u8> = num.chars().map(|c| c.to_digit(10).unwrap() as u8).collect();

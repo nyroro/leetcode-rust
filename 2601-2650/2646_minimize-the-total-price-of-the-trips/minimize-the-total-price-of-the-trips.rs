@@ -1,8 +1,6 @@
 
 use std::collections::HashMap;
 
-
-
 impl Solution {
     pub fn minimum_total_price(n: i32, edges: Vec<Vec<i32>>, price: Vec<i32>, trips: Vec<Vec<i32>>) -> i32 {
         let mut adj: HashMap<i32, Vec<i32>> = HashMap::new();
@@ -46,7 +44,7 @@ impl Solution {
     }
     
     fn dfs(cost: &Vec<i32>, node: i32, adj: &HashMap<i32, Vec<i32>>, dp: &mut Vec<Vec<Option<i32>>>, p: i32, p_half: bool) -> i32 {
-        let half_cost = cost[node as usize] / 2;
+        let mut half_cost = cost[node as usize] / 2;
         let mut full_cost = cost[node as usize];
         if let Some(cached) = dp[node as usize][p_half as usize] {
             return cached;

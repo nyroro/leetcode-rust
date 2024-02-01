@@ -16,16 +16,16 @@ impl TrieNode {
 }
 
 struct Trie {
-    root: Option<Box<TrieNode>>,
+    root: TrieNode,
 }
 
 impl Trie {
     fn new() -> Self {
-        Trie { root: Some(Box::new(TrieNode::new())) }
+        Trie { root: TrieNode::new() }
     }
 
     fn insert(&mut self, word: &str, weight: i32) {
-        let mut node = self.root.as_mut().unwrap();
+        let mut node = &mut self.root;
         node.weight = weight;
         for c in word.chars() {
             node = node.children.entry(c).or_insert(TrieNode::new());
@@ -36,13 +36,14 @@ impl Trie {
     fn search(&self, word: &str) -> i32 {
         let mut node = &self.root;
         for c in word.chars() {
-            if let Some(n) = node {
-                node = n.children.get(&c);
+            if let Some(n) = node.children.get(&c) {
+                node = n;
             } else {
                 return -1;
             }
         }
-        node.map_or(-1, |n| n.weight)
+        node.weight
+
     }
 }
 
@@ -55,7 +56,8 @@ impl WordFilter {
         let mut trie = Trie::new();
         for (i, word) in words.iter().enumerate() {
             for j in 0..word.len() {
-                trie.insert(&word[j..], i as i32);
+                let suffix = format!("{}#{}", &word[j..], word);
+                trie.insert(&suffix, i as i32);
             }
         }
         WordFilter { trie }
@@ -65,11 +67,4 @@ impl WordFilter {
         let word = format!("{}#{}", suff, pref);
         self.trie.search(&word)
     }
-}
-
-fn main() {
-    let words = vec!["apple".to_string()];
-    let word_filter = WordFilter::new(words);
-    println!("{}", word_filter.f("a".to_string(), "e".to_string())); // Output: 0
-
 }

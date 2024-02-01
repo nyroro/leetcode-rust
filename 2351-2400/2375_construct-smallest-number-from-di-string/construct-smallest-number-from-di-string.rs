@@ -3,20 +3,17 @@ impl Solution {
     pub fn smallest_number(pattern: String) -> String {
         let n = pattern.len();
         let mut result = String::new();
-        let mut current_min = 1;
-        let mut current_max = n + 1;
+        let mut stack = Vec::new();
 
-        for ch in pattern.chars() {
-            if ch == 'I' {
-                result.push_str(current_min.to_string().as_str());
-                current_min += 1;
-            } else {
-                result.push_str(current_max.to_string().as_str());
-                current_max -= 1;
+        for i in 0..=n {
+            stack.push(i + 1);
+            if i == n || pattern.chars().nth(i).unwrap() == 'I' {
+                while let Some(num) = stack.pop() {
+                    result.push_str(&num.to_string());
+                }
             }
         }
 
-        result.push_str(current_min.to_string().as_str());
         result
 
     }

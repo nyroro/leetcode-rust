@@ -2,32 +2,31 @@
 impl Solution {
     pub fn min_sessions(tasks: Vec<i32>, session_time: i32) -> i32 {
         let n = tasks.len();
-        let mut dp = vec![std::i32::MAX; 1 << n];
-        let mut ok = vec![false; 1 << n];
-        dp[0] = 0;
+        let max_mask = 1 << n;
+        let mut dp = vec![std::i32::MAX; max_mask];
         
-        for i in 1..(1 << n) {
-            let mut t = 0;
-            for j in 0..n {
-                if (i >> j) & 1 == 1 {
-                    t += tasks[j];
+        for mask in 1..max_mask {
+            let mut remaining = mask;
+            let mut time = 0;
+            let mut count = 0;
+            for i in 0..n {
+                if (remaining & 1) == 1 {
+                    time += tasks[i];
+                    count += 1;
                 }
+                remaining >>= 1;
             }
-            ok[i] = t <= session_time;
-        }
-        
-        for i in 1..(1 << n) {
-            for j in (1..=i).rev() {
-                let mut ms = j;
-                while ms > 0 {
-                    if ok[ms as usize] {
-                        dp[i] = std::cmp::min(dp[i], dp[i ^ ms as usize] + 1);
+            if time <= session_time {
+                dp[mask] = 1;
+            } else {
+                for sub in 1..mask {
+                    if (sub & mask) == sub {
+                        dp[mask] = dp[mask].min(dp[sub] + dp[mask - sub]);
                     }
-                    ms = (ms - 1) & j;
                 }
             }
         }
         
-        return dp[(1 << n) - 1];
+        return dp[max_mask - 1];
     }
 }

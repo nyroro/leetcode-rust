@@ -1,11 +1,11 @@
 
 impl Solution {
-    pub fn count_sub_islands(grid1: Vec<Vec<i32>>, grid2: Vec<Vec<i32>>) -> i32 {
+    pub fn count_sub_islands(grid1: Vec<Vec<i32>>, mut grid2: Vec<Vec<i32>>) -> i32 {
         let mut count = 0;
         let m = grid1.len();
         let n = grid1[0].len();
         
-        fn dfs(grid1: &Vec<Vec<i32>>, grid2: &Vec<Vec<i32>>, i: usize, j: usize) -> bool {
+        fn dfs(grid1: &Vec<Vec<i32>>, grid2: &mut Vec<Vec<i32>>, i: usize, j: usize) -> bool {
             if i >= grid2.len() || j >= grid2[0].len() || grid2[i][j] == 0 {
                 return true;
             }
@@ -40,7 +40,7 @@ impl Solution {
         
         for i in 0..m {
             for j in 0..n {
-                if grid2[i][j] == 1 && dfs(&grid1, &grid2, i, j) {
+                if grid2[i][j] == 1 && dfs(&grid1, &mut grid2, i, j) {
                     count += 1;
                 }
             }

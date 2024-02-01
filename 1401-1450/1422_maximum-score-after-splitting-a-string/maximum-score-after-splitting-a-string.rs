@@ -15,7 +15,7 @@ impl Solution {
             max_score = max_score.max(score);
         }
 
-        max_score
+        max_score as i32
 
     }
 }

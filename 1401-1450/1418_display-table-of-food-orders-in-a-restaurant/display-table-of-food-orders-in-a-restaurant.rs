@@ -27,7 +27,7 @@ impl Solution {
         let mut header: Vec<String> = vec!["Table".to_string()];
         let mut food_list: Vec<String> = food_set.into_iter().collect();
         food_list.sort();
-        header.extend(food_list);
+        header.extend(food_list.clone());
         result.push(header);
         
         // 按桌号升序遍历HashMap，将每个桌号和对应的食物数量添加到结果中

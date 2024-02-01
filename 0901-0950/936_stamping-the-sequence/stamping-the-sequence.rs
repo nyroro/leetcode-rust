@@ -2,7 +2,8 @@
 impl Solution {
     pub fn moves_to_stamp(stamp: String, target: String) -> Vec<i32> {
         let stamp: Vec<char> = stamp.chars().collect();
-        let target: Vec<char> = target.chars().collect();
+        let mut target: Vec<char> = target.chars().collect(); // Make target mutable
+
         let mut result: Vec<i32> = Vec::new();
         let mut visited: Vec<bool> = vec![false; target.len()];
         let mut stars = 0;

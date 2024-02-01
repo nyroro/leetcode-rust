@@ -16,7 +16,7 @@ impl Solution {
             right += 1;
         }
 
-        count
+        count as i32
 
     }
 }

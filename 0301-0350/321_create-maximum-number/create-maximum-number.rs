@@ -22,7 +22,7 @@ impl Solution {
 
     fn get_max_subsequence(nums: &[i32], k: usize) -> Vec<i32> {
         let mut stack = Vec::new();
-        let to_remove = nums.len() - k;
+        let mut to_remove = nums.len() - k;
 
         for &num in nums {
             while !stack.is_empty() && num > *stack.last().unwrap() && to_remove > 0 {

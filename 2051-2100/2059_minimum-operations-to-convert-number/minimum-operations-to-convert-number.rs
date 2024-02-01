@@ -7,7 +7,7 @@ impl Solution {
         let mut queue: VecDeque<(i32, i32)> = VecDeque::new();
         let inf: i32 = 0x7fffffff;
 
-        let mut gao = |x: i32, dis: i32| {
+        let mut gao = |x: i32, dis: i32, queue: &mut VecDeque<(i32, i32)>, table: &mut HashMap<i32, i32>| {
             if *table.get(&x).unwrap_or(&inf) > dis + 1 {
                 table.insert(x, dis);
                 if x >= 0 && x <= 1000 {
@@ -35,9 +35,9 @@ impl Solution {
                     let k1 = now + t;
                     let k2 = now - t;
                     let k3 = now ^ t;
-                    gao(k1, dis + 1);
-                    gao(k2, dis + 1);
-                    gao(k3, dis + 1);
+                    gao(k1, dis + 1, &mut queue, &mut table);
+                    gao(k2, dis + 1, &mut queue, &mut table);
+                    gao(k3, dis + 1, &mut queue, &mut table);
                 }
             }
         }

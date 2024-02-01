@@ -2,21 +2,17 @@
 use std::collections::BinaryHeap;
 use std::cmp::Ordering;
 
-#[derive(Copy, Clone, Eq, PartialEq)]
+#[derive(Copy, Clone, PartialEq, PartialOrd)]
 struct State {
     prob: f64,
     node: usize,
 }
 
+impl Eq for State {}
+
 impl Ord for State {
     fn cmp(&self, other: &Self) -> Ordering {
         other.prob.partial_cmp(&self.prob).unwrap()
-    }
-}
-
-impl PartialOrd for State {
-    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
-        Some(self.cmp(other))
     }
 }
 

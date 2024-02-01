@@ -1,4 +1,7 @@
 
+use rand::seq::SliceRandom;
+use rand::thread_rng;
+
 struct Solution {
     nums: Vec<i32>,
     original_nums: Vec<i32>,
@@ -21,12 +24,8 @@ impl Solution {
     }
     
     fn shuffle(&mut self) -> Vec<i32> {
-        let mut rng = rand::thread_rng();
-        let n = self.nums.len();
-        for i in (1..n).rev() {
-            let j = rng.gen_range(0..=i);
-            self.nums.swap(i, j);
-        }
+        let mut rng = thread_rng();
+        self.nums.shuffle(&mut rng);
         self.nums.clone()
     }
 }

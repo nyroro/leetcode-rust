@@ -1,7 +1,7 @@
 
 impl Solution {
     pub fn digit_count(num: String) -> bool {
-        let mut count = vec![0; num.len()];
+        let mut count = vec![0; 10];
 
         for ch in num.chars() {
             let digit = ch.to_digit(10).unwrap() as usize;

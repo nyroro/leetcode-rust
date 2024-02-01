@@ -1,6 +1,6 @@
 
 impl Solution {
-    pub fn min_operations(nums: Vec<i32>) -> i32 {
+    pub fn min_operations(mut nums: Vec<i32>) -> i32 {
         let mut operations = 0;
         
         for i in 1..nums.len() {

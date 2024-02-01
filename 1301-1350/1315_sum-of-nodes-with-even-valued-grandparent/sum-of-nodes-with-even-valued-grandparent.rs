@@ -20,10 +20,8 @@ use std::cell::RefCell;
 //   }
 // }
 
-
-
 impl Solution {
-    pub fn sum_even_grandparent(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
+    fn sum_even_grandparent(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
         fn dfs(node: &Option<Rc<RefCell<TreeNode>>>, parent: Option<i32>, grandparent: Option<i32>) -> i32 {
             if let Some(n) = node {
                 let n = n.borrow();

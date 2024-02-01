@@ -53,7 +53,7 @@ impl Solution {
             Some('A') => "A".to_string(),
             Some('B') => "B".to_string(),
             Some('D') => "Draw".to_string(),
-            None => "Pending".to_string(),
+            _ => "Pending".to_string(),
         }
     }
 }

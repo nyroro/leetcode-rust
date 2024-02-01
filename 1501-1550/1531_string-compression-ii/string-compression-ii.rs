@@ -19,7 +19,7 @@ impl Solution {
                     } else {
                         del += 1;
                     }
-                    if j as i32 - del as i32 < 0 {
+                    if j as i32 - (del as i32) < 0 {
                         break;
                     }
                     dp[i][j] = std::cmp::min(dp[i][j], dp[t - 1][j - del] + 1 + if cnt >= 100 { 3 } else if cnt >= 10 { 2 } else if cnt >= 2 { 1 } else { 0 });

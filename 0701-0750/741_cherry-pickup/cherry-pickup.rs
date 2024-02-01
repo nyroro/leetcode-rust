@@ -3,7 +3,14 @@ impl Solution {
     pub fn cherry_pickup(grid: Vec<Vec<i32>>) -> i32 {
         let n = grid.len();
         let mut dp = vec![vec![vec![-1; n]; n]; n];
-        Solution::dfs(0, 0, 0, &grid, &mut dp)
+        let result = Solution::dfs(0, 0, 0, &grid, &mut dp);
+        if result < 0 {
+            0
+
+        } else {
+            result
+
+        }
     }
 
     fn dfs(x1: usize, y1: usize, x2: usize, grid: &Vec<Vec<i32>>, dp: &mut Vec<Vec<Vec<i32>>>) -> i32 {

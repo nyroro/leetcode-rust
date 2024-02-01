@@ -5,7 +5,7 @@ impl Solution {
         nums.sort();
 
         for x in 1..=nums.len() {
-            let count = nums.iter().filter(|&num| *num >= x).count();
+            let count = nums.iter().filter(|&num| *num >= x as i32).count();
             if count == x {
                 return x as i32;
             }

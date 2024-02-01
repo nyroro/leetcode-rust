@@ -16,9 +16,9 @@ impl Solution {
             s.push('0');
         }
 
-        // 按照字典序排序特殊子字符串
+        // 按照字典序逆序排序特殊子字符串
 
-        special_strings.sort();
+        special_strings.sort_by(|a, b| b.cmp(a));
 
         // 将特殊子字符串连接起来得到最终结果
 

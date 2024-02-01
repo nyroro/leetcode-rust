@@ -5,6 +5,8 @@ impl Solution {
     pub fn find_num_of_valid_words(words: Vec<String>, puzzles: Vec<String>) -> Vec<i32> {
         let mut word_map: HashMap<u32, i32> = HashMap::new();
 
+        // Step 1: Create a bitmask for each word and store it in the word_map
+
         for word in words.iter() {
             let mut bitmask: u32 = 0;
             for ch in word.chars() {
@@ -14,10 +16,16 @@ impl Solution {
         }
 
         let mut result = Vec::new();
+        // Step 2-3: Generate subsets for each puzzle and count the valid words
+
         for puzzle in puzzles.iter() {
             let mut count = 0;
             let mut first_char = 1 << (puzzle.chars().next().unwrap() as u32 - 'a' as u32);
-            let mut bitmask = first_char;
+            let mut bitmask = 0;
+
+            for ch in puzzle.chars() {
+                bitmask |= 1 << (ch as u32 - 'a' as u32);
+            }
 
             let mut subset = bitmask;
             loop {

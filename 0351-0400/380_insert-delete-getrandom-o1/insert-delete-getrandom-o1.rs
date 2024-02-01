@@ -22,7 +22,9 @@ impl RandomizedSet {
     }
     
     fn get_random(&self) -> i32 {
-        let index = rand::thread_rng().gen_range(0..self.set.len());
-        *self.set.iter().nth(index).unwrap()
+        let index = rand::thread_rng().gen_range(0, self.set.len());
+        let random_element = self.set.iter().nth(index).unwrap();
+        *random_element
+
     }
 }

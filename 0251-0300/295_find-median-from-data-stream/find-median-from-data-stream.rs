@@ -38,14 +38,3 @@ impl MedianFinder {
         }
     }
 }
-
-fn main() {
-    let mut obj = MedianFinder::new();
-    obj.add_num(1);
-    obj.add_num(2);
-    let ret_1: f64 = obj.find_median();
-    obj.add_num(3);
-    let ret_2: f64 = obj.find_median();
-    println!("Median 1: {}", ret_1);
-    println!("Median 2: {}", ret_2);
-}

@@ -20,8 +20,8 @@ impl Solution {
             return dp[left][right];
         }
         
-        let score_left = prefix_sum[right + 1] - prefix_sum[left + 1] + Self::dfs(left + 1, right, dp, prefix_sum);
-        let score_right = prefix_sum[right] - prefix_sum[left] + Self::dfs(left, right - 1, dp, prefix_sum);
+        let score_left = prefix_sum[right + 1] - prefix_sum[left + 1] - Self::dfs(left + 1, right, dp, prefix_sum);
+        let score_right = prefix_sum[right] - prefix_sum[left] - Self::dfs(left, right - 1, dp, prefix_sum);
         
         dp[left][right] = score_left.max(score_right);
         return dp[left][right];

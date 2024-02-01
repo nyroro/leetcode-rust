@@ -1,5 +1,5 @@
 
-use std::collections::BinaryHeap;
+use std::collections::{BinaryHeap, VecDeque};
 use std::cmp::Reverse;
 
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord)]
@@ -14,15 +14,15 @@ impl Solution {
     pub fn highest_ranked_k_items(grid: Vec<Vec<i32>>, pricing: Vec<i32>, start: Vec<i32>, k: i32) -> Vec<Vec<i32>> {
         let m = grid.len();
         let n = grid[0].len();
-        let mut queue = Vec::new();
         let mut distance = vec![vec![-1; n]; m];
         let mut directions = vec![(0, 1), (0, -1), (1, 0), (-1, 0)];
         let mut items = BinaryHeap::new();
+        let mut queue = VecDeque::new();
 
         distance[start[0] as usize][start[1] as usize] = 0;
-        queue.push((start[0] as usize, start[1] as usize));
+        queue.push_back((start[0] as usize, start[1] as usize));
 
-        while let Some((x, y)) = queue.pop() {
+        while let Some((x, y)) = queue.pop_front() {
             let current_distance = distance[x][y];
             let val = grid[x][y];
             if pricing[0] <= val && val <= pricing[1] {
@@ -33,7 +33,7 @@ impl Solution {
                 let new_y = (y as i32 + dy) as usize;
                 if new_x < m && new_y < n && distance[new_x][new_y] == -1 && grid[new_x][new_y] != 0 {
                     distance[new_x][new_y] = current_distance + 1;
-                    queue.push((new_x, new_y));
+                    queue.push_back((new_x, new_y));
                 }
             }
         }

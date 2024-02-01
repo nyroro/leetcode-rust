@@ -20,7 +20,7 @@ impl Solution {
                     if x1 * x2 + y1 * y2 == 0 {
                         let p4 = (p3.0 + p2.0 - p1.0, p3.1 + p2.1 - p1.1);
                         if point_set.contains(&p4) {
-                            let area = (x1 * x1 + y1 * y1).sqrt() * (x2 * x2 + y2 * y2).sqrt();
+                            let area = (x1.pow(2) + y1.pow(2)) as f64 * (x2.pow(2) + y2.pow(2)) as f64;
                             min_area = min_area.min(area);
                         }
                     }
@@ -32,7 +32,6 @@ impl Solution {
             return 0.0;
         }
         
-        min_area
-
+        min_area.sqrt()
     }
 }

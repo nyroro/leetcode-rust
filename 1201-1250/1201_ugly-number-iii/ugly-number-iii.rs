@@ -6,11 +6,11 @@ impl Solution {
         let ab = a as i64 * b as i64 / Solution::gcd(a as i64, b as i64);
         let ac = a as i64 * c as i64 / Solution::gcd(a as i64, c as i64);
         let bc = b as i64 * c as i64 / Solution::gcd(b as i64, c as i64);
-        let abc = a as i64 * bc / Solution::gcd(a as i64, bc);
+        let abc = a as i64 * bc / Solution::gcd(a as i64, bc as i64);
         
         while left < right {
             let mid = left + (right - left) / 2;
-            let count = mid / a + mid / b + mid / c - mid / ab - mid / ac - mid / bc + mid / abc;
+            let count = mid / a as i64 + mid / b as i64 + mid / c as i64 - mid / ab - mid / ac - mid / bc + mid / abc;
             if count < n as i64 {
                 left = mid + 1;
             } else {

@@ -20,7 +20,7 @@ impl Solution {
 
         for i in 0..n as usize {
             for j in (i + 1)..n as usize {
-                let rank = adjacency[i][i] + adjacency[j][j] - adjacency[i][j];
+                let rank = adjacency[i].iter().sum::<i32>() + adjacency[j].iter().sum::<i32>() - adjacency[i][j];
                 max_rank = max_rank.max(rank);
             }
         }

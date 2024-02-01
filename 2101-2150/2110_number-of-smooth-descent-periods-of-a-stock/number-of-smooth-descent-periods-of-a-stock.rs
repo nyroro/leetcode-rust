@@ -15,6 +15,6 @@ impl Solution {
             }
         }
         
-        dp.iter().sum::<i64>()
+        dp.iter().map(|&x| x as i64).sum()
     }
 }

@@ -1,51 +1,17 @@
 
-use std::collections::HashSet;
-
 impl Solution {
     pub fn is_self_crossing(distance: Vec<i32>) -> bool {
-        let mut visited = HashSet::new();
-        visited.insert((0, 0));
-        
-        let mut x = 0;
-        let mut y = 0;
-        let mut direction = 0;
-        
-        for d in distance {
-            if direction == 0 {
-                for _ in 0..d {
-                    y += 1;
-                    if !visited.insert((x, y)) {
-                        return true;
-                    }
-                }
-                direction = 1;
-            } else if direction == 1 {
-                for _ in 0..d {
-                    x -= 1;
-                    if !visited.insert((x, y)) {
-                        return true;
-                    }
-                }
-                direction = 2;
-            } else if direction == 2 {
-                for _ in 0..d {
-                    y -= 1;
-                    if !visited.insert((x, y)) {
-                        return true;
-                    }
-                }
-                direction = 3;
-            } else {
-                for _ in 0..d {
-                    x += 1;
-                    if !visited.insert((x, y)) {
-                        return true;
-                    }
-                }
-                direction = 0;
+        for i in 3..distance.len() {
+            if distance[i] >= distance[i - 2] && distance[i - 1] <= distance[i - 3] {
+                return true;
+            }
+            if i >= 4 && distance[i - 1] == distance[i - 3] && distance[i] + distance[i - 4] >= distance[i - 2] {
+                return true;
+            }
+            if i >= 5 && distance[i - 2] >= distance[i - 4] && distance[i] + distance[i - 4] >= distance[i - 2] && distance[i - 1] <= distance[i - 3] && distance[i - 1] + distance[i - 5] >= distance[i - 3] {
+                return true;
             }
         }
-        
         false
 
     }

@@ -9,7 +9,7 @@ impl Solution {
             return false;
         }
         
-        if n & 0x55555555 == 0 {
+        if n & 0x55555555 != 0 {
             return true;
         }
         

@@ -1,25 +1,19 @@
 
 impl Solution {
     pub fn calculate_minimum_hp(dungeon: Vec<Vec<i32>>) -> i32 {
-        let m = dungeon.len();
-        let n = dungeon[0].len();
-        let mut dp = vec![vec![0; n]; m];
+        let m = dungeon.len() as i32;
+        let n = dungeon[0].len() as i32;
+        let mut dp = vec![vec![i32::MAX; n as usize + 1]; m as usize + 1];
+        dp[m as usize][n as usize - 1] = 1;
+        dp[m as usize - 1][n as usize] = 1;
 
         for i in (0..m).rev() {
             for j in (0..n).rev() {
-                if i == m - 1 && j == n - 1 {
-                    dp[i][j] = dungeon[i][j].max(0);
-                } else if i == m - 1 {
-                    dp[i][j] = (dp[i][j + 1] - dungeon[i][j]).max(0);
-                } else if j == n - 1 {
-                    dp[i][j] = (dp[i + 1][j] - dungeon[i][j]).max(0);
-                } else {
-                    dp[i][j] = (dp[i + 1][j].min(dp[i][j + 1]) - dungeon[i][j]).max(0);
-                }
+                let need = (dp[i as usize + 1][j as usize].min(dp[i as usize][j as usize + 1]) - dungeon[i as usize][j as usize]).max(1);
+                dp[i as usize][j as usize] = need;
             }
         }
 
-        dp[0][0] + 1
-
+        dp[0][0]
     }
 }

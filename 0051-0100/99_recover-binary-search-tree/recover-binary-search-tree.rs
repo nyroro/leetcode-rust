@@ -8,7 +8,7 @@ impl Solution {
         let mut second: Option<Rc<RefCell<TreeNode>>> = None;
         let mut prev: Option<Rc<RefCell<TreeNode>>> = None;
 
-        Self::inorder_traversal(root, &mut prev, &mut first, &mut second);
+        Self::inorder_traversal(root.as_ref(), &mut prev, &mut first, &mut second);
 
         if let (Some(first_node), Some(second_node)) = (first, second) {
             let temp = first_node.borrow().val;
@@ -18,13 +18,13 @@ impl Solution {
     }
 
     fn inorder_traversal(
-        root: &mut Option<Rc<RefCell<TreeNode>>>,
+        root: Option<&Rc<RefCell<TreeNode>>>,
         prev: &mut Option<Rc<RefCell<TreeNode>>>,
         first: &mut Option<Rc<RefCell<TreeNode>>>,
         second: &mut Option<Rc<RefCell<TreeNode>>>,
     ) {
         if let Some(node) = root {
-            Self::inorder_traversal(&mut node.borrow_mut().left, prev, first, second);
+            Self::inorder_traversal(node.borrow().left.as_ref(), prev, first, second);
 
             if let Some(prev_node) = prev {
                 if prev_node.borrow().val > node.borrow().val {
@@ -34,9 +34,9 @@ impl Solution {
                     *second = Some(node.clone());
                 }
             }
-            *prev = Some(node.clone();
+            *prev = Some(node.clone());
 
-            Self::inorder_traversal(&mut node.borrow_mut().right, prev, first, second);
+            Self::inorder_traversal(node.borrow().right.as_ref(), prev, first, second);
         }
     }
 }

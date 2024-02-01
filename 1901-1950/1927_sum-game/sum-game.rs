@@ -13,17 +13,17 @@ impl Solution {
                 if c == '?' {
                     left_count += 1;
                 } else {
-                    left_sum += c.to_digit(10).unwrap();
+                    left_sum += c.to_digit(10).unwrap() as i32;
                 }
             } else {
                 if c == '?' {
                     right_count += 1;
                 } else {
-                    right_sum += c.to_digit(10).unwrap();
+                    right_sum += c.to_digit(10).unwrap() as i32;
                 }
             }
         }
 
-        return (left_count + right_count) % 2 == 1 || left_sum - right_sum != (right_count - left_count) as i32 * 9 / 2;
+        return (left_count + right_count) % 2 == 1 || left_sum - right_sum != (right_count as i32 - left_count as i32) * 9 / 2;
     }
 }

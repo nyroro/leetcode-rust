@@ -24,7 +24,7 @@ impl PartialOrd for CharCount {
 
 impl Ord for CharCount {
     fn cmp(&self, other: &Self) -> std::cmp::Ordering {
-        self.count.cmp(&other.count)
+        self.count.cmp(&other.count).reverse()
     }
 }
 
@@ -32,25 +32,25 @@ impl Solution {
     pub fn longest_diverse_string(a: i32, b: i32, c: i32) -> String {
         let mut heap = BinaryHeap::new();
         if a > 0 {
-            heap.push(Reverse(CharCount { ch: 'a', count: a }));
+            heap.push(CharCount { ch: 'a', count: a });
         }
         if b > 0 {
-            heap.push(Reverse(CharCount { ch: 'b', count: b }));
+            heap.push(CharCount { ch: 'b', count: b });
         }
         if c > 0 {
-            heap.push(Reverse(CharCount { ch: 'c', count: c }));
+            heap.push(CharCount { ch: 'c', count: c });
         }
 
         let mut result = String::new();
-        while let Some(Reverse(mut max_char)) = heap.pop() {
+        while let Some(mut max_char) = heap.pop() {
             if result.len() >= 2 && result.chars().last().unwrap() == max_char.ch && result.chars().nth(result.len() - 2).unwrap() == max_char.ch {
-                if let Some(Reverse(mut second_char)) = heap.pop() {
+                if let Some(mut second_char) = heap.pop() {
                     result.push(second_char.ch);
                     second_char.count -= 1;
                     if second_char.count > 0 {
-                        heap.push(Reverse(second_char));
+                        heap.push(second_char);
                     }
-                    heap.push(Reverse(max_char));
+                    heap.push(max_char);
                 } else {
                     break;
                 }
@@ -58,7 +58,7 @@ impl Solution {
                 result.push(max_char.ch);
                 max_char.count -= 1;
                 if max_char.count > 0 {
-                    heap.push(Reverse(max_char));
+                    heap.push(max_char);
                 }
             }
         }

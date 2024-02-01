@@ -5,14 +5,13 @@ impl Solution {
         let mut stack: Vec<&str> = Vec::new();
 
         for node in nodes {
-            if node != "#" {
-                stack.push(node);
-            } else {
-                while stack.len() >= 2 && stack[stack.len() - 1] == "#" && stack[stack.len() - 2] == "#" {
-                    stack.pop();
-                    stack.pop();
-                }
-                stack.push(node);
+            stack.push(node);
+
+            while stack.len() >= 3 && stack[stack.len() - 1] == "#" && stack[stack.len() - 2] == "#" && stack[stack.len() - 3] != "#" {
+                stack.pop();
+                stack.pop();
+                stack.pop();
+                stack.push("#");
             }
         }
 

@@ -7,8 +7,9 @@ impl Solution {
         let mut queue: VecDeque<(String, i32)> = VecDeque::new();
         let mut visited: HashSet<String> = HashSet::new();
         
-        queue.push_back((begin_word, 1));
-        visited.insert(begin_word.clone());
+        queue.push_back((begin_word.clone(), 1)); // 克隆begin_word并放入队列
+
+        visited.insert(begin_word);
         
         while let Some((word, length)) = queue.pop_front() {
             if word == end_word {

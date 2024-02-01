@@ -49,7 +49,7 @@ impl Solution {
         }
 
         for _ in 0..extra_students {
-            let max_class = max_heap.pop().unwrap();
+            let mut max_class = max_heap.pop().unwrap();
             total_pass_ratio -= max_class.pass as f64 / max_class.total as f64;
             max_class.pass += 1;
             max_class.total += 1;

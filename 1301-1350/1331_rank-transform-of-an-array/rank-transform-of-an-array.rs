@@ -1,4 +1,7 @@
 
+use std::collections::HashMap; // 导入HashMap模块
+
+
 impl Solution {
     pub fn array_rank_transform(arr: Vec<i32>) -> Vec<i32> {
         let mut sorted_arr = arr.clone();

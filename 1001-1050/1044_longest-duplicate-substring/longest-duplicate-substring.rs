@@ -21,25 +21,30 @@ impl Solution {
     }
     
     fn find_duplicate_substring(s: &str, len: usize) -> Option<String> {
-        let mut seen = std::collections::HashSet::new();
         let base = 26;
         let modulus = 2_u64.pow(32);
         let mut hash = 0_u64;
         let mut base_len = 1_u64;
+        let mut seen = std::collections::HashMap::new();
         
         for i in 0..len {
             hash = (hash * base + (s.as_bytes()[i] - b'a') as u64) % modulus;
             base_len = (base_len * base) % modulus;
         }
         
-        seen.insert(hash);
+        seen.insert(hash, 0);
         
         for start in 1..=(s.len() - len) {
-            hash = (hash * base - base_len * (s.as_bytes()[start - 1] - b'a') as u64 + (s.as_bytes()[start + len - 1] - b'a') as u64 + modulus) % modulus;
-            if seen.contains(&hash) {
-                return Some(s[start..start + len].to_string());
+            hash = (hash * base + (s.as_bytes()[start + len - 1] - b'a') as u64 - base_len * (s.as_bytes()[start - 1] - b'a') as u64) % modulus;
+            if hash < 0 {
+                hash += modulus;
             }
-            seen.insert(hash);
+            if let Some(pos) = seen.get(&hash) {
+                if &s[*pos..*pos + len] == &s[start..start + len] {
+                    return Some(s[start..start + len].to_string());
+                }
+            }
+            seen.insert(hash, start);
         }
         
         None

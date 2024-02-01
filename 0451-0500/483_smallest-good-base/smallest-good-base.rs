@@ -2,26 +2,13 @@
 impl Solution {
     pub fn smallest_good_base(n: String) -> String {
         let n: u64 = n.parse().unwrap();
-        let mut res: u64 = 0;
-        for m in (60..1).rev() {
-            let mut l: u64 = 2;
-            let mut r: u64 = n - 1;
-            while l <= r {
-                let mid: u64 = l + (r - l) / 2;
-                let sum: u64 = (1..m).fold(1, |acc, _| acc * mid + 1);
-                if sum == n {
-                    res = mid;
-                    break;
-                } else if sum < n {
-                    l = mid + 1;
-                } else {
-                    r = mid - 1;
-                }
-            }
-            if res != 0 {
-                break;
+        let max_m = (n as f64).log2() as u32 + 1;
+        for m in (2..=max_m).rev() {
+            let k = (n as f64).powf(1.0 / (m - 1) as f64) as u64;
+            if (1..m).fold((1, 1), |(sum, pow), _| (sum + pow * k, pow * k)).0 == n {
+                return k.to_string();
             }
         }
-        res.to_string()
+        (n - 1).to_string()
     }
 }

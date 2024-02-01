@@ -31,15 +31,3 @@ impl MapSum {
 
     }
 }
-
-fn main() {
-    let mut obj = MapSum::new();
-    obj.insert("apple".to_string(), 3);
-    let ret_1 = obj.sum("ap".to_string());
-    println!("{}", ret_1); // 输出3
-
-    obj.insert("app".to_string(), 2);
-    let ret_2 = obj.sum("ap".to_string());
-    println!("{}", ret_2); // 输出5
-
-}

@@ -30,19 +30,3 @@ impl MyCalendarTwo {
 
     }
 }
-
-fn main() {
-    let mut obj = MyCalendarTwo::new();
-    println!("{}", obj.book(10, 20)); // return True
-
-    println!("{}", obj.book(50, 60)); // return True
-
-    println!("{}", obj.book(10, 40)); // return True
-
-    println!("{}", obj.book(5, 15)); // return False
-
-    println!("{}", obj.book(5, 10)); // return True
-
-    println!("{}", obj.book(25, 55)); // return True
-
-}

@@ -10,7 +10,7 @@ impl Solution {
         for (i, num) in nums.iter().enumerate() {
             // 判断索引能否整除数组长度
 
-            if (i + 1) % nums.len() == 0 {
+            if nums.len() % (i + 1) == 0 {
                 // 累加特殊元素的平方
 
                 sum += num * num;

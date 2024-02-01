@@ -2,35 +2,11 @@
 impl Solution {
     pub fn solve_equation(equation: String) -> String {
         let sides: Vec<&str> = equation.split('=').collect();
-        let pattern = regex::Regex::new(r"([+-]*)([\dx]+)").unwrap();
+        let left_side = sides[0];
+        let right_side = sides[1];
 
-        fn calculate_coefficients(s: &str, pattern: &regex::Regex) -> (i32, i32) {
-            let mut ax = 0;
-            let mut an = 0;
-            for cap in pattern.captures_iter(s) {
-                let sign = cap.get(1).unwrap().as_str();
-                let val = cap.get(2).unwrap().as_str();
-                if val.ends_with('x') {
-                    let cnt = if val.len() > 1 { val[..val.len() - 1].parse().unwrap() } else { 1 };
-                    if sign == "-" {
-                        ax -= cnt;
-                    } else {
-                        ax += cnt;
-                    }
-                } else {
-                    let num = val.parse().unwrap();
-                    if sign == "-" {
-                        an -= num;
-                    } else {
-                        an += num;
-                    }
-                }
-            }
-            (ax, an)
-        }
-
-        let (ax, an) = calculate_coefficients(sides[0], &pattern);
-        let (bx, bn) = calculate_coefficients(sides[1], &pattern);
+        let (ax, an) = Solution::calculate_coefficients(left_side);
+        let (bx, bn) = Solution::calculate_coefficients(right_side);
 
         if ax == bx {
             if an == bn {
@@ -42,5 +18,43 @@ impl Solution {
             let x_val = (bn - an) / (ax - bx);
             return format!("x={}", x_val);
         }
+    }
+
+    fn calculate_coefficients(s: &str) -> (i32, i32) {
+        let mut ax = 0;
+        let mut an = 0;
+        let mut num = String::new();
+        let mut sign = 1;
+        for ch in s.chars() {
+            match ch {
+                'x' => {
+                    if num.is_empty() {
+                        ax += sign;
+                    } else {
+                        ax += sign * num.parse::<i32>().unwrap();
+                    }
+                    num.clear();
+                    sign = 1;
+                }
+                '+' | '-' => {
+                    if !num.is_empty() {
+                        an += sign * num.parse::<i32>().unwrap();
+                        num.clear();
+                    }
+                    if ch == '-' {
+                        sign = -1;
+                    } else {
+                        sign = 1;
+                    }
+                }
+                _ => {
+                    num.push(ch);
+                }
+            }
+        }
+        if !num.is_empty() {
+            an += sign * num.parse::<i32>().unwrap();
+        }
+        (ax, an)  // Return the tuple (ax, an)
     }
 }

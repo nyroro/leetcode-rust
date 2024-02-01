@@ -1,6 +1,4 @@
 
-// 定义一个函数来计算两个数的最大公约数
-
 fn gcd(mut a: i32, mut b: i32) -> i32 {
     while b != 0 {
         let temp = b;
@@ -10,8 +8,6 @@ fn gcd(mut a: i32, mut b: i32) -> i32 {
     a
 
 }
-
-// 定义一个函数来计算两个数的最小公倍数
 
 fn lcm(a: i32, b: i32) -> i32 {
     (a * b) / gcd(a, b)
@@ -26,6 +22,9 @@ impl Solution {
                 lcm_val = lcm(lcm_val, nums[j]);
                 if lcm_val == k {
                     count += 1;
+                }
+                if lcm_val > k {
+                    break;
                 }
             }
         }

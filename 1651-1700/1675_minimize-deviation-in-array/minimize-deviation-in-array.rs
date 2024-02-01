@@ -1,31 +1,16 @@
 
-use std::collections::BinaryHeap;
+use std::collections::BTreeSet;
 
 impl Solution {
     pub fn minimum_deviation(nums: Vec<i32>) -> i32 {
-        let mut pq = BinaryHeap::new();
-        let mut max_val = 0;
+        let mut set: BTreeSet<i32> = nums.iter().map(|&x| if x % 2 == 0 { x } else { x * 2 }).collect();
+        let mut min_deviation = *set.iter().rev().next().unwrap() - *set.iter().next().unwrap();
         
-        for num in nums.iter() {
-            let mut n = *num;
-            if n % 2 == 1 {
-                n *= 2;
-            }
-            pq.push(n);
-            max_val = max_val.max(n);
-        }
-        
-        let mut min_deviation = std::i32::MAX;
-        
-        while let Some(mut min) = pq.pop() {
-            min_deviation = min_deviation.min(max_val - min);
-            if min % 2 == 0 {
-                max_val = max_val.min(min / 2);
-                min *= 2;
-                pq.push(min);
-            } else {
-                break;
-            }
+        while *set.iter().rev().next().unwrap() % 2 == 0 {
+            let max_val = *set.iter().rev().next().unwrap();
+            set.remove(&max_val);
+            set.insert(max_val / 2);
+            min_deviation = min_deviation.min(*set.iter().rev().next().unwrap() - *set.iter().next().unwrap());
         }
         
         min_deviation

@@ -6,6 +6,10 @@ impl Solution {
             .map(|c| c.to_ascii_lowercase())
             .collect::<Vec<char>>();
         
+        if s.is_empty() {
+            return true;
+        }
+        
         let (mut left, mut right) = (0, s.len() - 1);
         
         while left < right {

@@ -34,23 +34,27 @@ impl StockPrice {
         *self.table.get(&self.latest).unwrap()
     }
     
-    fn maximum(&self) -> i32 {
-        let mut max_price = self.max_heap.peek().unwrap();
-        while self.table[&max_price.1] != max_price.0 {
-            max_price = self.max_heap.pop().unwrap();
-            max_price = self.max_heap.peek().unwrap();
+    fn maximum(&mut self) -> i32 {
+        while let Some(max_price) = self.max_heap.peek() {
+            if self.table[&max_price.1] == max_price.0 {
+                return max_price.0;
+            } else {
+                self.max_heap.pop();
+            }
         }
-        max_price.0
+        0 // 返回默认值，表示没有找到最大值
 
     }
     
-    fn minimum(&self) -> i32 {
-        let mut min_price = self.min_heap.peek().unwrap();
-        while self.table[&min_price.1] != -min_price.0 {
-            min_price = self.min_heap.pop().unwrap();
-            min_price = self.min_heap.peek().unwrap();
+    fn minimum(&mut self) -> i32 {
+        while let Some(min_price) = self.min_heap.peek() {
+            if self.table[&min_price.1] == -min_price.0 {
+                return -min_price.0;
+            } else {
+                self.min_heap.pop();
+            }
         }
-        -min_price.0
+        0 // 返回默认值，表示没有找到最小值
 
     }
 }

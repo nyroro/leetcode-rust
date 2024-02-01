@@ -1,8 +1,6 @@
 
-
-
 impl Solution {
-    pub fn min_speed_on_time(dist: Vec<i32>, hour: f64) -> i32 {
+    fn min_speed_on_time(dist: Vec<i32>, hour: f64) -> i32 {
         let mut left = 1;
         let mut right = 1_000_000_000;
         while left < right {

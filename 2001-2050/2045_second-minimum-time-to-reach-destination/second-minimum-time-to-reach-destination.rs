@@ -67,10 +67,12 @@ impl Graph {
     }
 }
 
+
+
 impl Solution {
     pub fn second_minimum(n: i32, edges: Vec<Vec<i32>>, time: i32, change: i32) -> i32 {
         let mut graph = Graph::new();
-        for edge in edges {
+        for edge in &edges {
             graph.add_edge(edge[0] as usize, edge[1] as usize);
         }
 
@@ -78,7 +80,7 @@ impl Solution {
         let d2 = graph.dijkstra(1);
 
         let mut retb = d[0] + 2;
-        for edge in edges {
+        for edge in &edges {
             if (d[edge[0] as usize - 1] + d2[edge[1] as usize - 1] + 1 == retb - 1)
                 || (d[edge[1] as usize - 1] + d2[edge[0] as usize - 1] + 1 == retb - 1)
             {

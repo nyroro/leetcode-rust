@@ -1,6 +1,6 @@
 
 impl Solution {
-    pub fn sort_even_odd(nums: Vec<i32>) -> Vec<i32> {
+    pub fn sort_even_odd(mut nums: Vec<i32>) -> Vec<i32> {
         // 创建一个新的数组，存储原始数组中奇数索引位置的值
 
         let mut odd_indices: Vec<i32> = Vec::new();

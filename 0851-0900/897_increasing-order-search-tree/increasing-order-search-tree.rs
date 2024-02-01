@@ -5,7 +5,7 @@ use std::cell::RefCell;
 impl Solution {
     pub fn increasing_bst(root: Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<TreeNode>>> {
         let mut values = Vec::new();
-        Solution::inorder_traversal(root, &mut values);
+        Solution::inorder_traversal(root.clone(), &mut values);
         Solution::build_bst(values)
     }
     
@@ -19,14 +19,18 @@ impl Solution {
     }
     
     fn build_bst(values: Vec<i32>) -> Option<Rc<RefCell<TreeNode>>> {
-        let mut new_root = Rc::new(RefCell::new(TreeNode::new(0)));
+        let new_root = Rc::new(RefCell::new(TreeNode::new(0)));
         let mut current = new_root.clone();
         
         for val in values {
-            current.borrow_mut().right = Some(Rc::new(RefCell::new(TreeNode::new(val))));
-            current = current.borrow().right.clone().unwrap();
+            let new_node = Rc::new(RefCell::new(TreeNode::new(val)));
+            current.borrow_mut().right = Some(new_node.clone());
+            current = new_node;
         }
         
-        Some(new_root.borrow().right.clone().unwrap())
+        let result = new_root.borrow().right.clone();
+        new_root.borrow_mut().right = None;
+        result
+
     }
 }

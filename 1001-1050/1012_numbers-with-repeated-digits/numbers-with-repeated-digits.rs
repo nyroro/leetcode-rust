@@ -1,20 +1,20 @@
 
 impl Solution {
     pub fn num_dup_digits_at_most_n(n: i32) -> i32 {
-        // 将n转换为字符串，方便进行位数的判断
+        // Convert n to a string for easier digit manipulation
 
         let n_str = n.to_string();
         let digits = n_str.len();
         let n = n as usize;
         
-        // 计算不重复的数字个数
+        // Calculate the count of non-repeated numbers
 
         let mut count = 0;
         for i in 1..digits {
             count += 9 * Self::permutation(9, i - 1);
         }
         
-        // 计算有重复数字的个数
+        // Calculate the count of numbers with repeated digits
 
         let mut used = [false; 10];
         for (i, digit) in n_str.chars().enumerate() {
@@ -33,11 +33,11 @@ impl Solution {
             }
         }
         
-        n - count as i32
+        (n - count) as i32
 
     }
     
-    // 计算排列数
+    // Calculate the permutation
 
     fn permutation(n: usize, k: usize) -> usize {
         let mut result = 1;

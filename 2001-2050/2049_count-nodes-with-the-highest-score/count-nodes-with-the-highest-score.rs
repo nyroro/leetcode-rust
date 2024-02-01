@@ -1,4 +1,7 @@
 
+use std::collections::{VecDeque, HashSet};
+
+#[derive(Clone)]
 struct TreeNode {
     index: usize,
     parent: i32,

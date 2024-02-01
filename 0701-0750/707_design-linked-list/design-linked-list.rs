@@ -8,7 +8,7 @@ struct Node {
 
 // Define the MyLinkedList struct
 
-struct MyLinkedList {
+pub struct MyLinkedList {
     head: Option<Box<Node>>,
     size: i32,
 }
@@ -18,13 +18,13 @@ struct MyLinkedList {
 impl MyLinkedList {
     // Initialize an empty linked list
 
-    fn new() -> Self {
+    pub fn new() -> Self {
         MyLinkedList { head: None, size: 0 }
     }
 
     // Retrieve the value of the node at the specified index
 
-    fn get(&self, index: i32) -> i32 {
+    pub fn get(&self, index: i32) -> i32 {
         if index < 0 || index >= self.size {
             return -1;
         }
@@ -43,7 +43,7 @@ impl MyLinkedList {
 
     // Add a new node with the given value at the head of the linked list
 
-    fn add_at_head(&mut self, val: i32) {
+    pub fn add_at_head(&mut self, val: i32) {
         let new_node = Node {
             val,
             next: self.head.take(),
@@ -54,7 +54,7 @@ impl MyLinkedList {
 
     // Append a new node with the given value at the end of the linked list
 
-    fn add_at_tail(&mut self, val: i32) {
+    pub fn add_at_tail(&mut self, val: i32) {
         if self.size == 0 {
             self.add_at_head(val);
             return;
@@ -73,7 +73,7 @@ impl MyLinkedList {
 
     // Add a new node with the given value at the specified index
 
-    fn add_at_index(&mut self, index: i32, val: i32) {
+    pub fn add_at_index(&mut self, index: i32, val: i32) {
         if index > self.size {
             return;
         }
@@ -100,7 +100,7 @@ impl MyLinkedList {
 
     // Delete the node at the specified index
 
-    fn delete_at_index(&mut self, index: i32) {
+    pub fn delete_at_index(&mut self, index: i32) {
         if index < 0 || index >= self.size {
             return;
         }
@@ -121,20 +121,4 @@ impl MyLinkedList {
             i += 1;
         }
     }
-}
-
-fn main() {
-    // Example usage
-
-    let mut obj = MyLinkedList::new();
-    obj.add_at_head(1);
-    obj.add_at_tail(3);
-    obj.add_at_index(1, 2);
-    let ret_1: i32 = obj.get(1);
-    obj.delete_at_index(1);
-    let ret_2: i32 = obj.get(1);
-    println!("{:?}", ret_1); // Output: 2
-
-    println!("{:?}", ret_2); // Output: 3
-
 }

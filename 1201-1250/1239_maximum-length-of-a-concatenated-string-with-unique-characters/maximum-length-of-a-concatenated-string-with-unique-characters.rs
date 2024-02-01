@@ -35,16 +35,3 @@ impl Solution {
         }
     }
 }
-
-fn main() {
-    let arr1 = vec!["un".to_string(), "iq".to_string(), "ue".to_string()];
-    let arr2 = vec!["cha".to_string(), "r".to_string(), "act".to_string(), "ers".to_string()];
-    let arr3 = vec!["abcdefghijklmnopqrstuvwxyz".to_string()];
-
-    println!("{}", Solution::max_length(arr1)); // Output: 4
-
-    println!("{}", Solution::max_length(arr2)); // Output: 6
-
-    println!("{}", Solution::max_length(arr3)); // Output: 26
-
-}

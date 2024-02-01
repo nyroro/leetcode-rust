@@ -6,10 +6,10 @@ impl Solution {
 
         for i in 0..chars.len() {
             let digit = chars[i].to_digit(10).unwrap() as usize;
-            if change[digit] > digit as i32 && (!changed || change[digit] >= digit as i32) {
+            if change[digit] > digit as i32 && (!changed || change[digit] > digit as i32) {
                 chars[i] = std::char::from_digit(change[digit] as u32, 10).unwrap();
                 changed = true;
-            } else if changed {
+            } else if changed && change[digit] < digit as i32 {
                 break;
             }
         }

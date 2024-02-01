@@ -2,16 +2,14 @@
 impl Solution {
     pub fn reordered_power_of2(n: i32) -> bool {
         let digits = Self::get_digits(n);
-        let mut power = 1;
         
-        while power <= i32::pow(2, 31) {
+        for i in 0..31 {
+            let power = 1 << i;
             let power_digits = Self::get_digits(power);
             
             if digits == power_digits {
                 return true;
             }
-            
-            power *= 2;
         }
         
         false

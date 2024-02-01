@@ -1,4 +1,6 @@
 
+use std::collections::HashMap;
+
 impl Solution {
     pub fn maximum_cost_substring(s: String, chars: String, vals: Vec<i32>) -> i32 {
         let mut char_vals = HashMap::new();

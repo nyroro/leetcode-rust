@@ -9,7 +9,7 @@ impl Solution {
             
             if nums1[i] > nums1[i-1] && nums2[i] > nums2[i-1] {
                 new_n = n;
-                new_s = s;
+                new_s = s + 1;
             }
             
             if nums1[i] > nums2[i-1] && nums2[i] > nums1[i-1] {

@@ -14,16 +14,16 @@ impl Solution {
             for j in 0..n {
                 let color = target_grid[i][j];
                 let (left, right, top, bottom) = colors.entry(color).or_insert((m, 0, n, 0));
-                *left = left.min(i);
-                *right = right.max(i);
-                *top = top.min(j);
-                *bottom = bottom.max(j);
+                *left = (*left).min(i);
+                *right = (*right).max(i);
+                *top = (*top).min(j);
+                *bottom = (*bottom).max(j);
             }
         }
 
         // 深度优先搜索
 
-        fn dfs(color: i32, colors: &HashMap<i32, (usize, usize, usize, usize)>, visited: &mut HashMap<i32, bool>) -> bool {
+        fn dfs(color: i32, colors: &HashMap<i32, (usize, usize, usize, usize)>, visited: &mut HashMap<i32, bool>, target_grid: &Vec<Vec<i32>>) -> bool {
             if let Some(&visited_color) = visited.get(&color) {
                 return visited_color;
             }
@@ -34,7 +34,7 @@ impl Solution {
                 for j in *top..=*bottom {
                     let neighbor_color = target_grid[i][j];
                     if neighbor_color != color {
-                        if !dfs(neighbor_color, colors, visited) {
+                        if !dfs(neighbor_color, colors, visited, target_grid) {
                             return false;
                         }
                     }
@@ -49,7 +49,7 @@ impl Solution {
         // 遍历每种颜色节点
 
         for color in colors.keys() {
-            if !dfs(*color, &colors, &mut visited) {
+            if !dfs(*color, &colors, &mut visited, &target_grid) {
                 return false;
             }
         }

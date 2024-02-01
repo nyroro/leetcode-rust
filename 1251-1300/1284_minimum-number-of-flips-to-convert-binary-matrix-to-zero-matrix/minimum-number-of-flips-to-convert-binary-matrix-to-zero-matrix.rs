@@ -7,8 +7,10 @@ impl Solution {
         let n = mat[0].len();
         let mut queue = VecDeque::new();
         let mut visited = HashSet::new();
-        let start = mat.iter().map(|row| row.iter().map(|&x| x).collect::<Vec<i32>>()).collect::<Vec<Vec<i32>>>();
-        queue.push_back((start, 0));
+        let start = mat.clone(); // 使用 clone 方法创建副本
+
+        queue.push_back((start.clone(), 0)); // 使用 clone 方法创建副本
+
         visited.insert(start);
 
         while let Some((cur, steps)) = queue.pop_front() {

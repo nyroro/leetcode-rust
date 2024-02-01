@@ -1,22 +1,33 @@
 
+use std::collections::HashMap;
+
 impl Solution {
     pub fn beautiful_substrings(s: String, k: i32) -> i64 {
+        let s = s.as_bytes();
+        let n = s.len();
         let mut count = 0;
-        for i in 0..s.len() {
-            for j in i+1..=s.len() {
-                if Solution::is_beautiful(&s[i..j], k) {
-                    count += 1;
-                }
-            }
-        }
-        count
+        let mut prefix = HashMap::new();
+        prefix.insert(0, 1);
 
-    }
-    
-    fn is_beautiful(s: &str, k: i32) -> bool {
-        let vowels = s.chars().filter(|&c| "aeiou".contains(c)).count() as i32;
-        let consonants = s.len() as i32 - vowels;
-        vowels == consonants && vowels * consonants % k == 0
+        let mut v_count = 0;
+        let mut c_count = 0;
+
+        for i in 0..n {
+            if "aeiou".contains(s[i] as char) {
+                v_count += 1;
+            } else {
+                c_count += 1;
+            }
+
+            for j in 0..k {
+                let target = v_count - c_count * j;
+                count += *prefix.get(&(target % k)).unwrap_or(&0);
+            }
+
+            *prefix.entry(v_count - c_count * ((k - 1) % k)).or_insert(0) += 1;
+        }
+
+        count
 
     }
 }

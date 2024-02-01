@@ -1,6 +1,6 @@
 
 impl Solution {
-    pub fn count_tested_devices(battery_percentages: Vec<i32>) -> i32 {
+    pub fn count_tested_devices(mut battery_percentages: Vec<i32>) -> i32 {
         let mut tested_devices = 0;
         let n = battery_percentages.len();
 

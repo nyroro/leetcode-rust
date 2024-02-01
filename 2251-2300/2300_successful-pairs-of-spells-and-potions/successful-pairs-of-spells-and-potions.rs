@@ -4,26 +4,26 @@ impl Solution {
         let mut pairs: Vec<i32> = vec![0; spells.len()]; // 步骤1
 
 
-        let mut spells = spells;
         let mut potions = potions;
-        spells.sort(); // 步骤2
+        potions.sort(); // 步骤1
 
-        potions.sort();
 
-        let mut j = 0;
         for i in 0..spells.len() {
-            let mut count = 0; // 步骤3
-
-            while j < potions.len() && spells[i] as i64 * potions[j] as i64 < success {
-                j += 1;
+            let mut left = 0;
+            let mut right = potions.len() as i32 - 1;
+            while left <= right {
+                let mid = left + (right - left) / 2;
+                if (spells[i] as i64) * (potions[mid as usize] as i64) < success {
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
+                }
             }
-            count = (potions.len() - j) as i32; // 步骤5
-
-            pairs[i] = count; // 步骤7
+            pairs[i] = potions.len() as i32 - left; // 步骤2
 
         }
 
-        pairs // 步骤8
+        pairs // 步骤3
 
     }
 }

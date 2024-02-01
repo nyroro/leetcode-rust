@@ -7,7 +7,7 @@ impl Solution {
 
         // 从左向右计算受力
 
-        let mut force = 0;
+        let mut force: i32 = 0;
         for i in 0..n {
             if dominoes[i] == 'R' {
                 force = n as i32;
@@ -24,7 +24,7 @@ impl Solution {
         force = 0;
         for i in (0..n).rev() {
             if dominoes[i] == 'L' {
-                force = -n as i32;
+                force = -(n as i32);
             } else if dominoes[i] == 'R' {
                 force = 0;
             } else {

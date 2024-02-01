@@ -29,20 +29,18 @@ impl StockSpanner {
     }
 }
 
-fn main() {
-    let mut stock_spanner = StockSpanner::new();
-    println!("{}", stock_spanner.next(100)); // return 1
+// let mut stock_spanner = StockSpanner::new();
+// println!("{}", stock_spanner.next(100)); // return 1
 
-    println!("{}", stock_spanner.next(80));  // return 1
+// println!("{}", stock_spanner.next(80));  // return 1
 
-    println!("{}", stock_spanner.next(60));  // return 1
+// println!("{}", stock_spanner.next(60));  // return 1
 
-    println!("{}", stock_spanner.next(70));  // return 2
+// println!("{}", stock_spanner.next(70));  // return 2
 
-    println!("{}", stock_spanner.next(60));  // return 1
+// println!("{}", stock_spanner.next(60));  // return 1
 
-    println!("{}", stock_spanner.next(75));  // return 4
+// println!("{}", stock_spanner.next(75));  // return 4
 
-    println!("{}", stock_spanner.next(85));  // return 6
+// println!("{}", stock_spanner.next(85));  // return 6
 
-}

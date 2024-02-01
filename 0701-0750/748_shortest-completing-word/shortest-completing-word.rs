@@ -38,7 +38,7 @@ impl Solution {
             // 更新最短单词和长度
 
             if is_completing_word && word.len() < shortest_length {
-                shortest_word = word;
+                shortest_word = word.clone();
                 shortest_length = word.len();
             }
         }

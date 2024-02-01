@@ -11,14 +11,14 @@ impl Solution {
             queue.push_back(node);
 
             while !queue.is_empty() {
-                let mut sum = 0;
+                let mut sum = 0i64;
                 let mut count = 0;
                 let level_size = queue.len();
 
                 for _ in 0..level_size {
                     if let Some(node) = queue.pop_front() {
                         let node = node.borrow();
-                        sum += node.val;
+                        sum += node.val as i64;
                         count += 1;
 
                         if let Some(left) = &node.left {

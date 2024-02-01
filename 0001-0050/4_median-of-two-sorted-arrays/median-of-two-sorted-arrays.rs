@@ -9,7 +9,7 @@ impl Solution {
         let m = nums1.len();
         let n = nums2.len();
         let total_len = m + n;
-        let mid = total_len / 2;
+        let mid = (total_len + 1) / 2;
 
         let mut left = 0;
         let mut right = m;

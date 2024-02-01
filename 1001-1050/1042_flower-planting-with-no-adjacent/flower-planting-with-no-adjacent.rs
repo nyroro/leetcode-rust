@@ -35,7 +35,6 @@ impl Solution {
         
         // Step 5: Return the array of garden types as the result
 
-        flowers
-
+        flowers.iter().map(|&x| x as i32).collect()
     }
 }

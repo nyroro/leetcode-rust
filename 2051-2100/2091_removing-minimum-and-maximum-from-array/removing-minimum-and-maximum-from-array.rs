@@ -1,7 +1,7 @@
 
 impl Solution {
     pub fn minimum_deletions(nums: Vec<i32>) -> i32 {
-        let mut arr: Vec<(i32, usize)> = nums.iter().cloned().enumerate().collect();
+        let mut arr: Vec<(i32, usize)> = nums.iter().cloned().enumerate().map(|(i, val)| (val, i)).collect();
         arr.sort_by_key(|&(val, _)| val);
         
         let al = arr[0].1 + 1;
@@ -15,11 +15,11 @@ impl Solution {
         let br = arr.len() - arr[arr.len() - 1].1;
         
         let mut ret = std::i32::MAX;
-        ret = ret.min(al.max(bl));
-        ret = ret.min(ar.max(br));
-        ret = ret.min(al.min(bl) + ar.min(br));
+        ret = ret.min(al.max(bl) as i32);
+        ret = ret.min(ar.max(br) as i32);
+        ret = ret.min((al.min(bl) + ar.min(br)) as i32);
         
-        ret as i32
+        ret
 
     }
 }

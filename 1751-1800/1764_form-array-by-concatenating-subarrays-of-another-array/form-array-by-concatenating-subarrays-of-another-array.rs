@@ -4,15 +4,12 @@ impl Solution {
         let mut i = 0;
         let mut j = 0;
         while i < groups.len() && j < nums.len() {
-            let mut k = j;
-            while k < nums.len() && groups[i] != &nums[k..k + groups[i].len()] {
-                k += 1;
-            }
-            if k == nums.len() {
+            if let Some(k) = nums[j..].windows(groups[i].len()).position(|window| window == &groups[i][..]) {
+                i += 1;
+                j += k + groups[i - 1].len();
+            } else {
                 return false;
             }
-            i += 1;
-            j = k + groups[i - 1].len();
         }
         i == groups.len()
     }

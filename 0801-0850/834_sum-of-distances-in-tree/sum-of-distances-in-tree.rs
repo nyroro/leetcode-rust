@@ -1,8 +1,8 @@
 
+use std::collections::HashMap;
+
 impl Solution {
     pub fn sum_of_distances_in_tree(n: i32, edges: Vec<Vec<i32>>) -> Vec<i32> {
-        use std::collections::HashMap;
-
         let mut adj: HashMap<i32, Vec<i32>> = HashMap::new();
         let mut count: Vec<i32> = vec![0; n as usize];
         let mut res: Vec<i32> = vec![0; n as usize];
@@ -15,8 +15,8 @@ impl Solution {
             adj.entry(v).or_insert(Vec::new()).push(u);
         }
 
-        dfs(0, -1, &adj, &mut count, &mut res, &mut subtree);
-        dfs2(0, -1, &adj, &mut count, &mut res, &subtree);
+        Solution::dfs(0, -1, &adj, &mut count, &mut res, &mut subtree);
+        Solution::dfs2(0, -1, &adj, &mut count, &mut res, &subtree);
 
         res
 
@@ -30,14 +30,16 @@ impl Solution {
         res: &mut Vec<i32>,
         subtree: &mut Vec<i32>,
     ) {
-        for &child in adj.get(&node).unwrap() {
-            if child == parent {
-                continue;
+        if let Some(children) = adj.get(&node) {
+            for &child in children {
+                if child == parent {
+                    continue;
+                }
+                Solution::dfs(child, node, adj, count, res, subtree);
+                count[node as usize] += count[child as usize];
+                res[node as usize] += res[child as usize] + count[child as usize];
+                subtree[node as usize] += subtree[child as usize];
             }
-            dfs(child, node, adj, count, res, subtree);
-            count[node as usize] += count[child as usize];
-            res[node as usize] += res[child as usize] + count[child as usize];
-            subtree[node as usize] += subtree[child as usize];
         }
         count[node as usize] += 1;
         subtree[node as usize] += 1;
@@ -51,12 +53,14 @@ impl Solution {
         res: &mut Vec<i32>,
         subtree: &Vec<i32>,
     ) {
-        for &child in adj.get(&node).unwrap() {
-            if child == parent {
-                continue;
+        if let Some(children) = adj.get(&node) {
+            for &child in children {
+                if child == parent {
+                    continue;
+                }
+                res[child as usize] = res[node as usize] - count[child as usize] + (count.len() as i32 - count[child as usize]);
+                Solution::dfs2(child, node, adj, count, res, subtree);
             }
-            res[child as usize] = res[node as usize] - count[child as usize] + (count.len() as i32 - count[child as usize]);
-            dfs2(child, node, adj, count, res, subtree);
         }
     }
 }

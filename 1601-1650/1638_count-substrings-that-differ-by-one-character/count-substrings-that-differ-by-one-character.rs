@@ -9,6 +9,9 @@ impl Solution {
             for j in 0..t.len() {
                 let mut diff_count = 0;
                 for k in 0..s.len().min(t.len()) {
+                    if i + k >= s.len() || j + k >= t.len() {
+                        break;
+                    }
                     if s_chars[i + k] != t_chars[j + k] {
                         diff_count += 1;
                     }

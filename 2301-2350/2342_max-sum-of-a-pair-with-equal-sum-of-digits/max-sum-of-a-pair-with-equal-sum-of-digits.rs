@@ -8,7 +8,8 @@ impl Solution {
 
         for num in nums {
             let mut sum = 0;
-            let mut n = num;
+            let mut n = num.abs(); // 取绝对值以处理负数
+
             while n > 0 {
                 sum += n % 10;
                 n /= 10;
@@ -18,9 +19,12 @@ impl Solution {
                 max_sum = max_sum.max(prev_num + num);
             }
 
-            digit_sum_map.entry(sum).or_insert(num);
+            digit_sum_map.entry(sum).and_modify(|e| *e = (*e).max(num)).or_insert(num);
         }
 
+        if max_sum == -1 {
+            return -1;
+        }
         max_sum
 
     }

@@ -17,25 +17,31 @@ impl TextEditor {
         self.cursor += text.len();
     }
 
-    fn delete_text(&mut self, k: usize) -> usize {
+    fn delete_text(&mut self, k: i32) -> i32 {
+        let k = k as usize; // Convert i32 to usize
+
         let prev_pos = self.cursor;
         let start = self.cursor.saturating_sub(k);
         let end = self.cursor;
         let deleted = self.text.drain(start..end).count();
         self.cursor -= deleted;
-        prev_pos - self.cursor
+        deleted as i32
 
     }
 
-    fn cursor_left(&self, k: usize) -> String {
-        let new_cursor = self.cursor.saturating_sub(k);
-        let start = new_cursor.saturating_sub(10).max(0);
+    fn cursor_left(&mut self, k: i32) -> String {
+        let k = k as usize; // Convert i32 to usize
+
+        self.cursor = self.cursor.saturating_sub(k);
+        let start = self.cursor.saturating_sub(10).max(0);
         self.text[start..self.cursor].to_string()
     }
 
-    fn cursor_right(&self, k: usize) -> String {
-        let new_cursor = self.cursor + k;
+    fn cursor_right(&mut self, k: i32) -> String {
+        let k = k as usize; // Convert i32 to usize
+
+        self.cursor = self.cursor.saturating_add(k).min(self.text.len());
         let start = self.cursor.saturating_sub(10).max(0);
-        self.text[start..new_cursor.min(self.text.len())].to_string()
+        self.text[start..self.cursor].to_string()
     }
 }

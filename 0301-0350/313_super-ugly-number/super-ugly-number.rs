@@ -3,7 +3,7 @@ use std::collections::{BinaryHeap, HashSet};
 use std::cmp::Reverse;
 
 impl Solution {
-    pub fn nth_super_ugly_number(n: i32, primes: Vec<i32>) -> i32 {
+    pub fn nth_super_ugly_number(n: i32, primes: Vec<i32>) -> i64 {
         let mut arr = BinaryHeap::new();
         let mut s = HashSet::new();
         let mut m = 0;
@@ -19,7 +19,7 @@ impl Solution {
         while x > 0 {
             let t = arr.pop().unwrap().0;
             for &k in &primes {
-                let val = t * k;
+                let val = t as i64 * k as i64;
                 if !s.contains(&val) {
                     if arr.len() < n as usize {
                         m = m.max(val);

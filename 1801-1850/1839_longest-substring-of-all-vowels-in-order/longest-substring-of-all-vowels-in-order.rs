@@ -7,11 +7,12 @@ impl Solution {
         let mut vowels = std::collections::HashSet::new();
 
         for (i, c) in word.chars().enumerate() {
-            if vowels.is_empty() || c > *vowels.iter().max().unwrap() {
+            if vowels.is_empty() || c >= *vowels.iter().max().unwrap() {
                 vowels.insert(c);
-            } else if c < *vowels.iter().max().unwrap() {
+            } else {
                 start = i;
                 vowels.clear();
+                vowels.insert(c);
             }
             end = i;
 

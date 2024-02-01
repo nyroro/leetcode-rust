@@ -7,27 +7,21 @@ impl Solution {
         dp[0][0] = 0;
 
         for i in 1..=m {
-            let mut valid_masks = Vec::new();
-            'outer: for mask in 0..1 << n {
-                let mut cur = mask;
-                while cur > 0 {
-                    if (cur & 0b11) == 0b11 || (cur & 0b101010) != cur {
-                        continue 'outer;
+            for mask in 0..1 << n {
+                if (mask & (mask << 1)) == 0 && (mask & (mask >> 1)) == 0 {
+                    let mut valid = true;
+                    for j in 0..n {
+                        if (mask >> j) & 1 == 1 && seats[i - 1][j] == '#' {
+                            valid = false;
+                            break;
+                        }
                     }
-                    cur >>= 1;
-                }
-                valid_masks.push(mask);
-            }
-
-            for &mask in &valid_masks {
-                for &prev_mask in &valid_masks {
-                    if (mask & prev_mask) == 0 && (mask & (prev_mask << 1)) == 0 && ((mask << 1) & prev_mask) == 0 {
-                        for j in 0..n {
-                            if (mask >> j) & 1 == 1 && seats[i - 1][j] == '#' {
-                                continue;
+                    if valid {
+                        for prev_mask in 0..1 << n {
+                            if (mask & (prev_mask << 1)) == 0 && ((mask << 1) & prev_mask) == 0 {
+                                dp[i][mask] = dp[i][mask].max(dp[i - 1][prev_mask] + (mask.count_ones() as i32));
                             }
                         }
-                        dp[i][mask] = dp[i][mask].max(dp[i - 1][prev_mask] + (mask.count_ones() as i32));
                     }
                 }
             }

@@ -7,10 +7,11 @@ impl Solution {
             sorted_nums.sort_unstable();
             let mut sum = 0;
             let mut count = 0;
-            for &num in sorted_nums.iter().rev() {
+            for &num in sorted_nums.iter() {
                 sum += num;
-                count += 1;
-                if sum > query {
+                if sum <= query {
+                    count += 1;
+                } else {
                     break;
                 }
             }

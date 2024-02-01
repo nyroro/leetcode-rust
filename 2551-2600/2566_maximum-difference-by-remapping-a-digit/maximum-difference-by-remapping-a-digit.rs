@@ -1,47 +1,34 @@
 
 impl Solution {
     pub fn min_max_difference(num: i32) -> i32 {
-        // Convert the number to a string
+        let num_str = num.to_string(); // 将数字转换为字符串
 
-        let num_str = num.to_string();
-        // Convert the string to a character array
-
-        let num_chars: Vec<char> = num_str.chars().collect();
+        let digits: Vec<char> = num_str.chars().collect(); // 将字符串转换为字符数组
         
-        // Array to store the replacement digits for 0 to 9
+        let mut min_diff = i32::MAX; // 初始化最小差异为最大值
 
-        let replacements = [9, 1, 2, 3, 4, 5, 6, 7, 8, 0];
+        let mut max_diff = 0; // 初始化最大差异为0
         
-        // Initialize the minimum and maximum numbers with the original number
+        // 遍历每一位数字
 
-        let mut min_num = num;
-        let mut max_num = num;
-        
-        // Iterate through each digit of the number
-
-        for i in 0..num_chars.len() {
-            // Convert the character to a digit
-
-            let digit = num_chars[i].to_digit(10).unwrap() as usize;
+        for i in 0..digits.len() {
+            let digit = digits[i].to_digit(10).unwrap() as i32; // 将字符转换为数字
             
-            // Replace the digit with the corresponding replacement
+            // 尝试将当前数字替换为0到9之间的每个数字
 
-            let replaced_min = num_str.replace(num_chars[i], replacements[digit].to_string().as_str());
-            let replaced_max = num_str.replace(num_chars[i], replacements[digit].to_string().as_str());
-            
-            // Update the minimum and maximum numbers
+            for j in 0..=9 {
+                let replaced_num = num_str.replace(digit.to_string().as_str(), j.to_string().as_str()); // 替换数字
+                
+                let replaced_val = replaced_num.parse::<i32>().unwrap(); // 将替换后的字符串转换为数字
+                
+                // 更新最小差异和最大差异
 
-            min_num = std::cmp::min(min_num, replaced_min.parse::<i32>().unwrap());
-            max_num = std::cmp::max(max_num, replaced_max.parse::<i32>().unwrap());
+                min_diff = min_diff.min(replaced_val);
+                max_diff = max_diff.max(replaced_val);
+            }
         }
         
-        // Calculate the difference between the maximum and minimum numbers
-
-        let difference = max_num - min_num;
-        
-        // Return the difference
-
-        difference
+        max_diff - min_diff // 计算最大差异和最小差异之间的差异
 
     }
 }

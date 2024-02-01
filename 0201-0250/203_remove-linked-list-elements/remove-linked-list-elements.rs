@@ -1,26 +1,15 @@
 
-// Definition for singly-linked list.
-#[derive(PartialEq, Eq, Clone, Debug)]
-pub struct ListNode {
-  pub val: i32,
-  pub next: Option<Box<ListNode>>
-}
-
-impl ListNode {
-  #[inline]
-  fn new(val: i32) -> Self {
-    ListNode {
-      next: None,
-      val
-
-    }
-  }
-}
-
 impl Solution {
     pub fn remove_elements(head: Option<Box<ListNode>>, val: i32) -> Option<Box<ListNode>> {
-        let mut dummy = Some(Box::new(ListNode::new(0)));
-        dummy.as_mut().unwrap().next = head;
+        if head.is_none() {
+            return None;
+        }
+        
+        let mut dummy = Some(Box::new(ListNode {
+            val: 0,
+            next: head,
+        }));
+        
         let mut prev = &mut dummy;
         let mut curr = &mut prev.as_mut().unwrap().next;
         

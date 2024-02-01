@@ -1,22 +1,27 @@
 
-use std::collections::HashMap;
-
 impl Solution {
     pub fn balanced_string(s: String) -> i32 {
         let n = s.len();
-        let mut counts = HashMap::new();
+        let mut counts = vec![0; 128];
         let mut left = 0;
         let mut result = n;
         
+        for &c in s.as_bytes() {
+            counts[c as usize] += 1;
+        }
+        
         for right in 0..n {
-            *counts.entry(s.chars().nth(right).unwrap()).or_insert(0) += 1;
+            counts[s.as_bytes()[right] as usize] -= 1;
             
-            while left < n && counts.get(&'Q').unwrap_or(&0) > &(n / 4)
-                && counts.get(&'W').unwrap_or(&0) > &(n / 4)
-                && counts.get(&'E').unwrap_or(&0) > &(n / 4)
-                && counts.get(&'R').unwrap_or(&0) > &(n / 4) {
+            while left < n && counts['Q' as usize] <= n / 4
+
+                && counts['W' as usize] <= n / 4
+
+                && counts['E' as usize] <= n / 4
+
+                && counts['R' as usize] <= n / 4 {
                 result = result.min(right - left + 1);
-                *counts.get_mut(&s.chars().nth(left).unwrap()).unwrap() -= 1;
+                counts[s.as_bytes()[left] as usize] += 1;
                 left += 1;
             }
         }

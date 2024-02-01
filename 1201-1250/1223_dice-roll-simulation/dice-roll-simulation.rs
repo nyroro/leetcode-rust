@@ -14,8 +14,10 @@ impl Solution {
                     if k == 1 {
                         for prev_j in 1..=6 {
                             if prev_j != j {
-                                dp[i][j][k] += dp[i-1][prev_j][1];
-                                dp[i][j][k] %= modulo;
+                                for prev_k in 1..=roll_max[prev_j-1] as usize {
+                                    dp[i][j][k] += dp[i-1][prev_j][prev_k];
+                                    dp[i][j][k] %= modulo;
+                                }
                             }
                         }
                     } else {
@@ -33,7 +35,7 @@ impl Solution {
             }
         }
         
-        result
+        result as i32
 
     }
 }

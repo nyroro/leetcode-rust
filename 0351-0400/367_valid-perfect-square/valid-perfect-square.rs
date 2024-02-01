@@ -10,11 +10,11 @@ impl Solution {
         
         while left <= right {
             let mid = left + (right - left) / 2;
-            let square = mid * mid;
+            let square = mid as i64 * mid as i64;
             
-            if square == num {
+            if square == num as i64 {
                 return true;
-            } else if square < num {
+            } else if square < num as i64 {
                 left = mid + 1;
             } else {
                 right = mid - 1;

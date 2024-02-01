@@ -5,11 +5,11 @@ impl Solution {
         let mut total = n;
 
         for i in (0..n as usize).rev() {
-            let diff = k - total + 1;
+            let diff = k - total;
             if diff > 0 {
                 let diff = diff.min(25);
                 result[i] = (b'a' + diff as u8) as char;
-                total += diff - 1;
+                total += diff;
             }
             if total == k {
                 break;

@@ -1,8 +1,6 @@
 
-
-
 impl Solution {
-    pub fn count_of_atoms(formula: String) -> String {
+    fn count_of_atoms(formula: String) -> String {
         use std::collections::HashMap;
         
         let mut counts: HashMap<String, i32> = HashMap::new();

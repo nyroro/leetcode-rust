@@ -31,12 +31,3 @@ impl Solution {
 
     }
 }
-
-fn main() {
-    let result1 = Solution::count_collisions(String::from("RLRSLL"));
-    let result2 = Solution::count_collisions(String::from("LLRR"));
-    println!("Result 1: {}", result1); // Output: 5
-
-    println!("Result 2: {}", result2); // Output: 0
-
-}

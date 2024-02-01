@@ -5,8 +5,8 @@ impl Solution {
         let mut current = 'a';
 
         for ch in word.chars() {
-            let clockwise_distance = (ch as u8 - current as u8 + 26) % 26;
-            let counterclockwise_distance = (current as u8 - ch as u8 + 26) % 26;
+            let clockwise_distance = (ch as u8 - current as u8 + 26) as i32 % 26;
+            let counterclockwise_distance = (current as u8 - ch as u8 + 26) as i32 % 26;
             let min_distance = clockwise_distance.min(counterclockwise_distance);
 
             time += min_distance;

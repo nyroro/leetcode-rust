@@ -1,4 +1,6 @@
 
+use std::collections::HashSet;
+
 impl Solution {
     pub fn max_unique_split(s: String) -> i32 {
         let mut max_count = 0;
@@ -8,7 +10,7 @@ impl Solution {
 
     }
     
-    fn backtrack(index: usize, s: &str, visited: &mut HashSet<&str>, max_count: &mut i32) {
+    fn backtrack<'a>(index: usize, s: &'a str, visited: &mut HashSet<&'a str>, max_count: &mut i32) {
         if index == s.len() {
             *max_count = (*max_count).max(visited.len() as i32);
             return;

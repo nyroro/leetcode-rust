@@ -28,12 +28,13 @@ impl UnionFind {
         if root_p == root_q {
             return false;
         }
-        if self.size[root_p as usize] > self.size[root_q as usize] {
-            std::mem::swap(&mut p, &mut q);
-            std::mem::swap(&mut root_p, &mut root_q);
-        }
-        self.parent[root_p as usize] = root_q;
-        self.size[root_q as usize] += self.size[root_p as usize];
+        let (smaller, larger) = if self.size[root_p as usize] > self.size[root_q as usize] {
+            (root_q, root_p)
+        } else {
+            (root_p, root_q)
+        };
+        self.parent[smaller as usize] = larger;
+        self.size[larger as usize] += self.size[smaller as usize];
         self.count -= 1;
         true
 

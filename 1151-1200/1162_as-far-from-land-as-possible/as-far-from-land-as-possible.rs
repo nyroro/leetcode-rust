@@ -1,4 +1,7 @@
 
+use std::collections::VecDeque;
+use std::cmp;
+
 impl Solution {
     pub fn max_distance(grid: Vec<Vec<i32>>) -> i32 {
         let n = grid.len();
@@ -36,7 +39,7 @@ impl Solution {
         for i in 0..n {
             for j in 0..n {
                 if dist[i][j] > 0 {
-                    max_dist = max(max_dist, dist[i][j]);
+                    max_dist = cmp::max(max_dist, dist[i][j]);
                 }
             }
         }

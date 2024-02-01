@@ -34,22 +34,3 @@ impl SubrectangleQueries {
         self.rectangle[row as usize][col as usize]
     }
 }
-
-fn main() {
-    // 测试代码
-
-    let rectangle = vec![
-        vec![1, 2, 1],
-        vec![4, 3, 4],
-        vec![3, 2, 1],
-        vec![1, 1, 1],
-    ];
-    let mut obj = SubrectangleQueries::new(rectangle);
-    assert_eq!(obj.get_value(0, 2), 1);
-    obj.update_subrectangle(0, 0, 3, 2, 5);
-    assert_eq!(obj.get_value(0, 2), 5);
-    assert_eq!(obj.get_value(3, 1), 5);
-    obj.update_subrectangle(3, 0, 3, 2, 10);
-    assert_eq!(obj.get_value(3, 1), 10);
-    assert_eq!(obj.get_value(0, 2), 5);
-}

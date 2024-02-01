@@ -1,6 +1,10 @@
 
 impl Solution {
     pub fn find_min_height_trees(n: i32, edges: Vec<Vec<i32>>) -> Vec<i32> {
+        if n == 1 {
+            return vec![0];
+        }
+        
         // 创建邻接表
 
         let mut adj_list = vec![vec![]; n as usize];
@@ -35,12 +39,12 @@ impl Solution {
         while !queue.is_empty() {
             result = queue.clone();
             let mut next_level = Vec::new();
-            for node in queue {
-                let node = node as usize;
+            for node in &queue {
+                let node = *node as usize;
                 for neighbor in &adj_list[node] {
                     degrees[*neighbor as usize] -= 1;
                     if degrees[*neighbor as usize] == 1 {
-                        next_level.push(*neighbor);
+                        next_level.push(*neighbor as i32);
                     }
                 }
             }

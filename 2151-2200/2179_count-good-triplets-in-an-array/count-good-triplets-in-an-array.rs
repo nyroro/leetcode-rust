@@ -16,22 +16,20 @@ impl Solution {
         let mut arr = vec![0; nums1.len() + 1];
         let mut s = vec![0; nums1.len()];
 
-        fn cal(arr: &Vec<i32>, x: usize) -> i64 {
+        fn cal(arr: &Vec<i32>, mut x: usize) -> i64 {
             let mut ret = 0;
-            let mut x = x as i32;
             while x > 0 {
-                ret += arr[x as usize];
-                x -= x & -x;
+                ret += arr[x];
+                x -= x & (x).wrapping_neg();
             }
             ret as i64
 
         }
 
         fn update(arr: &mut Vec<i32>, mut x: usize, val: i32) {
-            let mut x = x as i32;
-            while x <= arr.len() as i32 {
-                arr[x as usize] += val;
-                x += x & -x;
+            while x < arr.len() {
+                arr[x] += val;
+                x += x & (x).wrapping_neg();
             }
         }
 
