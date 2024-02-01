@@ -13,7 +13,7 @@ impl Solution {
                 if distance < min_distance {
                     min_distance = distance;
                     min_index = index as i32;
-                } else if distance == min_distance && (index as i32) < min_index {
+                } else if distance == min_distance && index as i32 < min_index {
                     min_index = index as i32;
                 }
             }

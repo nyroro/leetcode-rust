@@ -5,7 +5,7 @@ impl Solution {
         let m = land.len();
         let n = land[0].len();
         
-        fn dfs(land: &mut Vec<Vec<i32>>, r: usize, c: usize, result: &mut Vec<Vec<i32>>) {
+        fn dfs(land: &Vec<Vec<i32>>, r: usize, c: usize, result: &mut Vec<Vec<i32>>) {
             if r >= land.len() || c >= land[0].len() || land[r][c] != 1 {
                 return;
             }
@@ -33,12 +33,10 @@ impl Solution {
             dfs(land, r, c2, result);
         }
         
-        let mut mutable_land = land.clone();
-        
         for i in 0..m {
             for j in 0..n {
-                if mutable_land[i][j] == 1 {
-                    dfs(&mut mutable_land, i, j, &mut result);
+                if land[i][j] == 1 {
+                    dfs(&land, i, j, &mut result);
                 }
             }
         }

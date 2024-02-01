@@ -15,7 +15,7 @@ impl Solution {
                     
                     let distance = ((x - xi).pow(2) + (y - yi).pow(2)) as f64;
                     
-                    if distance <= (radius.pow(2) as f64) {
+                    if distance <= radius.pow(2) {
                         let signal_quality = (qi as f64 / (1.0 + distance.sqrt())).floor() as i32;
                         total_quality += signal_quality;
                     }

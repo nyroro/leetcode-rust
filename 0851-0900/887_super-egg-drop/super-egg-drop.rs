@@ -19,7 +19,6 @@ impl Solution {
             }
         }
 
-        dp[k][n] as i32
-
+        dp[k][n]
     }
 }

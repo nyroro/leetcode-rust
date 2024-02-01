@@ -9,19 +9,12 @@ impl Solution {
         }
         
         if ones_count == 0 {
-            let n = s.len() as i64 - 1;
-            return ((n * (n - 1) / 2) % modulo) as i32;
+            return (((s.len() - 1) as i64 * (s.len() - 2) as i64 / 2) % modulo) as i32;
         }
         
         let ones_per_part = ones_count / 3;
         let mut count = 0;
         let mut ones = 0;
-        let mut ways1 = 0;
-        let mut ways2 = 0;
-        
-        if ones_per_part == 0 {
-            return ((((s.len() - 1) as i64 * (s.len() - 2) as i64 / 2) % modulo) as i32);
-        }
         
         for c in s.chars() {
             if c == '1' {
@@ -30,11 +23,10 @@ impl Solution {
             
             if ones == ones_per_part {
                 count += 1;
-            } else if ones == ones_per_part * 2 {
-                ways2 += count;
             }
         }
         
-        ((ways2 % modulo) as i32)
+        count
+
     }
 }

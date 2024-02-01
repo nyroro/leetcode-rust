@@ -10,7 +10,7 @@ impl Solution {
         while i < pieces.len() {
             let piece = &pieces[i];
             if let Some(&start) = map.get(&piece[0]) {
-                if arr.get(start..start+piece.len()) == Some(&piece[..]) {
+                if arr[start..start+piece.len()] == piece[..] {
                     i += 1;
                 } else {
                     return false;
@@ -20,6 +20,6 @@ impl Solution {
             }
         }
         
-        arr.len() == pieces.iter().map(|piece| piece.len()).sum::<usize>()
+        arr.len() == pieces.iter().map(|piece| piece.len()).sum()
     }
 }

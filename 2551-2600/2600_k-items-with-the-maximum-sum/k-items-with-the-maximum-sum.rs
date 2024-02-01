@@ -4,9 +4,9 @@ impl Solution {
         let ones_to_pick = std::cmp::min(num_ones, k);
         let remaining = k - ones_to_pick;
         let zeros_to_pick = std::cmp::min(num_zeros, remaining);
-        let neg_ones_to_pick = std::cmp::min(num_neg_ones, remaining - zeros_to_pick);
+        let neg_ones_to_pick = remaining - zeros_to_pick;
         
-        ones_to_pick - neg_ones_to_pick
+        ones_to_pick + neg_ones_to_pick
 
     }
 }

@@ -14,10 +14,10 @@ impl KthLargest {
     
     fn add(&mut self, val: i32) -> i32 {
         self.nums.push(val);
-        self.nums.sort_unstable_by(|a, b| b.cmp(a));
+        self.nums.sort_unstable();
         if self.nums.len() > self.k {
-            self.nums.truncate(self.k);
+            self.nums.remove(0);
         }
-        self.nums[self.k - 1]
+        self.nums[0]
     }
 }

@@ -21,3 +21,11 @@ impl MyCalendar {
 
     }
 }
+
+fn main() {
+    let mut obj = MyCalendar::new();
+    let ret_1: bool = obj.book(10, 20);
+    let ret_2: bool = obj.book(15, 25);
+    let ret_3: bool = obj.book(20, 30);
+    println!("{}, {}, {}", ret_1, ret_2, ret_3);
+}

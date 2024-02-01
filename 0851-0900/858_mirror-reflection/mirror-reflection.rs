@@ -1,7 +1,7 @@
 
 impl Solution {
     pub fn mirror_reflection(p: i32, q: i32) -> i32 {
-        let g = Solution::gcd(p, q);
+        let g = gcd(p, q);
         let p = p / g;
         let q = q / g;
         if p % 2 == 0 && q % 2 == 1 {

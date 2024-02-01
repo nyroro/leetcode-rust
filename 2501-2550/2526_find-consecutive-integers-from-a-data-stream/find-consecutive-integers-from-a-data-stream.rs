@@ -14,7 +14,7 @@ impl DataStream {
         }
     }
     
-    fn consec(&mut self, num: i32) -> bool {
+    fn consec(&self, num: i32) -> bool {
         self.stream.push(num);
         if self.stream.len() < self.k as usize {
             return false;

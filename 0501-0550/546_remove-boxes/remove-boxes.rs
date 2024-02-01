@@ -3,16 +3,15 @@ impl Solution {
     pub fn remove_boxes(boxes: Vec<i32>) -> i32 {
         let n = boxes.len();
         let mut memo = vec![vec![vec![0; n]; n]; n];
-        Solution::calculate_points(&boxes, &mut memo, 0, n - 1, 0) as i32
-
+        Solution::calculate_points(&boxes, &mut memo, 0, n - 1, 0)
     }
 
-    fn calculate_points(boxes: &Vec<i32>, memo: &mut Vec<Vec<Vec<i32>>>, l: usize, r: usize, k: usize) -> usize {
+    fn calculate_points(boxes: &Vec<i32>, memo: &mut Vec<Vec<Vec<i32>>>, l: usize, r: usize, k: usize) -> i32 {
         if l > r {
             return 0;
         }
         if memo[l][r][k] > 0 {
-            return memo[l][r][k] as usize;
+            return memo[l][r][k];
         }
         let mut l_new = l;
         let mut k_new = k;
@@ -26,7 +25,7 @@ impl Solution {
                 res = res.max(Solution::calculate_points(boxes, memo, l_new + 1, m - 1, 0) + Solution::calculate_points(boxes, memo, m, r, k_new + 1));
             }
         }
-        memo[l][r][k] = res as i32;
+        memo[l][r][k] = res;
         res
 
     }

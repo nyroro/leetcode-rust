@@ -1,11 +1,28 @@
 
 use std::rc::Rc;
 use std::cell::RefCell;
-use std::collections::HashMap; // 导入HashMap
+// Definition for a binary tree node.
+// pub struct TreeNode {
+//   val: i32,
+//   left: Option<Rc<RefCell<TreeNode>>>,
+//   right: Option<Rc<RefCell<TreeNode>>>,
+// }
+// 
+// impl TreeNode {
+//   pub fn new(val: i32) -> Self {
+//     TreeNode {
+//       val,
+//       left: None,
+//       right: None
 
+//     }
+//   }
+// }
 
 impl Solution {
     pub fn find_duplicate_subtrees(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<Option<Rc<RefCell<TreeNode>>>> {
+        use std::collections::HashMap;
+
         let mut map: HashMap<String, i32> = HashMap::new();
         let mut res: Vec<Option<Rc<RefCell<TreeNode>>>> = Vec::new();
 

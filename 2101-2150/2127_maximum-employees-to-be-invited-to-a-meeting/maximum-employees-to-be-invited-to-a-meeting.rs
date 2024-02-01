@@ -20,14 +20,14 @@ impl Solution {
             }
         }
         while qi < q.len() {
-            let now = q[qi] as usize;
+            let now = q[qi];
             qi += 1;
-            visited[now] = true;
-            let nxt = favorite[now] as usize;
-            length[nxt] = length[nxt].max(length[now] + 1);
-            indegree[nxt] -= 1;
-            if indegree[nxt] == 0 {
-                q.push(nxt as i32);
+            visited[now as usize] = true;
+            let nxt = favorite[now as usize];
+            length[nxt as usize] = length[nxt as usize].max(length[now as usize] + 1);
+            indegree[nxt as usize] -= 1;
+            if indegree[nxt as usize] == 0 {
+                q.push(nxt);
             }
         }
         let mut acyclic = 0;
@@ -40,16 +40,15 @@ impl Solution {
                 while !visited[now] {
                     now_len += 1;
                     visited[now] = true;
-                    now = favorite[now] as usize;
+                    now = favorite[now as usize];
                 }
                 if now_len == 2 {
-                    acyclic += now_len + length[i] + length[favorite[i] as usize];
+                    acyclic += now_len + length[i] + length[favorite[i as usize]];
                 } else {
                     cyclic = cyclic.max(now_len);
                 }
             }
         }
-        acyclic.max(cyclic) as i32
-
+        acyclic.max(cyclic)
     }
 }

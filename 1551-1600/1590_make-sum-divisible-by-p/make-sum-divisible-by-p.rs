@@ -21,7 +21,7 @@ impl Solution {
             if let Some(&j) = map.get(&diff) {
                 min_len = min_len.min((i as i32 - j).max(0));
             }
-            map.insert(sum, i as i32);
+            map.insert(sum as i32, i as i32);
         }
         if min_len == n as i32 {
             -1

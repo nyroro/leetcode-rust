@@ -10,11 +10,11 @@ impl Solution {
         let mut count = vec![0; 2];
 
         while right < n {
-            count[(answer[right] == 'T') as usize] += 1;
-            max_count = max_count.max(count[(answer[right] == 'T') as usize]);
+            count[answer[right] as usize - 'F' as usize] += 1;
+            max_count = max_count.max(count[answer[right] as usize - 'F' as usize]);
 
             if (right - left + 1) - max_count > k as usize {
-                count[(answer[left] == 'T') as usize] -= 1;
+                count[answer[left] as usize - 'F' as usize] -= 1;
                 left += 1;
             }
 

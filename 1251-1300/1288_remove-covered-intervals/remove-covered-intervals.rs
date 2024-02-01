@@ -10,7 +10,7 @@ impl Solution {
             }
         });
 
-        let mut count = 1;
+        let mut count = 0;
         let mut left = intervals[0][0];
         let mut right = intervals[0][1];
 

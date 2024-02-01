@@ -8,14 +8,14 @@ impl Solution {
             return 0;
         }
         let mut sums = vec![0; len + 1];
-        sums[0] = nums[0] as i64;
+        sums[0] = nums[0];
         for i in 1..nums.len() {
-            sums[i] = sums[i - 1] + nums[i] as i64;
+            sums[i] = sums[i - 1] + nums[i];
         }
-        Solution::merge(&mut sums, lower as i64, upper as i64, 0, len)
+        Solution::merge(&mut sums, lower, upper, 0, len)
     }
 
-    fn merge(sums: &mut Vec<i64>, lower: i64, upper: i64, low: usize, high: usize) -> i32 {
+    fn merge(sums: &mut Vec<i32>, lower: i32, upper: i32, low: usize, high: usize) -> i32 {
         if high <= low {
             return 0;
         }

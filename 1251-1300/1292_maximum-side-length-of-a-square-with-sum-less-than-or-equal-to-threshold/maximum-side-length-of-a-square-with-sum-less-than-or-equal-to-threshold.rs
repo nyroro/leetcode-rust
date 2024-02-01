@@ -1,6 +1,4 @@
 
-use std::convert::TryInto;
-
 impl Solution {
     pub fn max_side_length(mat: Vec<Vec<i32>>, threshold: i32) -> i32 {
         let m = mat.len();
@@ -23,6 +21,7 @@ impl Solution {
                 }
             }
         }
-        max_side_length.try_into().unwrap()
+        max_side_length
+
     }
 }

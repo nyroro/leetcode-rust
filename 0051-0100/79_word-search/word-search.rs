@@ -7,8 +7,7 @@ impl Solution {
         
         for i in 0..rows {
             for j in 0..cols {
-                let mut visited = vec![vec![false; cols]; rows];
-                if Self::dfs(&board, &word_chars, &mut visited, i as i32, j as i32, 0) {
+                if Self::dfs(&board, &word_chars, i as i32, j as i32, 0) {
                     return true;
                 }
             }
@@ -18,8 +17,8 @@ impl Solution {
 
     }
     
-    fn dfs(board: &Vec<Vec<char>>, word: &Vec<char>, visited: &mut Vec<Vec<bool>>, i: i32, j: i32, k: usize) -> bool {
-        if i < 0 || i as usize >= board.len() || j < 0 || j as usize >= board[0].len() || visited[i as usize][j as usize] || board[i as usize][j as usize] != word[k] {
+    fn dfs(board: &Vec<Vec<char>>, word: &Vec<char>, i: i32, j: i32, k: usize) -> bool {
+        if i < 0 || i as usize >= board.len() || j < 0 || j as usize >= board[0].len() || board[i as usize][j as usize] != word[k] {
             return false;
         }
         
@@ -27,19 +26,24 @@ impl Solution {
             return true;
         }
         
+        let temp = board[i as usize][j as usize];
         let directions = vec![(0, 1), (0, -1), (1, 0), (-1, 0)];
-        visited[i as usize][j as usize] = true;
+        let mut result = false;
+        
+        board[i as usize][j as usize] = ' '; // 标记当前单元格已访问
         
         for (dx, dy) in directions {
             let x = i + dx;
             let y = j + dy;
-            if Self::dfs(board, word, visited, x, y, k + 1) {
-                return true;
+            if Self::dfs(board, word, x, y, k + 1) {
+                result = true;
+                break;
             }
         }
         
-        visited[i as usize][j as usize] = false;
-        false
+        board[i as usize][j as usize] = temp; // 恢复当前单元格的值
+
+        result
 
     }
 }

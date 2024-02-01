@@ -14,15 +14,12 @@ impl Solution {
         if (max_choosable_integer * (max_choosable_integer + 1)) / 2 < desired_total {
             return false;
         }
-        // Create a memoization table
-
-        let mut memo = std::collections::HashMap::new();
         // Call the recursive helper function to determine if the first player can force a win
 
-        Self::can_win(&mut used, desired_total, &mut memo)
+        Self::can_win(&mut used, desired_total)
     }
     
-    fn can_win(used: &mut Vec<bool>, desired_total: i32, memo: &mut std::collections::HashMap<String, bool>) -> bool {
+    fn can_win(used: &mut Vec<bool>, desired_total: i32) -> bool {
         // Check if the desired total has already been reached
 
         if desired_total <= 0 {
@@ -47,10 +44,10 @@ impl Solution {
                 used[i] = true;
                 // Check if the opponent cannot force a win from the next state
 
-                if !Self::can_win(used, desired_total - i as i32, memo) {
+                if !Self::can_win(used, desired_total - i as i32) {
                     // Memoize the current state and return true
 
-                    memo.insert(state.clone(), true);
+                    memo.insert(state, true);
                     used[i] = false;
                     return true;
                 }
@@ -61,7 +58,7 @@ impl Solution {
         }
         // Memoize the current state and return false
 
-        memo.insert(state.clone(), false);
+        memo.insert(state, false);
         false
 
     }

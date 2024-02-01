@@ -3,7 +3,7 @@ impl Solution {
     pub fn is_good_array(nums: Vec<i32>) -> bool {
         // 计算数组中所有元素的最大公约数
 
-        let gcd = nums.iter().fold(0, |a, &b| Solution::gcd(a, b));
+        let gcd = nums.iter().fold(0, |a, &b| gcd(a, b));
         // 如果最大公约数为 1，则返回 true，否则返回 false
 
         gcd == 1

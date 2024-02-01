@@ -4,21 +4,20 @@ use std::cmp::Reverse;
 
 impl Solution {
     pub fn get_number_of_backlog_orders(orders: Vec<Vec<i32>>) -> i32 {
-        let mut buy_orders: BinaryHeap<(i32, i32)> = BinaryHeap::new(); // max heap
+        let mut buy_orders = BinaryHeap::new(); // 最大堆
 
-        let mut sell_orders: BinaryHeap<(Reverse<i32>, i32)> = BinaryHeap::new(); // min heap
+        let mut sell_orders = BinaryHeap::new(); // 最小堆
         
         for order in orders {
             let price = order[0];
-            let mut amount = order[1]; // make amount mutable
-
+            let amount = order[1];
             let order_type = order[2];
             
             if order_type == 0 {
-                // handle buy orders
+                // 处理买单
 
                 while let Some(mut sell) = sell_orders.pop() {
-                    if sell.0 .0 <= price {
+                    if sell <= price {
                         let min_amount = sell.1.min(amount);
                         amount -= min_amount;
                         sell.1 -= min_amount;
@@ -37,10 +36,10 @@ impl Solution {
                     buy_orders.push((price, amount));
                 }
             } else {
-                // handle sell orders
+                // 处理卖单
 
                 while let Some(mut buy) = buy_orders.pop() {
-                    if buy.0 >= price {
+                    if buy >= price {
                         let min_amount = buy.1.min(amount);
                         amount -= min_amount;
                         buy.1 -= min_amount;

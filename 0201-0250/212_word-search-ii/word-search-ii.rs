@@ -48,7 +48,7 @@ impl Solution {
             for j in 0..cols {
                 let mut visited = vec![vec![false; cols]; rows];
                 let mut word = String::new();
-                Solution::search(&board, i, j, &mut trie.root, &mut visited, &mut word, &mut result);
+                Solution::search(&board, i, j, &trie.root, &mut visited, &mut word, &mut result);
             }
         }
         
@@ -60,7 +60,7 @@ impl Solution {
         board: &Vec<Vec<char>>,
         row: usize,
         col: usize,
-        node: &mut TrieNode,
+        node: &TrieNode,
         visited: &mut Vec<Vec<bool>>,
         word: &mut String,
         result: &mut Vec<String>,
@@ -70,35 +70,38 @@ impl Solution {
         }
         
         let ch = board[row][col];
-        if let Some(next_node) = node.children.get_mut(&ch) {
-            visited[row][col] = true;
-            word.push(ch);
-            
-            if next_node.is_word {
-                result.push(word.clone());
-                next_node.is_word = false; // Avoid duplicate results
-
-            }
-            
-            let directions = [(0, 1), (0, -1), (1, 0), (-1, 0)];
-            for (dx, dy) in directions.iter() {
-                let new_row = row as i32 + dx;
-                let new_col = col as i32 + dy;
-                if new_row >= 0 && new_row < board.len() as i32 && new_col >= 0 && new_col < board[0].len() as i32 {
-                    Solution::search(
-                        board,
-                        new_row as usize,
-                        new_col as usize,
-                        next_node,
-                        visited,
-                        word,
-                        result,
-                    );
-                }
-            }
-            
-            visited[row][col] = false;
-            word.pop();
+        if !node.children.contains_key(&ch) {
+            return;
         }
+        
+        visited[row][col] = true;
+        word.push(ch);
+        
+        let next_node = &node.children[&ch];
+        if next_node.is_word {
+            result.push(word.clone());
+            next_node.is_word = false; // Avoid duplicate results
+
+        }
+        
+        let directions = [(0, 1), (0, -1), (1, 0), (-1, 0)];
+        for (dx, dy) in directions.iter() {
+            let new_row = row as i32 + dx;
+            let new_col = col as i32 + dy;
+            if new_row >= 0 && new_row < board.len() as i32 && new_col >= 0 && new_col < board[0].len() as i32 {
+                Solution::search(
+                    board,
+                    new_row as usize,
+                    new_col as usize,
+                    next_node,
+                    visited,
+                    word,
+                    result,
+                );
+            }
+        }
+        
+        visited[row][col] = false;
+        word.pop();
     }
 }

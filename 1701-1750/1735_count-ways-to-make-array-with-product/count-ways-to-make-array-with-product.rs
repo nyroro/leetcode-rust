@@ -21,7 +21,7 @@ impl Solution {
                     count += 1;
                     num /= i;
                 }
-                ways = (ways * Solution::comb(count + n - 1, count)) % MOD;
+                ways = (ways * Self::comb(count + n - 1, count)) % MOD;
                 i += 1;
             }
 
@@ -43,7 +43,7 @@ impl Solution {
         let mut res = 1;
         for i in 0..k {
             res = (res * (n - i) as i64) % MOD;
-            res = (res * Solution::mod_inv(i as i64 + 1)) % MOD;
+            res = (res * Self::mod_inv(i as i64 + 1)) % MOD;
         }
         res
 
@@ -62,4 +62,10 @@ impl Solution {
         res
 
     }
+}
+
+fn main() {
+    let queries = vec![vec![2, 6], vec![5, 1], vec![73, 660]];
+    let result = Solution::ways_to_fill_array(queries);
+    println!("{:?}", result);
 }

@@ -16,20 +16,10 @@ impl Solution {
         let login_minutes = to_minutes(&login_time);
         let logout_minutes = to_minutes(&logout_time);
 
-        // 如果登出时间早于登录时间，加上24小时
-
-        let logout_minutes_adjusted = if logout_minutes < login_minutes {
-            logout_minutes + 24 * 60
-
-        } else {
-            logout_minutes
-
-        };
-
         // 计算登录时间和登出时间所在的完整比赛轮次
 
         let start_round = (login_minutes + 14) / 15;
-        let end_round = logout_minutes_adjusted / 15;
+        let end_round = logout_minutes / 15;
 
         // 返回完整比赛轮次的差值
 

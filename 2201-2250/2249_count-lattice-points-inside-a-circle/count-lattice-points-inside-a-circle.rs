@@ -1,22 +1,25 @@
 
-use std::collections::HashSet;
-
 impl Solution {
     pub fn count_lattice_points(circles: Vec<Vec<i32>>) -> i32 {
-        let mut points = HashSet::new();
-        for circle in circles {
-            let xi = circle[0];
-            let yi = circle[1];
-            let ri = circle[2];
-            for x in (xi - ri)..=(xi + ri) {
-                for y in (yi - ri)..=(yi + ri) {
+        let mut count = 0;
+        for x in 1..=100 {
+            for y in 1..=100 {
+                let mut inside_circle = false;
+                for circle in &circles {
+                    let xi = circle[0];
+                    let yi = circle[1];
+                    let ri = circle[2];
                     if (x - xi).pow(2) + (y - yi).pow(2) <= ri.pow(2) {
-                        points.insert((x, y));
+                        inside_circle = true;
+                        break;
                     }
+                }
+                if inside_circle {
+                    count += 1;
                 }
             }
         }
-        points.len() as i32
+        count
 
     }
 }

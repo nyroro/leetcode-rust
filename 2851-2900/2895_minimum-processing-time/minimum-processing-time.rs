@@ -7,6 +7,13 @@ impl Solution {
         let mut processor_time = processor_time;
         processor_time.sort(); // Sort processor_time in ascending order
 
+        let mut left = 0;
+        let mut right = tasks.len() - 1;
+        while left < right {
+            tasks.swap(left, right);
+            left += 1;
+            right -= 1;
+        }
         let mut l = 0;
         let mut r = tasks.len() - 1;
         let mut res = 0;

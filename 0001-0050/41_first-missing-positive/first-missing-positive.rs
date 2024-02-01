@@ -1,6 +1,6 @@
 
 impl Solution {
-    pub fn first_missing_positive(mut nums: Vec<i32>) -> i32 {
+    pub fn first_missing_positive(nums: Vec<i32>) -> i32 {
         let n = nums.len();
         
         // 将所有正整数放到它们应该在的位置上

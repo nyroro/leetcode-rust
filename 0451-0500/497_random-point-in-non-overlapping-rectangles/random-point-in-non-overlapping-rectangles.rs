@@ -32,3 +32,10 @@ impl Solution {
         vec![x, y]
     }
 }
+
+fn main() {
+    let rects = vec![vec![-2, -2, 1, 1], vec![2, 2, 4, 6]];
+    let obj = Solution::new(rects);
+    let ret_1: Vec<i32> = obj.pick();
+    println!("{:?}", ret_1);
+}

@@ -1,8 +1,6 @@
 
 // 定义树的节点结构体
 
-#[derive(Clone)]  // 添加 #[derive(Clone)] 注解
-
 struct TreeNode {
     node: i32,
     neighbors: Vec<i32>,

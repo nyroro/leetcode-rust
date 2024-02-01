@@ -1,8 +1,6 @@
 
 // Step 1: Define a struct to represent each car
 
-#[derive(Clone)] // Implement the Clone trait
-
 struct Car {
     position: i32,
     time_to_target: f64,
@@ -38,8 +36,7 @@ impl Solution {
             if cars[t].time_to_target < cars[t - 1].time_to_target {
                 fleet_count += 1;
             } else {
-                cars[t - 1] = cars[t].clone(); // Use clone to create a copy
-
+                cars[t - 1] = cars[t];
             }
         }
         

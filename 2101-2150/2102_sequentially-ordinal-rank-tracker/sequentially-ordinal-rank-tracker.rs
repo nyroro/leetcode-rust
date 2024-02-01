@@ -1,16 +1,21 @@
 
-use std::collections::{BTreeMap, HashMap};
+use std::collections::BTreeMap;
+
+struct Location {
+    name: String,
+    score: i32,
+}
 
 struct SORTracker {
     locations: BTreeMap<i32, Vec<String>>,
-    counter: HashMap<String, i32>,
+    counter: i32,
 }
 
 impl SORTracker {
     fn new() -> Self {
         SORTracker {
             locations: BTreeMap::new(),
-            counter: HashMap::new(),
+            counter: 0,
         }
     }
     
@@ -21,17 +26,15 @@ impl SORTracker {
     }
     
     fn get(&mut self) -> String {
-        let count = self.counter.entry("get".to_string()).or_insert(0);
-        *count += 1;
+        self.counter += 1;
         let mut result = String::new();
-        let mut current_count = 0;
         for (_, names) in self.locations.iter().rev() {
             for name in names {
-                current_count += 1;
-                if current_count == *count {
+                if self.counter == 1 {
                     result = name.clone();
                     break;
                 }
+                self.counter -= 1;
             }
             if !result.is_empty() {
                 break;

@@ -8,23 +8,21 @@ impl Solution {
 
         // 将所有文件夹路径添加到哈希集合中
 
-        for f in &folder {
-            folders.insert(f.clone());
+        for f in folder {
+            folders.insert(f);
         }
 
         // 遍历每个文件夹路径，检查是否存在子文件夹
 
-        for f in folder {
+        for f in folders {
             let mut is_subfolder = false;
+            let mut path = String::new();
 
             // 拆分文件夹路径为每个子文件夹
 
-            let subfolders: Vec<&str> = f.split('/').skip(1).collect();
-
-            // 检查是否存在子文件夹
-
-            for i in 1..subfolders.len() {
-                let path = format!("/{}", subfolders[..i].join("/"));
+            for folder in f.split('/').skip(1) {
+                path.push('/');
+                path.push_str(folder);
 
                 // 如果子文件夹存在于哈希集合中，则该文件夹是子文件夹
 

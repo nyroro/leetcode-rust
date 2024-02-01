@@ -2,8 +2,8 @@
 impl Solution {
     pub fn paths_with_max_score(board: Vec<String>) -> Vec<i32> {
         let n = board.len();
-        let mut dp: Vec<Vec<(i32, i32)>> = vec![vec![(std::i32::MIN, 0); n]; n];
-        let dirs: Vec<(i32, i32)> = vec![(0, 1), (1, 0), (1, 1)];
+        let mut dp: Vec<Vec<(i32, i32)>> = vec![vec![(0, 0); n]; n];
+        let dirs: Vec<(i32, i32)> = vec![(0, -1), (-1, 0), (-1, -1)];
 
         dp[n-1][n-1] = (0, 1);
 
@@ -17,7 +17,7 @@ impl Solution {
                     let x = (i as i32 + dx) as usize;
                     let y = (j as i32 + dy) as usize;
 
-                    if x < n && y < n && dp[x][y].0 != std::i32::MIN {
+                    if x < n && y < n && dp[x][y].0 >= 0 {
                         let score = if board[i].chars().nth(j).unwrap() == 'E' {
                             0
 
@@ -36,7 +36,7 @@ impl Solution {
             }
         }
 
-        if dp[0][0].0 == std::i32::MIN {
+        if dp[0][0].0 == 0 {
             vec![0, 0]
         } else {
             vec![dp[0][0].0, dp[0][0].1]

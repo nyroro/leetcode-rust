@@ -20,9 +20,9 @@ impl Solution {
     }
     
     fn can_allocate(candies: &Vec<i32>, k: i64, max_candies: i32) -> bool {
-        let mut count = 0i64;
+        let mut count = 0;
         for &candy in candies {
-            count += i64::from(candy / max_candies);
+            count += candy / max_candies;
             if count >= k {
                 return true;
             }

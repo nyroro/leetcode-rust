@@ -21,12 +21,12 @@ impl Solution {
             }
         }
 
-        let mut q: Vec<(usize, i32)> = queries.iter().cloned().enumerate().map(|(i, val)| (i, val)).collect();
-        q.sort_by_key(|&(i, val)| val);
+        let mut q: Vec<(i32, usize)> = queries.iter().cloned().enumerate().collect();
+        q.sort();
 
         let mut ret: Vec<i32> = vec![0; q.len()];
         for i in (0..q.len()).rev() {
-            let (index, t) = q[i];
+            let (t, index) = q[i];
             while !arr.is_empty() && arr.front().unwrap()[0] > t {
                 arr.pop_front();
             }

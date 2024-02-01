@@ -1,37 +1,33 @@
 
-use std::collections::{HashMap, HashSet};
-
 struct Twitter {
     users: HashMap<i32, HashSet<i32>>,
-    tweets: HashMap<i32, Vec<(i32, i32)>>,
-    time: i32,
+    tweets: Vec<(i32, i32)>,
 }
 
 impl Twitter {
     fn new() -> Self {
         Twitter {
             users: HashMap::new(),
-            tweets: HashMap::new(),
-            time: 0,
+            tweets: Vec::new(),
         }
     }
     
     fn post_tweet(&mut self, user_id: i32, tweet_id: i32) {
-        self.time += 1;
-        self.tweets.entry(user_id).or_insert(Vec::new()).push((self.time, tweet_id));
+        self.tweets.push((user_id, tweet_id));
     }
     
     fn get_news_feed(&self, user_id: i32) -> Vec<i32> {
         let mut feed = Vec::new();
-        let mut tweets = self.tweets.get(&user_id).unwrap_or(&Vec::new()).clone();
-        for &followee_id in self.users.get(&user_id).unwrap_or(&HashSet::new()) {
-            if let Some(followee_tweets) = self.tweets.get(&followee_id) {
-                tweets.extend_from_slice(followee_tweets);
+        if let Some(followees) = self.users.get(&user_id) {
+            let mut tweets = self.tweets.iter().rev();
+            for (uid, tid) in tweets {
+                if *uid == user_id || followees.contains(uid) {
+                    feed.push(*tid);
+                }
+                if feed.len() == 10 {
+                    break;
+                }
             }
-        }
-        tweets.sort_by(|a, b| b.0.cmp(&a.0));
-        for tweet in tweets.iter().take(10) {
-            feed.push(tweet.1);
         }
         feed
 
@@ -46,4 +42,15 @@ impl Twitter {
             followees.remove(&followee_id);
         }
     }
+}
+
+fn main() {
+    let mut obj = Twitter::new();
+    obj.post_tweet(1, 5);
+    let ret_1: Vec<i32> = obj.get_news_feed(1);
+    obj.follow(1, 2);
+    obj.post_tweet(2, 6);
+    let ret_2: Vec<i32> = obj.get_news_feed(1);
+    obj.unfollow(1, 2);
+    let ret_3: Vec<i32> = obj.get_news_feed(1);
 }

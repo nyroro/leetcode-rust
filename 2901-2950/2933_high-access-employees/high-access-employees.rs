@@ -6,7 +6,7 @@ impl Solution {
         let mut table: HashMap<String, Vec<i32>> = HashMap::new();
 
         for access in access_times {
-            let v: i32 = access[1][..2].parse::<i32>().unwrap() * 60 + access[1][2..].parse::<i32>().unwrap();
+            let v: i32 = access[1][..2].parse().unwrap() * 60 + access[1][2..].parse().unwrap();
             table.entry(access[0].clone()).or_insert(Vec::new()).push(v);
         }
 

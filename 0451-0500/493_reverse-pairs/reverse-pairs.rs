@@ -1,7 +1,7 @@
 
 impl Solution {
     pub fn reverse_pairs(nums: Vec<i32>) -> i32 {
-        fn merge_and_count(nums: &mut [i32], left: usize, mid: usize, right: usize) -> usize {
+        fn merge_and_count(nums: &mut [i32], left: usize, mid: usize, right: usize) -> i32 {
             let mut count = 0;
             let mut i = left;
             let mut j = mid + 1;
@@ -45,7 +45,7 @@ impl Solution {
 
         }
         
-        fn merge_sort_and_count(nums: &mut [i32], left: usize, right: usize) -> usize {
+        fn merge_sort_and_count(nums: &mut [i32], left: usize, right: usize) -> i32 {
             if left >= right {
                 return 0;
             }
@@ -61,7 +61,6 @@ impl Solution {
         let mut nums = nums;
         let n = nums.len();
         
-        merge_sort_and_count(&mut nums, 0, n - 1) as i32
-
+        merge_sort_and_count(&mut nums, 0, n - 1)
     }
 }

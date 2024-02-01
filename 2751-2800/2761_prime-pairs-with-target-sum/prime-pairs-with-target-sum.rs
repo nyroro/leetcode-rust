@@ -1,34 +1,26 @@
 
 impl Solution {
-    pub fn sieve_of_eratosthenes(n: i32) -> Vec<bool> {
-        let mut primes = vec![true; (n + 1) as usize];
-        primes[0] = false;
-        primes[1] = false;
-        let mut p = 2;
-        while p * p <= n {
-            if primes[p as usize] {
-                let mut i = p * p;
-                while i <= n {
-                    primes[i as usize] = false;
-                    i += p;
-                }
-            }
-            p += 1;
+    pub fn is_prime(num: i32) -> bool {
+        if num <= 1 {
+            return false;
         }
-        primes
-
+        let mut i = 2;
+        while i * i <= num {
+            if num % i == 0 {
+                return false;
+            }
+            i += 1;
+        }
+        return true;
     }
 
     pub fn find_prime_pairs(n: i32) -> Vec<Vec<i32>> {
-        let primes = Solution::sieve_of_eratosthenes(n);
         let mut result = Vec::new();
-        let mut x = 2;
-        while x <= n / 2 {
+        for x in 2..=n {
             let y = n - x;
-            if primes[x as usize] && primes[y as usize] {
+            if x <= y && Solution::is_prime(x) && Solution::is_prime(y) {
                 result.push(vec![x, y]);
             }
-            x += 1;
         }
         result
 

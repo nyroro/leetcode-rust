@@ -14,7 +14,7 @@ impl Solution {
             *freq.entry(chars[right]).or_insert(0) += 1;
 
             while freq.get(&'a').unwrap_or(&0) > &0 && freq.get(&'b').unwrap_or(&0) > &0 && freq.get(&'c').unwrap_or(&0) > &0 {
-                count += (n - right) as i32;
+                count += n - right as i32;
                 *freq.entry(chars[left]).or_insert(0) -= 1;
                 left += 1;
             }

@@ -1,33 +1,46 @@
 
+// Definition for singly-linked list.
+#[derive(PartialEq, Eq, Clone, Debug)]
+pub struct ListNode {
+  pub val: i32,
+  pub next: Option<Box<ListNode>>
+}
+
+impl ListNode {
+  #[inline]
+  fn new(val: i32) -> Self {
+    ListNode {
+      next: None,
+      val
+
+    }
+  }
+}
+
 impl Solution {
     pub fn sort_list(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
         // Convert the linked list into a vector
 
         let mut arr = Vec::new();
         let mut p = head;
-        while let Some(mut node) = p {
-            let next_node = node.next.take();
+        while let Some(node) = p {
             arr.push(node);
-            p = next_node;
+            p = node.next;
         }
 
         // Sort the vector using merge sort
 
         arr.sort_by(|a, b| a.val.cmp(&b.val));
 
-        // Reconstruct the sorted linked list
+        // Update the next pointers to reflect the sorted order
 
-        let mut dummy = ListNode::new(0);
-        let mut current = &mut dummy;
-        for node in arr {
-            current.next = Some(node);
-            current = current.next.as_mut().unwrap();
+        for i in 0..arr.len() - 1 {
+            arr[i].next = Some(arr[i + 1].clone());
         }
-        current.next = None;
+        arr.last().map(|last| last.next = None);
 
         // Return the head of the sorted linked list
 
-        dummy.next
-
+        arr.first().map(|first| Some(first.clone()))
     }
 }

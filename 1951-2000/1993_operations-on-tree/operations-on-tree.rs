@@ -62,10 +62,9 @@ impl LockingTree {
     }
     
     fn upgrade(&mut self, num: i32, user: i32) -> bool {
-        let node = self.nodes.get(&num).unwrap();
+        let node = self.nodes.get_mut(&num).unwrap();
         if !node.locked && self.has_locked_descendant(num) && !self.has_locked_ancestor(num) {
             self.unlock_descendants(num);
-            let node = self.nodes.get_mut(&num).unwrap();
             node.locked = true;
             node.locked_by = Some(user);
             true
@@ -117,4 +116,20 @@ impl LockingTree {
             }
         }
     }
+}
+
+fn main() {
+    let mut locking_tree = LockingTree::new(vec![-1, 0, 0, 1, 1, 2, 2]);
+    println!("{}", locking_tree.lock(2, 2));    // true
+
+    println!("{}", locking_tree.unlock(2, 3));  // false
+
+    println!("{}", locking_tree.unlock(2, 2));  // true
+
+    println!("{}", locking_tree.lock(4, 5));    // true
+
+    println!("{}", locking_tree.upgrade(0, 1)); // true
+
+    println!("{}", locking_tree.lock(0, 1));    // false
+
 }

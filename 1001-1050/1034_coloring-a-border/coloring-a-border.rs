@@ -19,7 +19,7 @@ impl Solution {
             m: usize,
             n: usize,
         ) {
-            if row >= m || col >= n || row < 0 || col < 0 || grid[row][col] != start_color {
+            if row >= m || col >= n || row == 0 || col == 0 || grid[row][col] != start_color {
                 return;
             }
             if visited[row][col] {

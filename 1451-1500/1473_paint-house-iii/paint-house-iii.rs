@@ -13,7 +13,7 @@ impl Solution {
         return res;
     }
     
-    fn min_cost_util(memo: &mut Vec<Vec<Vec<i32>>>, houses: &Vec<i32>, cost: &Vec<Vec<i32>>, m: i32, n: i32, target: i32, i: i32, previous: i32, int_max: i32) -> i32 {
+    fn min_cost_util(memo: &mut Vec<Vec<Vec<i32>>, houses: &Vec<i32>, cost: &Vec<Vec<i32>>, m: i32, n: i32, target: i32, i: i32, previous: i32, int_max: i32) -> i32 {
         if i == m {
             if target == 0 {
                 return 0;

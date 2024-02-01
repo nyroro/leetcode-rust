@@ -1,47 +1,47 @@
 
 impl Solution {
     pub fn min_number_of_frogs(croak_of_frogs: String) -> i32 {
-        let mut counts = vec![0; 5];
-        let croak_order = ['c', 'r', 'o', 'a', 'k'];
+        let mut croak_count = vec![0; 5];
         let mut frogs = 0;
-
+        let croak_order = ['c', 'r', 'o', 'a', 'k'];
+        
         for c in croak_of_frogs.chars() {
             match c {
-                'c' => counts[0] += 1,
+                'c' => croak_count[0] += 1,
                 'r' => {
-                    if counts[0] <= counts[1] {
+                    if croak_count[0] > croak_count[1] {
                         return -1;
                     }
-                    counts[1] += 1;
+                    croak_count[1] += 1;
                 },
                 'o' => {
-                    if counts[1] <= counts[2] {
+                    if croak_count[1] > croak_count[2] {
                         return -1;
                     }
-                    counts[2] += 1;
+                    croak_count[2] += 1;
                 },
                 'a' => {
-                    if counts[2] <= counts[3] {
+                    if croak_count[2] > croak_count[3] {
                         return -1;
                     }
-                    counts[3] += 1;
+                    croak_count[3] += 1;
                 },
                 'k' => {
-                    if counts[3] <= counts[4] {
+                    if croak_count[3] > croak_count[4] {
                         return -1;
                     }
-                    counts[4] += 1;
+                    croak_count[4] += 1;
                     for i in 0..5 {
-                        counts[i] -= 1;
+                        croak_count[i] -= 1;
                     }
-                    frogs = frogs.max(counts[0]);
+                    frogs = frogs.max(croak_count[0]);
                 },
                 _ => return -1,
             }
         }
-
-        if counts.iter().all(|&x| x == 0) {
-            frogs + 1
+        
+        if croak_count.iter().all(|&x| x == 0) {
+            frogs
 
         } else {
             -1

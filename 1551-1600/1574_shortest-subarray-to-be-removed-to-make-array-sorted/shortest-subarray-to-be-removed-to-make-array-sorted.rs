@@ -27,15 +27,15 @@ impl Solution {
 
         // 对于每个 i，计算当前子数组的长度并更新最短子数组的长度
 
-        let mut i = 0;
-        let mut j = right;
+        for i in 0..=left {
+            if arr[i] <= arr[right] {
+                res = std::cmp::min(res, right - i - 1);
+            }
+        }
 
-        while i <= left && j < n {
-            if arr[i] <= arr[j] {
-                res = std::cmp::min(res, j - i - 1);
-                i += 1;
-            } else {
-                j += 1;
+        for i in (right..n).rev() {
+            if arr[i] >= arr[left] {
+                res = std::cmp::min(res, i - left - 1);
             }
         }
 

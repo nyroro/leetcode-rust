@@ -18,7 +18,7 @@ impl Solution {
             (1, -1),  (1, 0),  (1, 1)
         ];
         
-        for &(dx, dy) in &directions {
+        for (dx, dy) in directions {
             let (new_row, new_col) = (row as i32 + dx, col as i32 + dy);
             if new_row >= 0 && new_row < m as i32 && new_col >= 0 && new_col < n as i32 {
                 let (new_row, new_col) = (new_row as usize, new_col as usize);
@@ -32,7 +32,7 @@ impl Solution {
             board[row][col] = (count as u8 + b'0') as char;
         } else {
             board[row][col] = 'B';
-            for &(dx, dy) in &directions {
+            for (dx, dy) in directions {
                 let (new_row, new_col) = (row as i32 + dx, col as i32 + dy);
                 if new_row >= 0 && new_row < m as i32 && new_col >= 0 && new_col < n as i32 {
                     let (new_row, new_col) = (new_row as usize, new_col as usize);

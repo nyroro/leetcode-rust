@@ -24,7 +24,7 @@ impl DetectSquares {
         let mut count = 0;
         
         for (&(px, py), &c) in &self.points {
-            if px != x && py != y && (px - x).abs() == (py - y).abs() {
+            if px != x && py != y && px - x == py - y {
                 let pair_count = self.points.get(&(px, y)).unwrap_or(&0) * self.points.get(&(x, py)).unwrap_or(&0);
                 count += pair_count * c;
             }

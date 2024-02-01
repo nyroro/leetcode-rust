@@ -45,11 +45,11 @@ impl CombinationIterator {
         let k = self.combination_length;
 
         let mut i = k - 1;
-        while i > 0 && self.current_combination[i] == n - k + i {
+        while i >= 0 && self.current_combination[i] == n - k + i {
             i -= 1;
         }
 
-        if self.current_combination[i] < n - k + i {
+        if i >= 0 {
             self.current_combination[i] += 1;
             for j in i + 1..k {
                 self.current_combination[j] = self.current_combination[j - 1] + 1;

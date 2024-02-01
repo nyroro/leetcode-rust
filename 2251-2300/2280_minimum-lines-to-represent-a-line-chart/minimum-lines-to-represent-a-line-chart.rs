@@ -9,8 +9,8 @@ impl Solution {
         stock_prices.sort();
         
         let mut ret = 1;
-        let mut a = &stock_prices[0];
-        let mut b = &stock_prices[1];
+        let mut a = stock_prices[0];
+        let mut b = stock_prices[1];
         
         for i in 2..stock_prices.len() {
             let c = &stock_prices[i];
@@ -25,7 +25,7 @@ impl Solution {
             }
             
             a = b;
-            b = c;
+            b = c.clone();
         }
         
         ret

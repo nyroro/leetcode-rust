@@ -1,8 +1,8 @@
 
 impl Solution {
     pub fn construct_distanced_sequence(n: i32) -> Vec<i32> {
-        let mut result = vec![0; (2 * n - 1) as usize];
-        let mut visited = vec![false; (n + 1) as usize];
+        let mut result = vec![0; 2 * n - 1];
+        let mut visited = vec![false; n as usize + 1];
         Self::backtrack(&mut result, &mut visited, n as usize, 0);
         result
 

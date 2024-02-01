@@ -4,7 +4,7 @@ impl Solution {
         const MOD: i64 = 1_000_000_007;
         let n = n as usize;
         let mut graph = vec![vec![std::i32::MAX; n]; n];
-        let mut dist = vec![std::i64::MAX; n];
+        let mut dist = vec![std::i32::MAX; n];
         let mut count = vec![0; n];
         let mut pq = std::collections::BinaryHeap::new();
 
@@ -26,7 +26,7 @@ impl Solution {
             }
             for next in 0..n {
                 if graph[node][next] != std::i32::MAX {
-                    let new_dist = dist[node] + graph[node][next] as i64;
+                    let new_dist = dist[node] + graph[node][next];
                     if new_dist < dist[next] {
                         dist[next] = new_dist;
                         count[next] = count[node];

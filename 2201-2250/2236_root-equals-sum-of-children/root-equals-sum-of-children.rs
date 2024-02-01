@@ -6,7 +6,7 @@ impl Solution {
     pub fn check_tree(root: Option<Rc<RefCell<TreeNode>>>) -> bool {
         if let Some(node) = root {
             let node = node.borrow();
-            let mut sum = node.val;
+            let sum = node.val;
             if let Some(left) = &node.left {
                 sum -= left.borrow().val;
             }

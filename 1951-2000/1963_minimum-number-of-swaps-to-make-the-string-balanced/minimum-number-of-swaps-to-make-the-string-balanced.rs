@@ -1,23 +1,28 @@
 
 impl Solution {
     pub fn min_swaps(s: String) -> i32 {
+        let mut stack = Vec::new();
         let mut swaps = 0;
-        let mut count = 0;
 
         for c in s.chars() {
             if c == '[' {
-                count += 1;
+                stack.push(c);
             } else {
-                count -= 1;
-                if count < 0 {
+                if let Some(top) = stack.last() {
+                    if *top == '[' {
+                        stack.pop();
+                    } else {
+                        stack.push(c);
+                        swaps += 1;
+                    }
+                } else {
+                    stack.push(c);
                     swaps += 1;
-                    count = 1;  // Fix: Reset count to 1 instead of 0
-
                 }
             }
         }
 
-        swaps
+        swaps / 2
 
     }
 }

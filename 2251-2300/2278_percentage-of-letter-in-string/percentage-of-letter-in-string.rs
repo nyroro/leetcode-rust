@@ -4,8 +4,8 @@ impl Solution {
         let s_chars: Vec<char> = s.chars().collect();
         let mut count = 0;
         
-        for c in &s_chars {
-            if *c == letter {
+        for c in s_chars {
+            if c == letter {
                 count += 1;
             }
         }

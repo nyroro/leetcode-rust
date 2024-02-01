@@ -14,7 +14,7 @@ impl Solution {
 
                 if slow == fast {
                     if slow == Self::next(&nums, slow) {
-                        break;
+                        return false;
                     }
                     return true;
                 }
@@ -35,8 +35,7 @@ impl Solution {
 
     fn next(nums: &Vec<i32>, i: usize) -> usize {
         let n = nums.len();
-        let next_index = ((i as i32 + nums[i]) % n as i32 + n as i32) % n as i32;
-        next_index as usize
+        ((n as i32 + nums[i] + i as i32) % n as i32) as usize
 
     }
 }

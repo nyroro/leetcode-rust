@@ -22,26 +22,41 @@ impl Solution {
 
         // 对房间按照大小进行排序
 
-        room_list.sort_by(|a, b| b.size.cmp(&a.size).then_with(|| a.id.cmp(&b.id)));
+        room_list.sort_by(|a, b| a.size.cmp(&b.size));
 
         // 定义一个函数来查找满足条件的房间
 
         let find_closest_room = |preferred: i32, min_size: i32| -> i32 {
+            let mut left = 0;
+            let mut right = room_list.len() as i32 - 1;
             let mut result = -1;
-            let mut min_diff = i32::max_value();
 
-            for room in &room_list {
-                if room.size >= min_size {
-                    let diff = (room.id - preferred).abs();
-                    if diff < min_diff || (diff == min_diff && room.id < result) {
-                        min_diff = diff;
-                        result = room.id;
+            while left <= right {
+                let mid = left + (right - left) / 2;
+                if room_list[mid as usize].size < min_size {
+                    left = mid + 1;
+                } else {
+                    if result == -1
+
+                        || (i32::abs(room_list[mid as usize].id - preferred)
+                            < i32::abs(room_list[result as usize].id - preferred))
+                        || ((i32::abs(room_list[mid as usize].id - preferred)
+                            == i32::abs(room_list[result as usize].id - preferred))
+                            && (room_list[mid as usize].id < room_list[result as usize].id))
+                    {
+                        result = mid;
                     }
+                    right = mid - 1;
                 }
             }
 
-            result
+            if result == -1 {
+                -1
 
+            } else {
+                room_list[result as usize].id
+
+            }
         };
 
         // 对每个查询进行处理

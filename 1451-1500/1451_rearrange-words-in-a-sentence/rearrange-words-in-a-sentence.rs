@@ -4,8 +4,7 @@ impl Solution {
         // Convert the first letter to lowercase and split the text into words
 
         let mut words: Vec<&str> = text.split_whitespace().collect();
-        let first_word = words[0].to_lowercase();
-        words[0] = &first_word;
+        words[0] = &words[0].to_lowercase();
 
         // Sort the words by length
 

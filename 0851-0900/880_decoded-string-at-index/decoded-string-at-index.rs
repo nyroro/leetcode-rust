@@ -27,3 +27,20 @@ impl Solution {
         String::new()
     }
 }
+
+fn main() {
+    let s1 = "leet2code3".to_string();
+    let k1 = 10;
+    let result1 = Solution::decode_at_index(s1, k1);
+    println!("Result 1: {}", result1);  // Output: "o"
+
+    let s2 = "ha22".to_string();
+    let k2 = 5;
+    let result2 = Solution::decode_at_index(s2, k2);
+    println!("Result 2: {}", result2);  // Output: "h"
+
+    let s3 = "a2345678999999999999999".to_string();
+    let k3 = 1;
+    let result3 = Solution::decode_at_index(s3, k3);
+    println!("Result 3: {}", result3);  // Output: "a"
+}

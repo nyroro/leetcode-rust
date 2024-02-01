@@ -11,11 +11,7 @@ impl Solution {
                     root = root_word.clone();
                 }
             }
-            if !root.is_empty() {
-                result.push_str(&root);
-            } else {
-                result.push_str(word);
-            }
+            result.push_str(&root);
             result.push(' ');
         }
 

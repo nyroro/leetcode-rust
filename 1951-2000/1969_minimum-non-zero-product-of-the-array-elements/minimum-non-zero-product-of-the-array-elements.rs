@@ -5,8 +5,7 @@ impl Solution {
         let max_num = (1 << p) - 1;
         let max_product = (max_num - 1) % modulo;
         let non_zero_product = Self::fast_pow(max_product, max_num / 2);
-        let result = (non_zero_product * (max_num % modulo)) % modulo;
-        result as i32
+        (non_zero_product * max_num % modulo) as i32
 
     }
     

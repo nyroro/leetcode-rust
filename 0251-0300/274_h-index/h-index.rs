@@ -7,20 +7,16 @@ impl Solution {
         // 计数每个引用次数的论文数量
 
         for &citation in &citations {
-            if citation >= n as i32 {
-                papers[n] += 1;
-            } else {
-                papers[citation as usize] += 1;
-            }
+            papers[usize::min(n, citation as usize)] += 1;
         }
         
         // 找到 h-index
 
         let mut h = n as i32;
-        let mut sum = papers[n];
+        let mut sum = 0;
         while h > sum {
-            h -= 1;
             sum += papers[h as usize];
+            h -= 1;
         }
         
         h

@@ -7,8 +7,7 @@ struct TrieNode {
 impl TrieNode {
     fn new() -> Self {
         TrieNode {
-            children: Default::default(), // 使用默认值来初始化数组
-
+            children: [None; 26],
             is_end: false,
         }
     }

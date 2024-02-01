@@ -4,7 +4,7 @@
 
 
 impl Solution {
-    pub fn num_subseq(mut nums: Vec<i32>, target: i32) -> i32 {
+    pub fn num_subseq(nums: Vec<i32>, target: i32) -> i32 {
         let modulo = 1_000_000_007;
         let mut result = 0;
         let mut left = 0;
@@ -21,13 +21,7 @@ impl Solution {
         
         while left <= right {
             if nums[left] + nums[right] > target {
-                if right > 0 { // 检查 right 是否大于 0
-
-                    right -= 1;
-                } else {
-                    break; // 如果 right 已经为 0，跳出循环
-
-                }
+                right -= 1;
             } else {
                 result = (result + powers[right - left]) % modulo; // 更新结果
 

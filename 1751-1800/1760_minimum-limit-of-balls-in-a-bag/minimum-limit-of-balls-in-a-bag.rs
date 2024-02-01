@@ -2,13 +2,13 @@
 impl Solution {
     pub fn minimum_size(nums: Vec<i32>, max_operations: i32) -> i32 {
         let mut left = 1;
-        let mut right = *nums.iter().max().unwrap();
+        let mut right = *nums.iter().max().unwrap() * max_operations;
 
         while left < right {
             let mid = (left + right) / 2;
-            let operations = Self::count_operations(&nums, mid, max_operations);
+            let max_balls = Self::count_operations(&nums, mid, max_operations);
 
-            if operations > max_operations {
+            if max_balls > mid {
                 left = mid + 1;
             } else {
                 right = mid;
@@ -20,17 +20,17 @@ impl Solution {
     }
 
     fn count_operations(nums: &Vec<i32>, limit: i32, max_operations: i32) -> i32 {
-        let mut operations = 0;
+        let mut count = 0;
 
         for num in nums {
-            operations += (*num - 1) / limit;
+            count += (*num - 1) / limit;
 
-            if operations > max_operations {
+            if count > max_operations {
                 break;
             }
         }
 
-        operations
+        count
 
     }
 }

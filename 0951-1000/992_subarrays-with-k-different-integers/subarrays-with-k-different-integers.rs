@@ -13,7 +13,7 @@ impl Solution {
             *freq1.entry(nums[right]).or_insert(0) += 1;
             *freq2.entry(nums[right]).or_insert(0) += 1;
             
-            while freq1.len() > k as usize {
+            while freq1.len() > k {
                 *freq1.get_mut(&nums[left1]).unwrap() -= 1;
                 if freq1[&nums[left1]] == 0 {
                     freq1.remove(&nums[left1]);
@@ -21,7 +21,7 @@ impl Solution {
                 left1 += 1;
             }
             
-            while freq2.len() >= k as usize {
+            while freq2.len() >= k {
                 *freq2.get_mut(&nums[left2]).unwrap() -= 1;
                 if freq2[&nums[left2]] == 0 {
                     freq2.remove(&nums[left2]);

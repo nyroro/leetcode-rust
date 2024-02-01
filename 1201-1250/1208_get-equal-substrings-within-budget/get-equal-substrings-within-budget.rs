@@ -20,7 +20,7 @@ impl Solution {
             end += 1;
         }
 
-        max_length as i32
+        max_length
 
     }
 }

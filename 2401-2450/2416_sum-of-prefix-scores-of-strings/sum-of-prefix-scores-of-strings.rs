@@ -1,48 +1,30 @@
 
-struct TrieNode {
-    children: [Option<Box<TrieNode>>; 26],
-    count: i32,
-}
-
-impl TrieNode {
-    fn new() -> Self {
-        TrieNode {
-            children: Default::default(),
-            count: 0,
-        }
-    }
-}
+use std::collections::HashMap;
 
 impl Solution {
     pub fn sum_prefix_scores(words: Vec<String>) -> Vec<i32> {
-        let mut root = TrieNode::new();
-        let mut result = Vec::new();
+        let mut prefix_scores = vec![];
+        let mut prefix_count = HashMap::new();
 
-        for word in words.iter() {
-            let mut node = &mut root;
-            for &ch in word.as_bytes() {
-                let idx = (ch - b'a') as usize;
-                node = node.children[idx].get_or_insert_with(|| Box::new(TrieNode::new()));
-                node.count += 1;
+        for word in &words {
+            let mut prefix = String::new();
+            for ch in word.chars() {
+                prefix.push(ch);
+                *prefix_count.entry(prefix.clone()).or_insert(0) += 1;
             }
         }
 
-        for word in words.iter() {
-            let mut node = &root;
+        for word in &words {
             let mut score = 0;
-            for &ch in word.as_bytes() {
-                let idx = (ch - b'a') as usize;
-                if let Some(next_node) = &node.children[idx] {
-                    node = next_node;
-                    score += node.count;
-                } else {
-                    break;
-                }
+            let mut prefix = String::new();
+            for ch in word.chars() {
+                prefix.push(ch);
+                score += prefix_count[&prefix];
             }
-            result.push(score);
+            prefix_scores.push(score);
         }
 
-        result
+        prefix_scores
 
     }
 }

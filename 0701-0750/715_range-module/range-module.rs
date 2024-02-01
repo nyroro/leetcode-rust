@@ -10,7 +10,7 @@ impl RangeModule {
         }
     }
     
-    fn add_range(&mut self, mut left: i32, mut right: i32) {
+    fn add_range(&mut self, left: i32, right: i32) {
         let mut merged = Vec::new();
         let mut i = 0;
         while i < self.ranges.len() && self.ranges[i].1 < left {

@@ -12,10 +12,10 @@ impl Solution {
         let remaining_milestones = total_milestones - max_milestones as i64;
 
         if remaining_milestones >= max_milestones as i64 {
-            total_milestones
+            2 * max_milestones as i64 + 1
 
         } else {
-            2 * remaining_milestones + 1
+            total_milestones
 
         }
     }

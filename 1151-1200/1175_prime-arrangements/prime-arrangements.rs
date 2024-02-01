@@ -23,21 +23,21 @@ impl Solution {
         
         // 计算素数的排列数量
 
-        let mut prime_permutations: i64 = 1;
+        let mut prime_permutations = 1;
         for i in 2..=prime_count {
-            prime_permutations = (prime_permutations * i) % (MOD as i64);
+            prime_permutations = (prime_permutations * i) % MOD;
         }
         
         // 计算非素数的排列数量
 
-        let mut non_prime_permutations: i64 = 1;
+        let mut non_prime_permutations = 1;
         for i in 2..=non_prime_count {
-            non_prime_permutations = (non_prime_permutations * i) % (MOD as i64);
+            non_prime_permutations = (non_prime_permutations * i) % MOD;
         }
         
         // 计算最终的答案
 
-        let result = (prime_permutations * non_prime_permutations) % (MOD as i64);
+        let result = (prime_permutations * non_prime_permutations) % MOD;
         result as i32
 
     }

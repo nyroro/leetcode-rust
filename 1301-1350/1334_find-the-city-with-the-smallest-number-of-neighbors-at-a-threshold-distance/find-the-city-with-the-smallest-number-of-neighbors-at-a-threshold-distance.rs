@@ -17,8 +17,8 @@ impl Solution {
         for k in 0..n as usize {
             for i in 0..n as usize {
                 for j in 0..n as usize {
-                    if dist[i][k] != i32::MAX && dist[k][j] != i32::MAX {
-                        dist[i][j] = dist[i][j].min(dist[i][k] + dist[k][j]);
+                    if dist[i][j] > dist[i][k] + dist[k][j] {
+                        dist[i][j] = dist[i][k] + dist[k][j];
                     }
                 }
             }

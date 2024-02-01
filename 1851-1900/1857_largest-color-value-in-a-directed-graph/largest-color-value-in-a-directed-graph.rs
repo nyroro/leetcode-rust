@@ -46,7 +46,7 @@ impl Solution {
         }
 
         colors_count[u][colors[u] as usize] += 1;
-        *result = (*result).max(colors_count[u][colors[u] as usize]);
+        *result = result.max(colors_count[u][colors[u] as usize]);
 
         on_path[u] = 0;
         true

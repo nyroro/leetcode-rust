@@ -7,9 +7,9 @@ impl Solution {
         for i in 0..32 {
             let mut count = 0;
             for num in &nums {
-                count += ((num >> i) & 1) as i32;
+                count += (num >> i) & 1;
             }
-            total_distance += count * (n as i32 - count);
+            total_distance += count * (n - count);
         }
         
         total_distance

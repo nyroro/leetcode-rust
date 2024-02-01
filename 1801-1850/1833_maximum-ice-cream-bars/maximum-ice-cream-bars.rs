@@ -10,17 +10,17 @@ impl Solution {
         }
         
         for i in 1..=100000 {
-            if total + i as i32 * count[i] as i32 <= coins {
-                total += i as i32 * count[i] as i32;
+            if total + i * count[i] <= coins {
+                total += i * count[i];
                 max_ice_cream += count[i];
             } else {
                 let remaining_coins = coins - total;
-                max_ice_cream += (remaining_coins / i as i32) as usize;
+                max_ice_cream += remaining_coins / i;
                 break;
             }
         }
         
-        max_ice_cream as i32
+        max_ice_cream
 
     }
 }

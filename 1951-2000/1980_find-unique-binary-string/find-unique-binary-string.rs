@@ -4,10 +4,11 @@ impl Solution {
         let n = nums.len();
         let mut result = String::new();
         
-        for i in 0..(1 << n) {
-            let binary = format!("{:0width$b}", i, width = n);
-            if !nums.contains(&binary) {
-                result = binary;
+        for i in 0..n {
+            if nums.contains(&format!("{:0width$b}", i, width = n)) {
+                continue;
+            } else {
+                result = format!("{:0width$b}", i, width = n);
                 break;
             }
         }

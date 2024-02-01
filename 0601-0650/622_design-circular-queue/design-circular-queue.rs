@@ -68,3 +68,35 @@ impl MyCircularQueue {
         self.size == self.buffer.len()
     }
 }
+
+fn main() {
+    let mut obj = MyCircularQueue::new(3);
+    let ret_1: bool = obj.en_queue(1);
+    let ret_2: bool = obj.en_queue(2);
+    let ret_3: bool = obj.en_queue(3);
+    let ret_4: bool = obj.en_queue(4);
+    let ret_5: i32 = obj.rear();
+    let ret_6: bool = obj.is_full();
+    let ret_7: bool = obj.de_queue();
+    let ret_8: bool = obj.en_queue(4);
+    let ret_9: i32 = obj.rear();
+    
+    println!("{:?}", ret_1); // true
+
+    println!("{:?}", ret_2); // true
+
+    println!("{:?}", ret_3); // true
+
+    println!("{:?}", ret_4); // false
+
+    println!("{:?}", ret_5); // 3
+
+    println!("{:?}", ret_6); // true
+
+    println!("{:?}", ret_7); // true
+
+    println!("{:?}", ret_8); // true
+
+    println!("{:?}", ret_9); // 4
+
+}

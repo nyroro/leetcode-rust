@@ -24,14 +24,12 @@ impl Solution {
             }
             can_take &= !(state | graph.iter().enumerate().filter(|&(i, _)| (state & (1 << i)) != 0).fold(0, |acc, (_, &val)| acc | val));
             
-            let mut subset = can_take as usize; // Convert subset to usize
-
+            let mut subset = can_take;
             while subset > 0 {
                 if (subset.count_ones() as i32) <= k {
                     dp[state | subset] = dp[state | subset].min(dp[state] + 1);
                 }
-                subset = (subset - 1) & can_take as usize; // Convert can_take to usize
-
+                subset = (subset - 1) & can_take;
             }
         }
         

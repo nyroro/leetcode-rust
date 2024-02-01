@@ -6,7 +6,7 @@ impl Solution {
             parent[i] = i;
         }
         
-        for equation in &equations {
+        for equation in equations {
             let chars: Vec<char> = equation.chars().collect();
             let x = chars[0] as usize - 'a' as usize;
             let y = chars[3] as usize - 'a' as usize;
@@ -17,7 +17,7 @@ impl Solution {
             }
         }
         
-        for equation in &equations {
+        for equation in equations {
             let chars: Vec<char> = equation.chars().collect();
             let x = chars[0] as usize - 'a' as usize;
             let y = chars[3] as usize - 'a' as usize;

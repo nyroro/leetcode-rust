@@ -9,7 +9,7 @@ impl Solution {
         let chars: Vec<char> = s.chars().collect();
 
         for i in 1..=s.len() {
-            dp[i] = dp[i - 1] + i as i64 - *last_seen.get(&chars[i - 1]).unwrap_or(&0) as i64;
+            dp[i] = dp[i - 1] + i as i64 - last_seen.get(&chars[i - 1]).unwrap_or(&0) as i64;
             last_seen.insert(chars[i - 1], i);
             sum += dp[i];
         }

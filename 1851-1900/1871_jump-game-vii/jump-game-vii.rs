@@ -1,30 +1,22 @@
 
-use std::collections::VecDeque;
-
 impl Solution {
     pub fn can_reach(s: String, min_jump: i32, max_jump: i32) -> bool {
         let s = s.chars().collect::<Vec<char>>();
         let n = s.len();
-        let mut queue = VecDeque::new();
-        queue.push_back(0);
+        let mut dp = vec![false; n];
+        dp[0] = true;
         
         for i in 1..n {
             if s[i] == '0' {
-                while !queue.is_empty() && i - queue[0] > max_jump as usize {
-                    queue.pop_front();
-                }
-                if !queue.is_empty() && i - queue[0] >= min_jump as usize {
-                    queue.push_back(i);
+                for j in (i - max_jump.max(0) as usize)..=(i - min_jump as usize) {
+                    if j < n && dp[j] {
+                        dp[i] = true;
+                        break;
+                    }
                 }
             }
         }
         
-        if let Some(&last) = queue.back() {
-            last == n - 1
-
-        } else {
-            false
-
-        }
+        dp[n - 1]
     }
 }

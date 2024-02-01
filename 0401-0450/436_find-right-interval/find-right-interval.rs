@@ -2,7 +2,7 @@
 impl Solution {
     pub fn find_right_interval(intervals: Vec<Vec<i32>>) -> Vec<i32> {
         let mut result = vec![-1; intervals.len()];
-        let mut map = std::collections::BTreeMap::new();
+        let mut map = std::collections::HashMap::new();
         
         for (i, interval) in intervals.iter().enumerate() {
             map.insert(interval[0], i);

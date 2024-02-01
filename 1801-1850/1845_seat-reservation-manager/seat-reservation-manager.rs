@@ -31,3 +31,27 @@ impl SeatManager {
         self.available_seats.push(Reverse(seat_number));
     }
 }
+
+fn main() {
+    let mut obj = SeatManager::new(5);
+    let ret_1: i32 = obj.reserve();
+    println!("{}", ret_1); // Output: 1
+
+    let ret_2: i32 = obj.reserve();
+    println!("{}", ret_2); // Output: 2
+
+    obj.unreserve(2);
+    let ret_3: i32 = obj.reserve();
+    println!("{}", ret_3); // Output: 2
+
+    let ret_4: i32 = obj.reserve();
+    println!("{}", ret_4); // Output: 3
+
+    let ret_5: i32 = obj.reserve();
+    println!("{}", ret_5); // Output: 4
+
+    let ret_6: i32 = obj.reserve();
+    println!("{}", ret_6); // Output: 5
+
+    obj.unreserve(5);
+}

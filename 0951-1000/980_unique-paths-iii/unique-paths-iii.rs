@@ -37,10 +37,8 @@ impl Solution {
     ) {
         let directions = [(0, 1), (0, -1), (1, 0), (-1, 0)];
 
-        if *cur == *end {
-            if empty_count == -1 {
-                *count += 1;
-            }
+        if *cur == *end && empty_count == 0 {
+            *count += 1;
             return;
         }
 

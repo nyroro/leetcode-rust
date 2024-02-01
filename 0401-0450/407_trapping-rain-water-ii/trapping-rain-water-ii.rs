@@ -1,6 +1,4 @@
 
-use std::cmp::Ordering;
-
 impl Solution {
     pub fn trap_rain_water(height_map: Vec<Vec<i32>>) -> i32 {
         let m = height_map.len();
@@ -29,8 +27,8 @@ impl Solution {
         let directions = vec![(0, 1), (0, -1), (1, 0), (-1, 0)];
         while let Some(cell) = min_heap.pop() {
             for dir in &directions {
-                let ni = cell.row as i32 + dir.0;
-                let nj = cell.col as i32 + dir.1;
+                let ni = cell.row + dir.0;
+                let nj = cell.col + dir.1;
                 if ni >= 0 && ni < m as i32 && nj >= 0 && nj < n as i32 && !visited[ni as usize][nj as usize] {
                     visited[ni as usize][nj as usize] = true;
                     let height = height_map[ni as usize][nj as usize];
@@ -45,7 +43,7 @@ impl Solution {
     }
 }
 
-// 定义一个表示单元格的结构体，并实现Ord trait
+// 定义一个表示单元格的结构体
 
 #[derive(Eq, PartialEq)]
 struct Cell {
@@ -60,14 +58,14 @@ impl Cell {
     }
 }
 
-impl Ord for Cell {
-    fn cmp(&self, other: &Self) -> Ordering {
-        other.height.cmp(&self.height)
-    }
-}
+// 测试代码
 
-impl PartialOrd for Cell {
-    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
-        Some(self.cmp(other))
-    }
+fn main() {
+    let height_map = vec![
+        vec![1, 4, 3, 1, 3, 2],
+        vec![3, 2, 1, 3, 2, 4],
+        vec![2, 3, 3, 2, 3, 1],
+    ];
+    let volume = Solution::trap_rain_water(height_map);
+    println!("Volume of trapped water: {}", volume);
 }

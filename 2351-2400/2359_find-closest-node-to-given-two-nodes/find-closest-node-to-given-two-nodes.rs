@@ -1,22 +1,24 @@
 
-use std::collections::{HashMap, VecDeque};
+use std::collections::HashMap;
 
 impl Solution {
     pub fn closest_meeting_node(edges: Vec<i32>, node1: i32, node2: i32) -> i32 {
         let n = edges.len();
-        let mut graph: HashMap<i32, i32> = HashMap::new();
+        let mut graph: HashMap<i32, Vec<i32>> = HashMap::new();
         
         for i in 0..n {
             if edges[i] != -1 {
-                graph.insert(i as i32, edges[i]);
+                graph.entry(edges[i]).or_insert(Vec::new()).push(i as i32);
             }
         }
         
+        let mut visited: Vec<bool> = vec![false; n];
         let mut dist1: Vec<i32> = vec![-1; n];
         let mut dist2: Vec<i32> = vec![-1; n];
         
-        Self::bfs(node1, &graph, &mut dist1);
-        Self::bfs(node2, &graph, &mut dist2);
+        Self::dfs(node1, &graph, &mut visited, &mut dist1);
+        visited.iter_mut().for_each(|v| *v = false);
+        Self::dfs(node2, &graph, &mut visited, &mut dist2);
         
         let mut min_max_dist = std::i32::MAX;
         let mut result = -1;
@@ -35,16 +37,15 @@ impl Solution {
 
     }
     
-    fn bfs(start: i32, graph: &HashMap<i32, i32>, dist: &mut Vec<i32>) {
-        let mut queue: VecDeque<i32> = VecDeque::new();
-        queue.push_back(start);
-        dist[start as usize] = 0;
+    fn dfs(node: i32, graph: &HashMap<i32, Vec<i32>>, visited: &mut Vec<bool>, dist: &mut Vec<i32>) {
+        visited[node as usize] = true;
+        dist[node as usize] = 0;
         
-        while let Some(node) = queue.pop_front() {
-            if let Some(&neighbor) = graph.get(&node) {
-                if dist[neighbor as usize] == -1 {
-                    dist[neighbor as usize] = dist[node as usize] + 1;
-                    queue.push_back(neighbor);
+        if let Some(neighbors) = graph.get(&node) {
+            for &neighbor in neighbors {
+                if !visited[neighbor as usize] {
+                    Self::dfs(neighbor, graph, visited, dist);
+                    dist[node as usize] = std::cmp::max(dist[node as usize], 1 + dist[neighbor as usize]);
                 }
             }
         }

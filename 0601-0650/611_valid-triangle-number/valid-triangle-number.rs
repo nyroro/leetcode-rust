@@ -23,3 +23,10 @@ impl Solution {
 
     }
 }
+
+fn main() {
+    let nums1 = vec![2, 2, 3, 4];
+    let nums2 = vec![4, 2, 3, 4];
+    println!("Output for nums1: {}", Solution::triangle_number(nums1));
+    println!("Output for nums2: {}", Solution::triangle_number(nums2));
+}

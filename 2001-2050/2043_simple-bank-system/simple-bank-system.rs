@@ -8,7 +8,7 @@ impl Bank {
         Bank { balance }
     }
     
-    fn transfer(&mut self, account1: i32, account2: i32, money: i64) -> bool {
+    fn transfer(&self, account1: i32, account2: i32, money: i64) -> bool {
         let idx1 = account1 as usize - 1;
         let idx2 = account2 as usize - 1;
         if idx1 >= self.balance.len() || idx2 >= self.balance.len() {
@@ -23,7 +23,7 @@ impl Bank {
 
     }
     
-    fn deposit(&mut self, account: i32, money: i64) -> bool {
+    fn deposit(&self, account: i32, money: i64) -> bool {
         let idx = account as usize - 1;
         if idx >= self.balance.len() {
             return false;
@@ -33,7 +33,7 @@ impl Bank {
 
     }
     
-    fn withdraw(&mut self, account: i32, money: i64) -> bool {
+    fn withdraw(&self, account: i32, money: i64) -> bool {
         let idx = account as usize - 1;
         if idx >= self.balance.len() {
             return false;

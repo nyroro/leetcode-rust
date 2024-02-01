@@ -17,17 +17,8 @@ impl Solution {
         }
         
         for w in worker {
-            let mut found = false;
-            for i in (0..=w as usize).rev() {
-                if max_profit_map[i] > 0 {
-                    max_profit += max_profit_map[i];
-                    found = true;
-                    break;
-                }
-            }
-            if !found {
-                max_profit += 0;
-            }
+            max_profit += max_profit_map[w as usize]; // 根据工人的能力找到对应的最大利润并累加
+
         }
         
         max_profit

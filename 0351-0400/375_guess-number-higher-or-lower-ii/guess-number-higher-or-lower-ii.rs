@@ -2,7 +2,7 @@
 impl Solution {
     pub fn get_money_amount(n: i32) -> i32 {
         let n = n as usize;
-        let mut dp = vec![vec![0; n + 2]; n + 2];
+        let mut dp = vec![vec![0; n + 1]; n + 1];
 
         for len in 2..=n {
             for i in 1..=n-len+1 {

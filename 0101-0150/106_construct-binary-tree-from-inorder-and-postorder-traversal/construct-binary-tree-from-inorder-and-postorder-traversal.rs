@@ -19,8 +19,8 @@ impl Solution {
         let left_postorder = &postorder[..left_inorder.len()];
         let right_postorder = &postorder[left_inorder.len()..postorder.len() - 1];
         
-        root.as_ref().unwrap().borrow_mut().left = Solution::build_tree(left_inorder.to_vec(), left_postorder.to_vec());
-        root.as_ref().unwrap().borrow_mut().right = Solution::build_tree(right_inorder.to_vec(), right_postorder.to_vec());
+        root.borrow_mut().left = Solution::build_tree(left_inorder.to_vec(), left_postorder.to_vec());
+        root.borrow_mut().right = Solution::build_tree(right_inorder.to_vec(), right_postorder.to_vec());
         
         root
 

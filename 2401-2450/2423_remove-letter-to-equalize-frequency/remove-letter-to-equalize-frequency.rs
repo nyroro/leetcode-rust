@@ -16,8 +16,7 @@ impl Solution {
         for (ch, freq) in char_freq.iter() {
             let mut temp_freq = char_freq.clone();
             *temp_freq.get_mut(ch).unwrap() -= 1;
-            temp_freq.retain(|_, v| *v > 0);  // Fixed the mutability issue here
-
+            temp_freq.retain(|_, &v| v > 0);
             if temp_freq.values().collect::<Vec<_>>().as_slice().windows(2).all(|w| w[0] == w[1]) {
                 return true;
             }

@@ -1,6 +1,6 @@
 
 impl Solution {
-    pub fn sum_even_after_queries(mut nums: Vec<i32>, queries: Vec<Vec<i32>>) -> Vec<i32> {
+    pub fn sum_even_after_queries(nums: Vec<i32>, queries: Vec<Vec<i32>>) -> Vec<i32> {
         let mut answer = Vec::new();
         let mut sum = nums.iter().filter(|&num| num % 2 == 0).sum();
 

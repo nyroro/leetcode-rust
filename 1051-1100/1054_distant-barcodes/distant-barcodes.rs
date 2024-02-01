@@ -1,5 +1,5 @@
 
-use std::collections::{HashMap, BinaryHeap};
+use std::collections::HashMap;
 
 impl Solution {
     pub fn rearrange_barcodes(barcodes: Vec<i32>) -> Vec<i32> {
@@ -10,12 +10,10 @@ impl Solution {
             *count_map.entry(*barcode).or_insert(0) += 1;
         }
         
-        // 使用最大堆按照出现次数排序
+        // 根据出现次数进行排序
 
-        let mut heap: BinaryHeap<(i32, i32)> = BinaryHeap::new();
-        for (barcode, count) in count_map {
-            heap.push((count, barcode));
-        }
+        let mut sorted_barcodes: Vec<i32> = barcodes.clone();
+        sorted_barcodes.sort_by_key(|&barcode| count_map[&barcode]);
         
         // 创建结果数组
 
@@ -24,14 +22,13 @@ impl Solution {
         // 从结果数组的索引0开始，每隔一个位置插入一个条形码
 
         let mut index = 0;
-        while let Some((count, barcode)) = heap.pop() {
-            for _ in 0..count {
-                result[index] = barcode;
-                index += 2;
-                if index >= barcodes.len() {
-                    index = 1;
-                }
-            }
+        for i in (0..barcodes.len()).step_by(2) {
+            result[i] = sorted_barcodes[index];
+            index += 1;
+        }
+        for i in (1..barcodes.len()).step_by(2) {
+            result[i] = sorted_barcodes[index];
+            index += 1;
         }
         
         result

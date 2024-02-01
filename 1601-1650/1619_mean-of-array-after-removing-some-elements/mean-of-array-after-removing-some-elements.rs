@@ -5,11 +5,10 @@ impl Solution {
         sorted_arr.sort();
 
         let remove_count = (arr.len() as f64 * 0.05) as usize;
-        let (_, middle) = sorted_arr.split_at(remove_count);
-        let (middle, _) = middle.split_at(arr.len() - 2 * remove_count);
+        sorted_arr.drain(remove_count..arr.len() - remove_count);
 
-        let sum: i32 = middle.iter().sum();
-        let mean = sum as f64 / middle.len() as f64;
+        let sum: i32 = sorted_arr.iter().sum();
+        let mean = sum as f64 / sorted_arr.len() as f64;
 
         mean
 

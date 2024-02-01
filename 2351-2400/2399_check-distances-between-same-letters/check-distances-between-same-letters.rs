@@ -8,7 +8,7 @@ impl Solution {
         // 遍历字符串s，记录每个字母的出现位置
 
         for (i, c) in s.chars().enumerate() {
-            let entry = char_indices.entry(c.to_ascii_lowercase()).or_insert(Vec::new());
+            let entry = char_indices.entry(c).or_insert(Vec::new());
             entry.push(i as i32);
         }
         
@@ -20,7 +20,7 @@ impl Solution {
                 return false;
             }
             let dist = (d[1] - d[0]).abs() - 1;
-            let idx = (c.to_ascii_lowercase() as u8 - b'a') as usize;
+            let idx = (c as u8 - b'a') as usize;
             if dist != distance[idx] {
                 return false;
             }

@@ -4,6 +4,26 @@ use std::cell::RefCell;
 use std::collections::HashMap;
 use std::collections::VecDeque;
 
+// Definition for a binary tree node.
+#[derive(Debug, PartialEq, Eq)]
+pub struct TreeNode {
+  pub val: i32,
+  pub left: Option<Rc<RefCell<TreeNode>>>,
+  pub right: Option<Rc<RefCell<TreeNode>>>,
+}
+
+impl TreeNode {
+  #[inline]
+  pub fn new(val: i32) -> Self {
+    TreeNode {
+      val,
+      left: None,
+      right: None
+
+    }
+  }
+}
+
 impl Solution {
     pub fn width_of_binary_tree(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
         let mut max_width = 0;
@@ -20,10 +40,10 @@ impl Solution {
                 max_width = max_width.max(pos - map[&depth] + 1);
                 
                 if let Some(left) = node.as_ref().and_then(|n| n.borrow().left.clone()) {
-                    queue.push_back((Some(left), depth + 1, pos * 2));
+                    queue.push_back((left, depth + 1, pos * 2));
                 }
                 if let Some(right) = node.as_ref().and_then(|n| n.borrow().right.clone()) {
-                    queue.push_back((Some(right), depth + 1, pos * 2 + 1));
+                    queue.push_back((right, depth + 1, pos * 2 + 1));
                 }
             }
         }

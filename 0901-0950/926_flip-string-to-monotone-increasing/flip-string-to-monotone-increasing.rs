@@ -9,11 +9,11 @@ impl Solution {
             flips[i + 1] = flips[i] + (s[i] == '1') as i32;
         }
         
-        let mut min_flips = (n - flips[n] as usize) as i32;
+        let mut min_flips = n - flips[n];
         
         for i in 0..=n {
             let ones_left = flips[i];
-            let zeros_right = (n - i) as i32 - (flips[n] - flips[i]);
+            let zeros_right = n as i32 - i as i32 - (flips[n] - flips[i]);
             min_flips = min_flips.min(ones_left + zeros_right);
         }
         

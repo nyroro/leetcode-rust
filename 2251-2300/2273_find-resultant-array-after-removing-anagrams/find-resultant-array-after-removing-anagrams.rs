@@ -5,8 +5,8 @@ impl Solution {
         let mut prev_anagram = String::new();
         
         for word in words {
-            if !Solution::is_anagram(&prev_anagram, &word) {
-                result.push(word.clone());
+            if !is_anagram(&prev_anagram, &word) {
+                result.push(word);
                 prev_anagram = word;
             }
         }

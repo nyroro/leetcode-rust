@@ -1,6 +1,6 @@
 
 impl Solution {
-    pub fn can_place_flowers(mut flowerbed: Vec<i32>, n: i32) -> bool {
+    pub fn can_place_flowers(flowerbed: Vec<i32>, n: i32) -> bool {
         let mut count = 0;
         let mut i = 0;
         let len = flowerbed.len();

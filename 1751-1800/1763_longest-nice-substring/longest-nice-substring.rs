@@ -6,14 +6,23 @@ impl Solution {
             for j in (i + 1)..s.len() {
                 let sub = &s[i..=j];
                 let mut nice = true;
+                let mut set = std::collections::HashSet::new();
                 for c in sub.chars() {
-                    let lower = c.to_ascii_lowercase();
-                    let upper = c.to_ascii_uppercase();
-                    if sub.matches(lower).count() > 0 && sub.matches(upper).count() > 0 {
-                        continue;
-                    } else {
-                        nice = false;
-                        break;
+                    set.insert(c.to_ascii_lowercase());
+                }
+                for c in sub.chars() {
+                    if !set.contains(&c.to_ascii_lowercase()) {
+                        if c.is_ascii_lowercase() {
+                            if !set.contains(&c.to_ascii_uppercase()) {
+                                nice = false;
+                                break;
+                            }
+                        } else {
+                            if !set.contains(&c.to_ascii_lowercase()) {
+                                nice = false;
+                                break;
+                            }
+                        }
                     }
                 }
                 if nice && sub.len() > result.len() {

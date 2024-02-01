@@ -14,7 +14,7 @@ impl Solution {
                 }
                 let mut prefix_sum = 0;
                 count.entry(0).and_modify(|x| *x += 1).or_insert(1);
-                for sum in &row_sum {
+                for sum in row_sum {
                     prefix_sum += sum;
                     if let Some(&c) = count.get(&(prefix_sum - target)) {
                         result += c;

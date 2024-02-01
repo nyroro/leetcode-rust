@@ -1,6 +1,6 @@
 
 impl Solution {
-    pub fn min_swaps_couples(mut row: Vec<i32>) -> i32 {
+    pub fn min_swaps_couples(row: Vec<i32>) -> i32 {
         let mut pos_map = std::collections::HashMap::new();
         let mut swaps = 0;
         

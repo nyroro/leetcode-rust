@@ -4,7 +4,7 @@ use std::cell::RefCell;
 
 impl Solution {
     pub fn recover_from_preorder(traversal: String) -> Option<Rc<RefCell<TreeNode>>> {
-        let mut stack: Vec<(i32, Rc<RefCell<TreeNode>>)> = Vec::new();
+        let mut stack: Vec<(i32, i32, i32)> = Vec::new();
         let mut i = 0;
         let n = traversal.len() as i32;
         
@@ -25,8 +25,15 @@ impl Solution {
                 stack.pop();
             }
             
+            let parent = if stack.is_empty() {
+                None
+
+            } else {
+                Some(Rc::new(RefCell::new(stack.last().unwrap().2)))
+            };
+            
             let node = Rc::new(RefCell::new(TreeNode::new(value)));
-            if let Some((_, parent)) = stack.last() {
+            if let Some(parent) = &parent {
                 if parent.borrow().left.is_none() {
                     parent.borrow_mut().left = Some(node.clone());
                 } else {
@@ -34,9 +41,9 @@ impl Solution {
                 }
             }
             
-            stack.push((level, node));
+            stack.push((level, value, node));
         }
         
-        stack.first().map(|x| x.1.clone())
+        stack.first().map(|x| x.2.clone())
     }
 }

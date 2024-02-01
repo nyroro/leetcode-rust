@@ -20,12 +20,7 @@ impl Solution {
             max_len = max_len.max(right - left);
         }
 
-        if max_len == nums.len() {
-            (max_len - 1) as i32
+        (max_len - 1) as i32
 
-        } else {
-            max_len as i32
-
-        }
     }
 }

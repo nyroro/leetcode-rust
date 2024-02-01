@@ -1,6 +1,8 @@
 
+
+
 impl Solution {
-    fn max_jumps(arr: Vec<i32>, d: i32) -> i32 {
+    pub fn max_jumps(arr: Vec<i32>, d: i32) -> i32 {
         let n = arr.len();
         let mut dp = vec![0; n];
 

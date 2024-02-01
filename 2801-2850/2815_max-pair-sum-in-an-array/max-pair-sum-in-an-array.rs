@@ -2,23 +2,35 @@
 impl Solution {
     pub fn max_sum(nums: Vec<i32>) -> i32 {
         let mut max_sum = -1;
+        let mut max_digit = -1;
         
         for i in 0..nums.len() {
-            let num1 = nums[i];
-            let digit1 = num1.to_string().chars().max().unwrap().to_digit(10).unwrap();
+            let mut num = nums[i];
+            let mut digit = -1;
             
-            for j in (i + 1)..nums.len() {
-                let num2 = nums[j];
-                let digit2 = num2.to_string().chars().max().unwrap().to_digit(10).unwrap();
+            while num > 0 {
+                let curr_digit = num % 10;
+                digit = digit.max(curr_digit);
+                num /= 10;
+            }
+            
+            for j in 0..i {
+                let other_num = nums[j];
+                let mut other_digit = -1;
                 
-                if digit1 == digit2 {
-                    max_sum = max_sum.max(num1 + num2);
+                let mut temp = other_num;
+                while temp > 0 {
+                    let curr_digit = temp % 10;
+                    other_digit = other_digit.max(curr_digit);
+                    temp /= 10;
+                }
+                
+                if digit == other_digit {
+                    max_sum = max_sum.max(num + other_num);
                 }
             }
-        }
-        
-        if max_sum == -1 {
-            return -1;
+            
+            max_digit = max_digit.max(digit);
         }
         
         max_sum

@@ -15,7 +15,7 @@ impl Solution {
         
         for (num, &freq) in &count {
             if freq == nums.len() {
-                result.push(*num);
+                result.push(num);
             }
         }
         

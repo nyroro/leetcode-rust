@@ -9,10 +9,6 @@ impl Solution {
         
         let width = area / length;
         
-        if length < width {
-            vec![width, length]
-        } else {
-            vec![length, width]
-        }
+        vec![length, width]
     }
 }

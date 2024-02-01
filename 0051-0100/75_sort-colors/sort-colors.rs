@@ -17,9 +17,6 @@ impl Solution {
                 }
                 2 => {
                     nums.swap(mid, high);
-                    if high == 0 {
-                        break;
-                    }
                     high -= 1;
                 }
                 _ => {}

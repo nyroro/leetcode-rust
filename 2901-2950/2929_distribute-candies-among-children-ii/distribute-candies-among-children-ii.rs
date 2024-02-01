@@ -1,22 +1,17 @@
 
 impl Solution {
     pub fn distribute_candies(n: i32, limit: i32) -> i64 {
-        if n > 3 * limit {
-            return 0;
+        let mut count = 0;
+        for i in 0..=limit {
+            for j in 0..=limit {
+                for k in 0..=limit {
+                    if i + j + k == n && i <= limit && j <= limit && k <= limit {
+                        count += 1;
+                    }
+                }
+            }
         }
-        let mut ans = Solution::comb2(n + 2);
-        if n > limit {
-            ans -= 3 * Solution::comb2(n - limit + 1);
-        }
-        if n - 2 >= 2 * limit {
-            ans += 3 * Solution::comb2(n - 2 * limit);
-        }
-        ans
-
-    }
-
-    fn comb2(n: i32) -> i64 {
-        (n as i64 * (n as i64 - 1)) / 2
+        count
 
     }
 }

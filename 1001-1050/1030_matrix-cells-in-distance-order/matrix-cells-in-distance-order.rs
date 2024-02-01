@@ -10,7 +10,7 @@ impl Solution {
             }
         }
         
-        result.sort_by_key(|coord| coord[2].clone());
+        result.sort_by_key(|&coord| coord[2]);
         
         result.iter().map(|coord| vec![coord[0], coord[1]]).collect()
     }

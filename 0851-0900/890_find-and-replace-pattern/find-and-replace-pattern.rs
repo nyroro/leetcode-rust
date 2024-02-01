@@ -1,7 +1,4 @@
 
-use std::collections::HashMap;
-use std::collections::HashSet;
-
 impl Solution {
     pub fn find_and_replace_pattern(words: Vec<String>, pattern: String) -> Vec<String> {
         let mut result = Vec::new();

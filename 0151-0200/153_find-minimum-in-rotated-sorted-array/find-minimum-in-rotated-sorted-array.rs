@@ -6,8 +6,9 @@ impl Solution {
         
         while left < right {
             let mid = left + (right - left) / 2;
+            let mid_val = nums[mid];
             
-            if nums[mid] > nums[right] {
+            if mid_val >= nums[0] {
                 left = mid + 1;
             } else {
                 right = mid;

@@ -21,12 +21,12 @@ impl Solution {
         let mut k = k;
         let (mut i, mut j) = (0, 0);
         while i < row && j < col {
-            if j + 1 <= col && dp[i][j + 1] >= k {
+            if dp[i + 1][j] >= k {
                 result.push('H');
                 j += 1;
             } else {
                 result.push('V');
-                k -= if j + 1 <= col { dp[i][j + 1] } else { 0 };
+                k -= dp[i + 1][j];
                 i += 1;
             }
         }

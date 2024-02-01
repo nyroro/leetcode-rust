@@ -3,39 +3,41 @@ use std::collections::HashMap;
 
 impl Solution {
     pub fn minimum_operations(nums: Vec<i32>) -> i32 {
-        if nums.len() == 1 {
-            return 0;
+        let mut even_counts = HashMap::new();
+        let mut odd_counts = HashMap::new();
+
+        for (i, &num) in nums.iter().enumerate() {
+            if i % 2 == 0 {
+                *even_counts.entry(num).or_insert(0) += 1;
+            } else {
+                *odd_counts.entry(num).or_insert(0) += 1;
+            }
         }
 
-        let mut t1 = HashMap::new();
-        let mut t2 = HashMap::new();
+        let mut even_sorted: Vec<_> = even_counts.into_iter().collect();
+        even_sorted.sort_by_key(|&(_, count)| count);
 
-        for i in (0..nums.len()).step_by(2) {
-            *t1.entry(nums[i]).or_insert(0) += 1;
+        let mut odd_sorted: Vec<_> = odd_counts.into_iter().collect();
+        odd_sorted.sort_by_key(|&(_, count)| count);
+
+        let (max_even_count, max_even_num) = even_sorted.last().unwrap_or(&(0, &0));
+        let (max_odd_count, max_odd_num) = odd_sorted.last().unwrap_or(&(0, &0);
+
+        if max_even_num != max_odd_num {
+            return (nums.len() as i32) - max_even_count - max_odd_count;
         }
 
-        for i in (1..nums.len()).step_by(2) {
-            *t2.entry(nums[i]).or_insert(0) += 1;
-        }
+        let max_even_count = max_even_count.unwrap_or(&0);
+        let max_odd_count = max_odd_count.unwrap_or(&0);
 
-        let mut a1: Vec<_> = t1.into_iter().collect();
-        a1.sort_by_key(|&(_, v)| v);
-
-        let mut a2: Vec<_> = t2.into_iter().collect();
-        a2.sort_by_key(|&(_, v)| v);
-
-        if a1.last().unwrap().0 != a2.last().unwrap().0 {
-            return nums.len() as i32 - a1.last().unwrap().1 - a2.last().unwrap().1;
-        }
-
-        if a1.len() == 1 && a2.len() == 1 {
-            return nums.len() as i32 - i32::max(a1.last().unwrap().1, a2.last().unwrap().1);
-        } else if a1.len() == 1 {
-            return nums.len() as i32 - i32::max(a1.last().unwrap().1 + a2[a2.len() - 2].1, a2.last().unwrap().1);
-        } else if a2.len() == 1 {
-            return nums.len() as i32 - i32::max(a1.last().unwrap().1, a2.last().unwrap().1 + a1[a1.len() - 2].1);
+        if even_sorted.len() == 1 && odd_sorted.len() == 1 {
+            return (nums.len() as i32) - max(max_even_count, max_odd_count);
+        } else if even_sorted.len() == 1 {
+            return (nums.len() as i32) - max(max_even_count + odd_sorted[odd_sorted.len() - 2].1, max_odd_count);
+        } else if odd_sorted.len() == 1 {
+            return (nums.len() as i32) - max(max_even_count, max_odd_count + even_sorted[even_sorted.len() - 2].1);
         } else {
-            return nums.len() as i32 - i32::max(a1.last().unwrap().1 + a2[a2.len() - 2].1, a2.last().unwrap().1 + a1[a1.len() - 2].1);
+            return (nums.len() as i32) - max(max_even_count + odd_sorted[odd_sorted.len() - 2].1, max_odd_count + even_sorted[even_sorted.len() - 2].1);
         }
     }
 }

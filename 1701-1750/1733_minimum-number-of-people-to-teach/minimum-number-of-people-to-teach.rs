@@ -14,7 +14,7 @@ impl Solution {
         }
 
         let mut language_count = HashMap::new();
-        for i in &incompatible {
+        for i in incompatible {
             for lang in &languages[(i - 1) as usize] {
                 *language_count.entry(lang).or_insert(0) += 1;
             }

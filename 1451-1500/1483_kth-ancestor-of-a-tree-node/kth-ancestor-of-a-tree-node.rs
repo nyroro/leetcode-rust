@@ -35,3 +35,13 @@ impl TreeAncestor {
 
     }
 }
+
+fn main() {
+    let tree_ancestor = TreeAncestor::new(7, vec![-1, 0, 0, 1, 1, 2, 2]);
+    println!("{}", tree_ancestor.get_kth_ancestor(3, 1)); // returns 1 which is the parent of 3
+
+    println!("{}", tree_ancestor.get_kth_ancestor(5, 2)); // returns 0 which is the grandparent of 5
+
+    println!("{}", tree_ancestor.get_kth_ancestor(6, 3)); // returns -1 because there is no such ancestor
+
+}

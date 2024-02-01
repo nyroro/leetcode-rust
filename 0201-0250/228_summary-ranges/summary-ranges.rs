@@ -1,10 +1,6 @@
 
 impl Solution {
     pub fn summary_ranges(nums: Vec<i32>) -> Vec<String> {
-        if nums.is_empty() {
-            return Vec::new();
-        }
-        
         let mut result: Vec<String> = Vec::new();
         let mut start = nums[0];
         let mut end = nums[0];

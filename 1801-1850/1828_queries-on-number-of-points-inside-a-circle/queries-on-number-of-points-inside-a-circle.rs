@@ -16,7 +16,7 @@ impl Solution {
                 
                 let distance = ((x_i - x).pow(2) + (y_i - y).pow(2)) as f64;
                 
-                if distance <= (r.pow(2) as f64) {
+                if distance <= r.pow(2) {
                     count += 1;
                 }
             }

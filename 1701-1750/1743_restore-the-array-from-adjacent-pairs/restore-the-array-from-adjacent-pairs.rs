@@ -19,7 +19,7 @@ impl Solution {
         
         // 找到起始元素
 
-        let start = *adjacent_map.iter().find(|(_, v)| v.len() == 1).unwrap().0;
+        let start = adjacent_map.iter().find(|(_, v)| v.len() == 1).unwrap().0;
         
         // 构建原始数组
 
@@ -32,12 +32,12 @@ impl Solution {
     fn build_array(num: i32, nums: &mut Vec<i32>, adjacent_map: &mut HashMap<i32, Vec<i32>>) {
         nums.push(num);
         
-        let mut adjacent_nums = std::mem::replace(adjacent_map.get_mut(&num).unwrap(), Vec::new());
-        
-        while !adjacent_nums.is_empty() {
-            let next_num = adjacent_nums.pop().unwrap();
-            adjacent_map.get_mut(&next_num).unwrap().retain(|&x| x != num);
-            Self::build_array(next_num, nums, adjacent_map);
+        if let Some(adjacent_nums) = adjacent_map.get_mut(&num) {
+            while !adjacent_nums.is_empty() {
+                let next_num = adjacent_nums.pop().unwrap();
+                adjacent_map.get_mut(&next_num).unwrap().retain(|&x| x != num);
+                Self::build_array(next_num, nums, adjacent_map);
+            }
         }
     }
 }

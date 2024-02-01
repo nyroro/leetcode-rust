@@ -19,7 +19,6 @@ impl Solution {
             }
         }
         
-        max_length.max(end - start + 1) as i32
-
+        max_length.max(end - start + 1)
     }
 }

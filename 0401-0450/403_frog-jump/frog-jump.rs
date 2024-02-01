@@ -1,20 +1,18 @@
 
 use std::collections::HashMap;
 
-
-
 impl Solution {
     pub fn can_cross(stones: Vec<i32>) -> bool {
-        let mut dp: HashMap<(usize, i32), bool> = HashMap::new();
+        let mut dp: HashMap<i32, bool> = HashMap::new();
         Solution::can_cross_recursive(&stones, 0, 0, &mut dp)
     }
     
-    fn can_cross_recursive(stones: &Vec<i32>, index: usize, jump: i32, dp: &mut HashMap<(usize, i32), bool>) -> bool {
+    fn can_cross_recursive(stones: &Vec<i32>, index: usize, jump: i32, dp: &mut HashMap<i32, bool>) -> bool {
         if index == stones.len() - 1 {
             return true;
         }
         
-        let key = (index, jump);
+        let key = (index as i32) << 32 | jump;
         if let Some(&result) = dp.get(&key) {
             return result;
         }

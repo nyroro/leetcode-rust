@@ -3,7 +3,7 @@ impl Solution {
     pub fn min_operations(logs: Vec<String>) -> i32 {
         let mut stack: Vec<&str> = Vec::new();
         
-        for log in &logs {
+        for log in logs {
             match log.as_str() {
                 "../" => {
                     if !stack.is_empty() {

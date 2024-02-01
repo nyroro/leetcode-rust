@@ -10,21 +10,19 @@ impl Solution {
             }
         });
         
-        let mut dp = Vec::new();
+        let mut dp = vec![1; envelopes.len()];
+        let mut max_count = 1;
         
-        for envelope in envelopes {
-            let idx = match dp.binary_search(&envelope[1]) {
-                Ok(idx) => idx,
-                Err(idx) => idx,
-            };
-            if idx == dp.len() {
-                dp.push(envelope[1]);
-            } else {
-                dp[idx] = envelope[1];
+        for i in 1..envelopes.len() {
+            for j in 0..i {
+                if envelopes[i][1] > envelopes[j][1] {
+                    dp[i] = dp[i].max(dp[j] + 1);
+                }
             }
+            max_count = max_count.max(dp[i]);
         }
         
-        dp.len() as i32
+        max_count
 
     }
 }

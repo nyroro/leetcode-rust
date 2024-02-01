@@ -8,8 +8,7 @@ impl Solution {
             return -1;
         }
 
-        let mut swaps: i32 = 0;  // Fix the type of swaps to i32
-
+        let mut swaps = 0;
         let mut zeros_count = vec![0; n];
 
         // Calculate the count of trailing zeros for each row
@@ -36,8 +35,7 @@ impl Solution {
                     for k in (i..j).rev() {
                         zeros_count.swap(k, k + 1);
                     }
-                    swaps += (j - i) as i32;  // Convert the result of (j - i) to i32
-
+                    swaps += j - i;
                     break;
                 }
             }

@@ -1,5 +1,5 @@
+
 use std::collections::BinaryHeap;
-use std::cmp::Ordering;
 use std::cmp::Reverse;
 
 impl Solution {
@@ -7,23 +7,26 @@ impl Solution {
         let mut result = Vec::new();
         let mut min_heap = BinaryHeap::new();
 
-        if nums1.is_empty() || nums2.is_empty() {
-            return result;
+        for &num1 in nums1.iter() {
+            for &num2 in nums2.iter() {
+                min_heap.push(Reverse(num1 + num2));
+                if min_heap.len() > k as usize {
+                    min_heap.pop();
+                }
+            }
         }
 
-        for i in 0..nums1.len() {
-            min_heap.push(Reverse((nums1[i] + nums2[0], i, 0)));
-        }
-
-        while result.len() < k as usize && !min_heap.is_empty() {
-            let Reverse((sum, i, j)) = min_heap.pop().unwrap();
-            result.push(vec![nums1[i], nums2[j]]);
-
-            if j + 1 < nums2.len() {
-                min_heap.push(Reverse((nums1[i] + nums2[j + 1], i, j + 1)));
+        while let Some(Reverse(sum)) = min_heap.pop() {
+            for &num1 in nums1.iter() {
+                for &num2 in nums2.iter() {
+                    if num1 + num2 == sum {
+                        result.push(vec![num1, num2]);
+                    }
+                }
             }
         }
 
         result
+
     }
 }

@@ -21,7 +21,7 @@ impl Solution {
 
             for (c, count) in char_count.iter_mut() {
                 if let Some(&word_count) = word_count.get(c) {
-                    *count = (*count).min(word_count);
+                    *count = count.min(word_count);
                 } else {
                     *count = 0;
                 }

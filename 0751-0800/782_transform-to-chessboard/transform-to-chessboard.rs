@@ -18,29 +18,29 @@ impl Solution {
         for i in 0..n {
             row_sum += board[0][i];
             col_sum += board[i][0];
-            row_swap += if board[i][0] == i as i32 % 2 { 1 } else { 0 };
-            col_swap += if board[0][i] == i as i32 % 2 { 1 } else { 0 };
+            row_swap += board[i][0] == i % 2;
+            col_swap += board[0][i] == i % 2;
         }
 
-        if row_sum != n as i32 / 2 && row_sum != (n as i32 + 1) / 2 {
+        if row_sum != n / 2 && row_sum != (n + 1) / 2 {
             return -1;
         }
-        if col_sum != n as i32 / 2 && col_sum != (n as i32 + 1) / 2 {
+        if col_sum != n / 2 && col_sum != (n + 1) / 2 {
             return -1;
         }
 
         if n % 2 == 1 {
             if row_swap % 2 == 1 {
-                row_swap = n as i32 - row_swap;
+                row_swap = n - row_swap;
             }
             if col_swap % 2 == 1 {
-                col_swap = n as i32 - col_swap;
+                col_swap = n - col_swap;
             }
         } else {
-            row_swap = std::cmp::min(row_swap, n as i32 - row_swap);
-            col_swap = std::cmp::min(col_swap, n as i32 - col_swap);
+            row_swap = std::cmp::min(row_swap, n - row_swap);
+            col_swap = std::cmp::min(col_swap, n - col_swap);
         }
 
-        return ((row_swap + col_swap) / 2) as i32;
+        return (row_swap + col_swap) / 2;
     }
 }

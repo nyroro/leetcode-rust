@@ -28,7 +28,7 @@ impl Solution {
                         let diff = other_chars[l + 1] as i32 - other_chars[l] as i32;
                         other_difference.push(diff);
                     }
-                    if difference == other_difference {
+                    if difference != other_difference {
                         is_odd = false;
                         break;
                     }

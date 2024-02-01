@@ -14,7 +14,7 @@ impl Solution {
     pub fn find_in_mountain_array(target: i32, mountain_arr: &MountainArray) -> i32 {
         let mut left = 0;
         let mut right = mountain_arr.length() - 1;
-
+        
         // Find the peak index
 
         while left < right {
@@ -25,41 +25,39 @@ impl Solution {
                 right = mid;
             }
         }
-
+        
         let peak = left;
-
+        
         // Search in the ascending part
 
         left = 0;
         right = peak;
-        while left <= right {
+        while left < right {
             let mid = (left + right) / 2;
-            let num = mountain_arr.get(mid);
-            if num == target {
+            if mountain_arr.get(mid) == target {
                 return mid;
-            } else if num < target {
+            } else if mountain_arr.get(mid) < target {
                 left = mid + 1;
             } else {
-                right = mid - 1;
+                right = mid;
             }
         }
-
+        
         // Search in the descending part
 
         left = peak;
         right = mountain_arr.length() - 1;
-        while left <= right {
+        while left < right {
             let mid = (left + right) / 2;
-            let num = mountain_arr.get(mid);
-            if num == target {
+            if mountain_arr.get(mid) == target {
                 return mid;
-            } else if num > target {
+            } else if mountain_arr.get(mid) > target {
                 left = mid + 1;
             } else {
-                right = mid - 1;
+                right = mid;
             }
         }
-
+        
         return -1;
     }
 }

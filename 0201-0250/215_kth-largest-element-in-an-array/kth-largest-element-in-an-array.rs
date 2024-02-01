@@ -6,13 +6,13 @@ impl Solution {
         let mut heap = BinaryHeap::new();
         
         for num in nums {
-            heap.push(-num);
+            heap.push(num);
             
             if heap.len() > k as usize {
                 heap.pop();
             }
         }
         
-        -heap.pop().unwrap()
+        heap.pop().unwrap()
     }
 }

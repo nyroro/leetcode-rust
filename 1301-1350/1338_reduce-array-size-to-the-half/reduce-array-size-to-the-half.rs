@@ -4,7 +4,7 @@ use std::collections::HashMap;
 impl Solution {
     pub fn min_set_size(arr: Vec<i32>) -> i32 {
         let mut count_map = HashMap::new();
-        for &num in &arr {
+        for num in arr {
             *count_map.entry(num).or_insert(0) += 1;
         }
         
@@ -16,7 +16,7 @@ impl Solution {
         for count in counts {
             removed += count;
             set_size += 1;
-            if removed >= (arr.len() / 2) as i32 {
+            if removed >= arr.len() / 2 {
                 break;
             }
         }

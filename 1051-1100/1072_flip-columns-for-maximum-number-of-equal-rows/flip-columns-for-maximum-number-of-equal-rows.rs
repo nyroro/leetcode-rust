@@ -20,10 +20,8 @@ impl Solution {
 
             let flip_count = count_map.entry(flip_row_str.clone()).or_insert(0);
             *flip_count += 1;
-        }
 
-        for count in count_map.values() {
-            max_count = max_count.max(*count);
+            max_count = max_count.max(*count).max(*flip_count);
         }
 
         max_count

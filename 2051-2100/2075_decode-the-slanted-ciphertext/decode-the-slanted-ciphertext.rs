@@ -26,6 +26,7 @@ impl Solution {
             }
         }
 
-        original_text.trim_end().to_string()
+        original_text
+
     }
 }

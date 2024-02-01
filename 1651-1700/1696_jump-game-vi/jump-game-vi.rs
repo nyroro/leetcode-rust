@@ -1,8 +1,6 @@
 
 use std::collections::VecDeque;
 
-
-
 impl Solution {
     pub fn max_result(nums: Vec<i32>, k: i32) -> i32 {
         let n = nums.len();
@@ -19,8 +17,7 @@ impl Solution {
                     break;
                 }
             }
-            dp[i] = nums[i] + dp[*deque.front().unwrap()]; // Fixed the indexing issue here
-
+            dp[i] = nums[i] + dp[deque.front().unwrap()];
             while let Some(&j) = deque.back() {
                 if dp[i] >= dp[j] {
                     deque.pop_back();

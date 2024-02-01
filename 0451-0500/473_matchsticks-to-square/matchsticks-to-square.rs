@@ -6,29 +6,24 @@ impl Solution {
             return false;
         }
         let target: i32 = total_length / 4;
-        let n: usize = matchsticks.len();
-        let mut used: Vec<bool> = vec![false; n];
-        return Self::backtrack(&matchsticks, &mut used, 0, 0, 0, target);
+        let mut sides: [i32; 4] = [0; 4];
+        return Self::can_make_square(&matchsticks, &mut sides, 0, target);
     }
-    
-    fn backtrack(matchsticks: &Vec<i32>, used: &mut Vec<bool>, sides: i32, current: i32, index: usize, target: i32) -> bool {
-        if sides == 4 {
-            return true;
+
+    fn can_make_square(matchsticks: &Vec<i32>, sides: &mut [i32; 4], index: usize, target: i32) -> bool {
+        if index == matchsticks.len() {
+            return sides[0] == sides[1] && sides[1] == sides[2] && sides[2] == sides[3];
         }
-        if current == target {
-            return Self::backtrack(matchsticks, used, sides + 1, 0, 0, target);
-        }
-        for i in index..matchsticks.len() {
-            if used[i] || current + matchsticks[i] > target {
+        for i in 0..4 {
+            if sides[i] + matchsticks[index] > target {
                 continue;
             }
-            used[i] = true;
-            if Self::backtrack(matchsticks, used, sides, current + matchsticks[i], i + 1, target) {
+            sides[i] += matchsticks[index];
+            if Self::can_make_square(matchsticks, sides, index + 1, target) {
                 return true;
             }
-            used[i] = false;
+            sides[i] -= matchsticks[index];
         }
-        false
-
+        return false;
     }
 }

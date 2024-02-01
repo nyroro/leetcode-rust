@@ -9,7 +9,7 @@ impl Solution {
         let mut right = price.last().unwrap() - price.first().unwrap(); // 初始化左右指针
 
 
-        while left <= right {
+        while left < right {
             let mid = (right - left) / 2 + left; // 使用二分查找找到最大的差值
 
 
@@ -17,11 +17,11 @@ impl Solution {
 
                 left = mid + 1;
             } else {
-                right = mid - 1;
+                right = mid;
             }
         }
 
-        right // 返回最大的差值
+        left - 1 // 返回最大的差值
 
     }
 

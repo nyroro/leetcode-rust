@@ -16,20 +16,18 @@ impl Solution {
 
         // Iterate through all possible pairs of distinct letters
 
-        for i in 'a'..='z' {
-            for j in 'a'..='z' {
+        for i in b'a'..=b'z' {
+            for j in b'a'..=b'z' {
                 if i == j {
                     continue;
                 }
-                let a = i;
-                let b = j;
+                let a = char::from(i);
+                let b = char::from(j);
 
-                let s1 = table.get(&a).unwrap_or(&HashSet::new()).clone(); // Create a separate binding for s1
+                let s1 = table.get(&a).unwrap_or(&HashSet::new());
+                let s2 = table.get(&b).unwrap_or(&HashSet::new());
 
-                let s2 = table.get(&b).unwrap_or(&HashSet::new()).clone(); // Create a separate binding for s2
-
-
-                let common: HashSet<_> = s1.intersection(&s2).cloned().collect();
+                let common: HashSet<_> = s1.intersection(s2).cloned().collect();
                 let v1: HashSet<_> = s1.difference(&common).cloned().collect();
                 let v2: HashSet<_> = s2.difference(&common).cloned().collect();
 

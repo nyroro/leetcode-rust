@@ -11,7 +11,7 @@ impl Solution {
         // Iterate through the words and compare adjacent pairs
 
         for i in 0..words.len() - 1 {
-            if !Self::is_sorted_in_alien_language(&words[i], &words[i + 1], &map) {
+            if !is_sorted_in_alien_language(&words[i], &words[i + 1], &map) {
                 return false;
             }
         }

@@ -8,29 +8,24 @@ impl Solution {
             *count_map.entry(card).or_insert(0) += 1;
         }
         
-        let mut sorted_hand = hand.clone();
-        sorted_hand.sort();
-        
-        for &card in &sorted_hand {
-            if let Some(count) = count_map.get_mut(&card) {
-                if *count == 0 {
-                    continue;
-                }
-                *count -= 1;
-                for i in 1..group_size {
-                    if let Some(next_count) = count_map.get_mut(&(card + i)) {
-                        if *next_count == 0 {
-                            return false;
-                        }
-                        *next_count -= 1;
-                    } else {
+        hand.iter().fold(true, |result, _| {
+            if !result {
+                return false;
+            }
+            let mut current = *hand.iter().min().unwrap();
+            for _ in 0..group_size {
+                if let Some(count) = count_map.get_mut(&current) {
+                    if *count == 0 {
                         return false;
                     }
+                    *count -= 1;
+                } else {
+                    return false;
                 }
+                current += 1;
             }
-        }
-        
-        true
+            true
 
+        })
     }
 }

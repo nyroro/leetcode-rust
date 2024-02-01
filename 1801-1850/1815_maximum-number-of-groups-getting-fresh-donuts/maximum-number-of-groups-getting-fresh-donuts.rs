@@ -17,7 +17,7 @@ impl Solution {
             }
         }
         
-        ans += Solution::dfs(state, 0, &mut f, size);
+        ans += dfs(state, 0, &mut f, size);
         ans
 
     }
@@ -30,7 +30,7 @@ impl Solution {
         let mut res = 0;
         for i in 1..size {
             if (state >> (i * 5)) & 31 != 0 {
-                let t = Solution::dfs(state - (1 << (i * 5)), (mod_val + i as i32) % size as i32, f, size);
+                let t = dfs(state - (1 << (i * 5)), (mod_val + i as i32) % size as i32, f, size);
                 res = res.max(t + if mod_val == 0 { 1 } else { 0 });
             }
         }

@@ -18,7 +18,7 @@ impl StreamChecker {
         // 创建 Trie 树
 
         let mut root = TrieNode {
-            children: Default::default(),
+            children: [None; 26],
             is_word: false,
         };
         for word in words {
@@ -27,7 +27,7 @@ impl StreamChecker {
                 let index = (ch as u8 - b'a') as usize;
                 if node.children[index].is_none() {
                     node.children[index] = Some(Box::new(TrieNode {
-                        children: Default::default(),
+                        children: [None; 26],
                         is_word: false,
                     }));
                 }

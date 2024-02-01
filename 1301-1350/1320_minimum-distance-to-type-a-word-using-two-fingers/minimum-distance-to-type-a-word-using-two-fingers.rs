@@ -30,3 +30,10 @@ impl Solution {
         return (from_x as i32 - to_x as i32).abs() + (from_y as i32 - to_y as i32).abs();
     }
 }
+
+fn main() {
+    let word1 = "CAKE".to_string();
+    let word2 = "HAPPY".to_string();
+    println!("Minimum distance for word1: {}", Solution::minimum_distance(word1));
+    println!("Minimum distance for word2: {}", Solution::minimum_distance(word2));
+}

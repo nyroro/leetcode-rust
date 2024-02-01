@@ -29,16 +29,21 @@ impl Solution {
         let mut merged = Vec::with_capacity(end - start);
         let mut left = start;
         let mut right = mid;
-        let mut right_count = 0;
 
-        while left < mid {
-            while right < end && nums[left].1 > nums[right].1 {
-                right_count += 1;
+        while left < mid && right < end {
+            if nums[left].1 > nums[right].1 {
+                merged.push(nums[left]);
+                indices[nums[left].0] += end - right;
+                left += 1;
+            } else {
                 merged.push(nums[right]);
                 right += 1;
             }
-            result[nums[left].0] += right_count;
+        }
+
+        while left < mid {
             merged.push(nums[left]);
+            indices[nums[left].0] += end - right;
             left += 1;
         }
 
@@ -47,6 +52,8 @@ impl Solution {
             right += 1;
         }
 
-        nums[start..end].clone_from_slice(&merged);
+        for i in start..end {
+            nums[i] = merged[i - start];
+        }
     }
 }

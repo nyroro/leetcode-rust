@@ -53,10 +53,10 @@ impl Solution {
 
             let t = right;
 
-            if s < plates.len() && t < plates.len() && plates[t] > t && s < t {
-                ret.push(sums[plates[t]] - sums[plates[s]]);
+            if plates[t] > t as i32 && s < t {
+                ret.push(sums[plates[t] as usize] - sums[plates[s] as usize]);
             } else {
-                ret.push(0);
+                ret.push(sums[plates[t] as usize] - sums[plates[s] as usize] + if s > 0 { sums[plates[s - 1] as usize] } else { 0 });
             }
         }
 

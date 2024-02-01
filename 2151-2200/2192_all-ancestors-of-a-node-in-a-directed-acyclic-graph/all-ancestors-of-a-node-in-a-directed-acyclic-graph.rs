@@ -26,9 +26,8 @@ impl Solution {
             qi += 1;
             if let Some(t) = table.get(&now) {
                 for &node in t {
-                    let ancestors = ret[now as usize].iter().cloned().collect::<HashSet<i32>>();
                     ret[node as usize].insert(now);
-                    ret[node as usize].extend(ancestors);
+                    ret[node as usize].extend(ret[now as usize].iter().cloned());
                     degrees[node as usize] -= 1;
                     if degrees[node as usize] <= 0 {
                         q.push(node);

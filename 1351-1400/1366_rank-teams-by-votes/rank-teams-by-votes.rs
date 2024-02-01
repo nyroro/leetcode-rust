@@ -13,8 +13,8 @@ impl Solution {
             for (i, team) in vote.chars().enumerate() {
                 // 将团队添加到HashMap中，并增加对应的得票数
 
-                let count = team_votes.entry(team).or_insert(vec![0; 26]);
-                count[i] += 1;
+                let count = team_votes.entry(team).or_insert(0);
+                *count += 26i32.pow((vote.len() - i - 1) as u32);
             }
         }
         
@@ -24,12 +24,11 @@ impl Solution {
         teams.sort_by(|a, b| {
             let count_a = team_votes.get(a).unwrap();
             let count_b = team_votes.get(b).unwrap();
-            for i in 0..26 {
-                if count_a[i] != count_b[i] {
-                    return count_b[i].cmp(&count_a[i]);
-                }
+            if count_a != count_b {
+                count_b.cmp(count_a)
+            } else {
+                a.cmp(b)
             }
-            a.cmp(b)
         });
         
         // 将排序后的团队转换为字符串并返回

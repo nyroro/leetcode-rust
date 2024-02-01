@@ -30,3 +30,15 @@ impl Solution {
         insertions + (stack.len() as i32 * 2)
     }
 }
+
+fn main() {
+    let s1 = "(()))".to_string();
+    let s2 = "())".to_string();
+    let s3 = "))())(".to_string();
+    println!("{}", Solution::min_insertions(s1)); // Output: 1
+
+    println!("{}", Solution::min_insertions(s2)); // Output: 0
+
+    println!("{}", Solution::min_insertions(s3)); // Output: 3
+
+}

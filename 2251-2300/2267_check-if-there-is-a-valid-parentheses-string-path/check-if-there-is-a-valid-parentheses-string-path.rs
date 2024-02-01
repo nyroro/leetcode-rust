@@ -9,26 +9,23 @@ impl Solution {
         if (n + m - 1) % 2 != 0 {
             return false;
         }
-        let v = (n + m) / 2 + 1;
-        let mut dp = vec![vec![vec![false; v]; m]; n];
+        let mut dp = vec![vec![vec![false; (n + m) / 2 + 2]; m]; n];
         dp[0][0][1] = true;
+        let v = (n + m) / 2 + 1;
 
         for i in 0..n {
             for j in 0..m {
+                if i == 0 && j == 0 {
+                    continue;
+                }
                 for k in 0..v {
-                    if i > 0 {
-                        if grid[i][j] == '(' && k > 0 && dp[i-1][j][k-1] {
-                            dp[i][j][k] = true;
-                        }
-                        if grid[i][j] == ')' && k < v - 1 && dp[i-1][j][k+1] {
+                    if grid[i][j] == '(' {
+                        if (i > 0 && dp[i-1][j][k-1]) || (j > 0 && dp[i][j-1][k-1]) {
                             dp[i][j][k] = true;
                         }
                     }
-                    if j > 0 {
-                        if grid[i][j] == '(' && k > 0 && dp[i][j-1][k-1] {
-                            dp[i][j][k] = true;
-                        }
-                        if grid[i][j] == ')' && k < v - 1 && dp[i][j-1][k+1] {
+                    if grid[i][j] == ')' {
+                        if (i > 0 && dp[i-1][j][k+1]) || (j > 0 && dp[i][j-1][k+1]) {
                             dp[i][j][k] = true;
                         }
                     }

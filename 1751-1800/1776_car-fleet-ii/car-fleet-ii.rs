@@ -12,7 +12,7 @@ impl Solution {
                 let j = *stack.last().unwrap();
                 let (position_j, speed_j) = (cars[j][0], cars[j][1]);
 
-                if speed_i <= speed_j || (position_j - position_i) as f64 / (speed_i - speed_j) as f64 >= result[j] && result[j] != -1.0 {
+                if speed_i <= speed_j || (position_j - position_i) as f64 / (speed_i - speed_j) >= result[j] && result[j] != -1.0 {
                     stack.pop();
                 } else {
                     break;

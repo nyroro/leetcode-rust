@@ -1,47 +1,28 @@
 
+use std::collections::HashMap;
+
 impl Solution {
     pub fn three_sum_multi(arr: Vec<i32>, target: i32) -> i32 {
-        let modulo: i64 = 1_000_000_007;
         let mut count: i64 = 0;
-        let mut arr = arr;
-        arr.sort();
+        let modulo: i64 = 1_000_000_007;
+        let mut freq: HashMap<i32, i64> = HashMap::new();
+
+        for &num in &arr {
+            *freq.entry(num).or_insert(0) += 1;
+        }
 
         for i in 0..arr.len() {
-            let mut left = i + 1;
-            let mut right = arr.len() - 1;
-
-            while left < right {
-                let sum = arr[i] + arr[left] + arr[right];
-                if sum > target {
-                    right -= 1;
-                } else if sum < target {
-                    left += 1;
-                } else {
-                    if arr[left] != arr[right] {
-                        let mut left_count = 1;
-                        let mut right_count = 1;
-                        while left + 1 < right && arr[left] == arr[left + 1] {
-                            left_count += 1;
-                            left += 1;
-                        }
-                        while right - 1 > left && arr[right] == arr[right - 1] {
-                            right_count += 1;
-                            right -= 1;
-                        }
-                        count += left_count * right_count;
-                        count %= modulo;
-                        left += 1;
-                        right -= 1;
-                    } else {
-                        count += ((right - left + 1) * (right - left) / 2) as i64;
-                        count %= modulo;
-                        break;
+            for j in (i + 1)..arr.len() {
+                for k in (j + 1)..arr.len() {
+                    let sum = arr[i] + arr[j] + arr[k];
+                    if sum == target {
+                        count += 1;
                     }
                 }
             }
         }
 
-        count as i32
+        (count % modulo) as i32
 
     }
 }

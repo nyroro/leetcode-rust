@@ -9,13 +9,10 @@ impl Solution {
 
             for c in query.chars() {
                 if pattern_iter.peek().is_none() || c != *pattern_iter.peek().unwrap() {
-                    if c.is_ascii_uppercase() {
-                        match_found = false;
-                        break;
-                    }
-                } else {
-                    pattern_iter.next();
+                    match_found = false;
+                    break;
                 }
+                pattern_iter.next();
             }
 
             if match_found && pattern_iter.peek().is_none() {
