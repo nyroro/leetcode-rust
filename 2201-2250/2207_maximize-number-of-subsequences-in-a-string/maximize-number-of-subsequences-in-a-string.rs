@@ -30,7 +30,7 @@ impl Solution {
             }
         }
 
-        let mut answer = 0;
+        let mut answer = 0_i64;
         for (i, &c) in chars.iter().enumerate() {
             if c == a {
                 answer += suffix[i + 1];
